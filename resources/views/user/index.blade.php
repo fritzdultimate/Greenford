@@ -1,0 +1,90 @@
+@include('user.layouts.header')
+    <!-- App Capsule -->
+    <div id="appCapsule">
+
+        <!-- Wallet Card -->
+        <div class="section wallet-card-section pt-1">
+            <div class="wallet-card">
+                <!-- Balance -->
+                <div class="balance">
+                    <div class="left">
+                        <span class="title">Total Balance</span>
+                        <h1 class="total">$ {{ number_format($user_account->total_balance, 2, '.', ',') }}</h1>
+                    </div>
+                    <div class="right">
+                        <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
+                            <ion-icon name="add-outline"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+                <!-- * Balance -->
+                <!-- Wallet Footer -->
+                <div class="wallet-footer">
+                    <div class="item">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">
+                            <div class="icon-wrapper bg-danger">
+                                <ion-icon name="arrow-down-outline"></ion-icon>
+                            </div>
+                            <strong>Withdraw</strong>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#sendActionSheet">
+                            <div class="icon-wrapper">
+                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                            </div>
+                            <strong>Send</strong>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="app-cards.html">
+                            <div class="icon-wrapper bg-success">
+                                <ion-icon name="card-outline"></ion-icon>
+                            </div>
+                            <strong>Cards</strong>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#exchangeActionSheet">
+                            <div class="icon-wrapper bg-warning">
+                                <ion-icon name="swap-vertical"></ion-icon>
+                            </div>
+                            <strong>Exchange</strong>
+                        </a>
+                    </div>
+
+                </div>
+                <!-- * Wallet Footer -->
+            </div>
+        </div>
+        <!-- Wallet Card -->
+
+        @include('user.action-sheet')
+
+        @include('user.stats')
+
+        @include('user.transactions')
+
+        @include('user.cards')
+
+        @include('user.send-money')
+
+        @include('user.monthly-bills')
+
+        @include('user.savings')
+
+        @include('user.news')
+
+
+        <!-- app footer -->
+        <div class="appFooter">
+            <div class="footer-title">
+                Copyright © {{ env('SITE_NAME') }} {{ date('Y') }}. All Rights Reserved.
+            </div>
+        </div>
+        <!-- * app footer -->
+
+    </div>
+    <!-- * App Capsule -->
+
+@include('user.layouts.footer')
