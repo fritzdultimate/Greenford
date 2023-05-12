@@ -1,3 +1,4 @@
+    @include('user.dialogbox.error-modal')
         <!-- Deposit Action Sheet -->
         <div class="modal fade action-sheet" id="depositActionSheet" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -129,6 +130,14 @@
                                         <span class="input-group-text" id="basic-addon1">$</span>
                                         <input type="number" class="form-control" placeholder="0.00"
                                          name="amount">
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <label class="label">Description (optional)</label>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control"
+                                         name="description">
                                     </div>
                                 </div>
 

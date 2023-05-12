@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SendMoneyRequest;
 use App\Http\Requests\StoreDepositRequest;
 use App\Models\AdminWallet;
 use App\Models\ChildInvestmentPlan;
@@ -10,6 +11,7 @@ use App\Models\MainWallet;
 use App\Models\ReferrersInterestRelationship;
 use App\Models\Transactions;
 use App\Models\User;
+use App\Models\UserAccountData;
 use App\Models\UserWallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,19 +24,18 @@ class DepositController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDepositRequest $request, Deposit $deposit) {
+    public function store(SendMoneyRequest $request, Deposit $deposit) {
 
         $validated = $request->validated();
 
-       $hash = generateTransactionHash($deposit, 'transaction_hash', 25);
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+    //    $hash = generateTransactionHash($deposit, 'transaction_hash', 25);
 
-       $plan_name_is_valid = ChildInvestmentPlan::where('id', $validated['child_plan_id'])->first();
-       $wallet_id_is_valid = UserWallet::where('id', $validated['user_wallet_id'])->first();
-
-       if(!$wallet_id_is_valid) {
+       if($request) {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Please goto settings and update your wallets details']]
+                    'errors' => ['message' => [$user_account->total_balance]]
                 ], 401
             );
        }
