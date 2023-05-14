@@ -313,8 +313,6 @@
     <script src="{{ asset('app/js/plugins/splide/splide.min.js') }}"></script>
     <!-- Base Js File -->
     <script src="{{ asset('app/js/base.js') }}" defer></script>
-    <script src="{{ asset('dash/js/fn.js') }}"></script>
-    <script src="{{ asset('dash/js/deposit.js') }}"></script>
 
     <script>
         // Add to Home with 2 seconds delay.

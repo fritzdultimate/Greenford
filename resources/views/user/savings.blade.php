@@ -5,51 +5,23 @@
                 <a href="app-savings.html" class="link">View All</a>
             </div>
             <div class="goals">
-                <!-- item -->
-                <div class="item">
-                    <div class="in">
-                        <div>
-                            <h4>Gaming Console</h4>
-                            <p>Gaming</p>
+                @foreach($savings as $save)
+                    <!-- item -->
+                    <div class="item">
+                        <div class="in">
+                            <div>
+                                <h4>{{ ucfirst($save->name) }}</h4>
+                                <p>Gaming</p>
+                            </div>
+                            <div class="price">$ {{ number_format($save->target, 2, '.', ',') }}</div>
                         </div>
-                        <div class="price">$ 499</div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85"
-                            aria-valuemin="0" aria-valuemax="100">85%</div>
-                    </div>
-                </div>
-                <!-- * item -->
-                <!-- item -->
-                <div class="item">
-                    <div class="in">
-                        <div>
-                            <h4>New House</h4>
-                            <p>Living</p>
+                        <div class="progress text-center">
+                            <div class="progress-bar text-center" role="progressbar" style="width: {{ number_format($save->saved/($save->target/100))  }}%;" aria-valuenow="80"
+                                aria-valuemin="0" aria-valuemax="100">{{ number_format($save->saved/($save->target/100), 2)  }}%</div>
                         </div>
-                        <div class="price">$ 100,000</div>
                     </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55"
-                            aria-valuemin="0" aria-valuemax="100">55%</div>
-                    </div>
-                </div>
-                <!-- * item -->
-                <!-- item -->
-                <div class="item">
-                    <div class="in">
-                        <div>
-                            <h4>Sport Car</h4>
-                            <p>Lifestyle</p>
-                        </div>
-                        <div class="price">$ 42,500</div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15"
-                            aria-valuemin="0" aria-valuemax="100">15%</div>
-                    </div>
-                </div>
-                <!-- * item -->
+                    <!-- * item -->
+                @endforeach
             </div>
         </div>
         <!-- * Saving Goals -->

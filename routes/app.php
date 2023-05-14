@@ -111,6 +111,9 @@ use Illuminate\Support\Facades\Route;
 // Deposit::Router starts here
      Route::post('/deposit/create', [App\Http\Controllers\DepositController::class, 'store']);
      Route::post('/money/create', [App\Http\Controllers\DepositController::class, 'store']);
+     Route::post('/money/save', [App\Http\Controllers\DepositController::class, 'createSavings']);
+     Route::post('/money/create-savings-goal', [App\Http\Controllers\DepositController::class, 'createSavingsGoal']);
+     Route::get('/money/savings-goals', [App\Http\Controllers\DepositController::class, 'getSavings']);
      Route::post('/admin/deposit/approve', [App\Http\Controllers\DepositController::class, 'approve']);
      Route::post('/admin/deposit/deny', [App\Http\Controllers\DepositController::class, 'deny']);
      Route::post('/deposit/reinvest', [App\Http\Controllers\DepositController::class, 'reinvest']);

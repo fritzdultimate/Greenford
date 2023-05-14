@@ -14,6 +14,7 @@ use App\Models\Reviews;
 use App\Models\User;
 use App\Models\FakeWithdrawal;
 use App\Models\Properties;
+use App\Models\Savings;
 use App\Models\UserDoc;
 use Illuminate\Http\Request;
 use App\Models\SiteSettings;
@@ -44,9 +45,10 @@ class HomeController extends Controller {
         if($user->browsing_as){
             $user = User::find($user->browsing_as);
         }
-        $transactions = Transactions::where('user_id', $user['id'])->latest(5);
+        $transactions = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->orderBy('id', 'desc')->take(5)->get();
+        $savings = Savings::where('user_id', $user->id)->get();
         $user_account = UserAccountData::where('user_id', Auth::id())->first();
-        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account'));
+        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings'));
     }
     public function deposit(Request $request){
         $page_title = env('SITE_NAME') . " Investment Website | Deposit";

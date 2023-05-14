@@ -101,9 +101,9 @@ Route::get('/submit-property', [App\Http\Controllers\HomeController::class, 'sub
 
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faqs']);
 
-Route::get('/testimonial', function () {
-    $title = env("SITE_NAME") . " - Testimonial";
-    return view('visitor.testimonial', compact('title'));
+Route::get('/user/savings/create', function () {
+    $title = env("SITE_NAME") . " - Create Savings";
+    return view('user.create-savings', compact('title'));
 });
 
 Route::get('/login', [App\Http\Controllers\HomeController::class, 'login']);

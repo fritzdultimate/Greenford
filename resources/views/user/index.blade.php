@@ -25,7 +25,7 @@
                             <div class="icon-wrapper bg-danger">
                                 <ion-icon name="arrow-down-outline"></ion-icon>
                             </div>
-                            <strong>Withdraw</strong>
+                            <strong>Save</strong>
                         </a>
                     </div>
                     <div class="item">
@@ -33,7 +33,7 @@
                             <div class="icon-wrapper">
                                 <ion-icon name="arrow-forward-outline"></ion-icon>
                             </div>
-                            <strong>Send</strong>
+                            <strong>Transfer</strong>
                         </a>
                     </div>
                     <div class="item">
@@ -47,9 +47,9 @@
                     <div class="item">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#exchangeActionSheet">
                             <div class="icon-wrapper bg-warning">
-                                <ion-icon name="swap-vertical"></ion-icon>
+                                <ion-icon name="lock-closed-outline"></ion-icon>
                             </div>
-                            <strong>Exchange</strong>
+                            <strong>Lock Fund</strong>
                         </a>
                     </div>
 
@@ -73,7 +73,7 @@
 
         @include('user.savings')
 
-        @include('user.news')
+        <!-- @include('user.news') -->
 
 
         <!-- app footer -->
@@ -86,5 +86,7 @@
 
     </div>
     <!-- * App Capsule -->
-
+@include('user.layouts.general-scripts')
+<script src="{{ asset('dash/js/deposit.js') }}"></script>
+<script src="{{ asset('dash/js/savings.js') }}"></script>
 @include('user.layouts.footer')

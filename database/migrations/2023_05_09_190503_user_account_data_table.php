@@ -24,6 +24,8 @@ class UserAccountDataTable extends Migration
             $table->unsignedDecimal('total_bills')->default(0.00);
             $table->unsignedDecimal('total_incoming')->default(0.00);
             $table->unsignedDecimal('total_outgoing')->default(0.00);
+            $table->unsignedDecimal('total_sent_out')->default(0.00);
+            $table->unsignedDecimal('total_received')->default(0.00);
             $table->enum('kyc_level', ['tier 1', 'tier 2', 'tier 3'])->default('tier 1');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
