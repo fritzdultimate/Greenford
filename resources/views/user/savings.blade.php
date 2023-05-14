@@ -11,7 +11,7 @@
                         <div class="in">
                             <div>
                                 <h4>{{ ucfirst($save->name) }}</h4>
-                                <p>Gaming</p>
+                                <p>{{ ucfirst($save->description) }}</p>
                             </div>
                             <div class="price">$ {{ number_format($save->target, 2, '.', ',') }}</div>
                         </div>

@@ -113,7 +113,7 @@ Route::post('/register', [App\Http\Controllers\RegistrationController::class, 'i
 
 Route::get('/user', [App\Http\Controllers\HomeController::class, 'dashboard']);
 Route::get('/user/profile', [App\Http\Controllers\HomeController::class, 'profile']);
-Route::get('/user/wallets', [App\Http\Controllers\HomeController::class, 'wallets']);
+Route::get('/user/cards', [App\Http\Controllers\HomeController::class, 'cards']);
 Route::get('/user/deposit', [App\Http\Controllers\HomeController::class, 'deposit']);
 Route::get('/impression', [App\Http\Controllers\HomeController::class, 'impression']);
 Route::get('/user/deposits', [App\Http\Controllers\HomeController::class, 'deposits']);

@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateSavingsGoalRequest;
 use App\Http\Requests\CreateSavingsRequest;
+use App\Http\Requests\LockFundRequest;
 use App\Http\Requests\SendMoneyRequest;
 use App\Http\Requests\StoreDepositRequest;
 use App\Models\AdminWallet;
 use App\Models\ChildInvestmentPlan;
 use App\Models\Deposit;
+use App\Models\LockedFunds;
 use App\Models\MainWallet;
 use App\Models\ReferrersInterestRelationship;
 use App\Models\Savings;
+use App\Models\SavingsLogs;
 use App\Models\Transactions;
 use App\Models\User;
 use App\Models\UserAccountData;
@@ -228,17 +231,92 @@ class DepositController extends Controller {
         }
     }
 
-    public function createSavings(CreateSavingsRequest $createSavingsRequest) {
+    public function createSavings(CreateSavingsRequest $createSavingsRequest, SavingsLogs $savingsLogs) {
         $validated = $createSavingsRequest->validated();
 
         $user = Auth::user();
         $user_account = UserAccountData::where('user_id', $user->id)->first();
 
-        if($validated['amount'] > $user_account) {
+        if($validated['amount'] > $user_account->account_balance) {
             return response()->json(
                 [
                     'errors' => ['message' => ['Insufficient fund.']]
                 ], 401
+            );
+        }
+
+        $goal = Savings::where('id', $createSavingsRequest->savings)->first();
+
+        if($goal->target == $goal->saved) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Goal fulfilled.']]
+                ], 401
+            );
+        }
+
+        if($goal->target < $goal->saved + $validated['amount']) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Exeeded target.']]
+                ], 401
+            );
+        }
+
+        $user_account->decrement('account_balance', $validated['amount']);
+        $goal->increment('saved', $validated['amount']);
+
+        $transaction_id = generateTransactionHash($savingsLogs, 'transaction_id', 11);
+
+        $logSavings = SavingsLogs::create([
+            'amount' => $validated['amount'],
+            'savings_id' => $createSavingsRequest->savings,
+            'transaction_id' => $transaction_id
+        ]);
+
+        if($logSavings) {
+            $goal->refresh();
+
+            // send email
+            return response()->json(
+                [
+                    'success' => ['message' => [$goal->saved == $goal->target ? "Congrats! You have successfully reach your target of $$goal->target savings" : 'Money saved, great.']]
+                ], 201
+            );
+        }
+    }
+
+    public function lockFund(LockFundRequest $lockFundRequest, LockedFunds $lockedFunds) {
+        $validated = $lockFundRequest->validated();
+
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+
+        if($validated['amount'] > $user_account->account_balance) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Insufficient fund.']]
+                ], 401
+            );
+        }
+
+        $user_account->decrement('account_balance', $validated['amount']);
+        $transaction_id = generateTransactionHash($lockedFunds, 'transaction_id', 11);
+        $due_date = addDaysToDate(date("Y-m-d H:i:s"), $validated['duration']);
+        $lock_fund = LockedFunds::create([
+            'user_id' => $user->id,
+            'amount' => $validated['amount'],
+            'transaction_id' => $transaction_id,
+            'due_date' => $due_date
+        ]);
+
+        if($lock_fund) {
+
+            // send email
+            return response()->json(
+                [
+                    'success' => ['message' => ['Fund locked successfully']]
+                ], 201
             );
         }
     }

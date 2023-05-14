@@ -9,8 +9,8 @@
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Expenses</div>
-                        <div class="value text-danger">$ {{ number_format($user_account->expenses, 2, '.', ',') }}</div>
+                        <div class="title">Locked Fund</div>
+                        <div class="value text-danger">$ {{ number_format($total_locked_fund, 2, '.', ',') }}</div>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="col-6">
                     <div class="stat-box">
                         <div class="title">Savings</div>
-                        <div class="value">$ {{ number_format($user_account->savings, 2, '.', ',') }}</div>
+                        <div class="value">$ {{ number_format($total_savings, 2, '.', ',') }}</div>
                     </div>
                 </div>
             </div>

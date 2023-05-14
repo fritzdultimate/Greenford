@@ -9,7 +9,7 @@
                 <div class="balance">
                     <div class="left">
                         <span class="title">Total Balance</span>
-                        <h1 class="total">$ {{ number_format($user_account->total_balance, 2, '.', ',') }}</h1>
+                        <h1 class="total">$ {{ number_format($total_locked_fund + $total_savings + $user_account->account_balance, 2, '.', ',') }}</h1>
                     </div>
                     <div class="right">
                         <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
@@ -37,7 +37,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        <a href="app-cards.html">
+                        <a href="/user/cards">
                             <div class="icon-wrapper bg-success">
                                 <ion-icon name="card-outline"></ion-icon>
                             </div>
@@ -73,7 +73,6 @@
 
         @include('user.savings')
 
-        <!-- @include('user.news') -->
 
 
         <!-- app footer -->

@@ -13,6 +13,7 @@ use App\Models\Withdrawal;
 use App\Models\Reviews;
 use App\Models\User;
 use App\Models\FakeWithdrawal;
+use App\Models\LockedFunds;
 use App\Models\Properties;
 use App\Models\Savings;
 use App\Models\UserDoc;
@@ -48,7 +49,9 @@ class HomeController extends Controller {
         $transactions = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->orderBy('id', 'desc')->take(5)->get();
         $savings = Savings::where('user_id', $user->id)->get();
         $user_account = UserAccountData::where('user_id', Auth::id())->first();
-        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings'));
+        $total_locked_fund = LockedFunds::where('user_id', $user->id)->sum('amount');
+        $total_savings = Savings::where('user_id', $user->id)->sum('saved');
+        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings', 'total_locked_fund', 'total_savings'));
     }
     public function deposit(Request $request){
         $page_title = env('SITE_NAME') . " Investment Website | Deposit";
@@ -88,57 +91,10 @@ class HomeController extends Controller {
         return view('user.deposits', compact('page_title', 'mode', 'user', 'deposits'));
     }
 
-    public function wallets(Request $request){
-        $page_title = env('SITE_NAME') . " Investment Website | Deposit History";
-        $mode = 'dark';
-        $user = Auth::user();
-        if($user->browsing_as){
-            $user = User::find($user->browsing_as);
-        }
-        $user_wallets = UserWallet::where('user_id', Auth::id())->get();
-        $user_owned_wallet_ids = [];
-        foreach($user_wallets as $wallet) {
-            array_push($user_owned_wallet_ids, $wallet->main_wallet_id);
-        }
-        $main_wallets = MainWallet::whereNotIn('id', $user_owned_wallet_ids)->get();
-        return view('user.wallets', compact('page_title', 'mode', 'user', 'main_wallets', 'user_wallets'));
-    }
-
-    public function reinvest(Request $request){
-        $page_title = env('SITE_NAME') . " Investment Website | Reinvest";
-        $mode = 'dark';
-        $user = Auth::user();
-        if($user->browsing_as){
-            $user = User::find($user->browsing_as);
-        }
-        $plans = ChildInvestmentPlan::all();
-        $wallets = UserWallet::where('user_id', $user['id'])->get();
-        return view('user.reinvest', compact('page_title', 'mode', 'user', 'plans', 'wallets'));
-    }
-
-    public function reinvestments(Request $request){
-        $page_title = env('SITE_NAME') . " Investment Website | Reinvestment History";
-        $mode = 'dark';
-        $user = Auth::user();
-        if($user->browsing_as){
-            $user = User::find($user->browsing_as);
-        }
-        $reinvestments = Deposit::where([
-            ['reinvestment', '=', 1],
-            ['user_id', '=', $user['id']]
-        ])->get();
-        return view('user.reinvestments', compact('page_title', 'mode', 'user', 'reinvestments'));
-    }
-
-    public function withdrawal(Request $request){
-        $page_title = env('SITE_NAME') . " Investment Website | Withdrawal";
-        $mode = 'dark';
-        $user = Auth::user();
-        if($user->browsing_as){
-            $user = User::find($user->browsing_as);
-        }
-        $wallets = UserWallet::where('user_id', $user['id'])->get();
-        return view('user.withdrawal', compact('page_title', 'mode', 'user', 'wallets'));
+    public function cards(Request $request){
+        $page_title = env('SITE_NAME') . " Cards";
+        
+        return view('user.cards-view', compact('page_title'));
     }
 
     public function withdrawals(Request $request){
