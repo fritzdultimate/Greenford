@@ -1,11 +1,29 @@
-<!-- Transactions -->
-<div class="section mt-4">
-            <div class="section-heading">
-                <h2 class="title">Transactions</h2>
-                <a href="/user/transactions" class="link">View All</a>
-            </div>
+@include('user.layouts.header')
+
+    <!-- App Header -->
+    <div class="appHeader">
+        <div class="left">
+            <a href="#" class="headerButton goBack">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">
+            Transactions
+        </div>
+        
+    </div>
+    <!-- * App Header -->
+
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+
+        <!-- Transactions -->
+        @foreach($new_transaction_arr as $key => $transactions)
+        <div class="section mt-2">
+            <div class="section-title">{{ get_day_name($dates[$key]) }} </div>
             <div class="transactions">
-                @foreach($transactions as $transaction)
+            @foreach($transactions as $transaction)
                 <!-- item -->
                 <a href="/user/transaction/data/{{ $transaction->transaction_id }}" class="item">
                     <div class="detail">
@@ -32,21 +50,19 @@
                     </div>
                 </a>
                 <!-- * item -->
-                @endforeach
-                <!-- item -->
-                <a href="/user/transaction/data/{{ $transaction->transaction_id }}" class="item">
-                    <div class="detail">
-                        <img src="{{ asset('app/img/sample/brand/2.jpg') }}" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Apple</strong>
-                            <p>Appstore Purchase</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger">- $ 29</div>
-                    </div>
-                </a>
-                <!-- * item -->
+            @endforeach
             </div>
         </div>
+        @endforeach
         <!-- * Transactions -->
+
+        <div class="section mt-2 mb-2 hidden" style="visibility:hidden">
+            <a href="#" class="btn btn-primary btn-block btn-lg">Load More</a>
+        </div>
+
+
+    </div>
+    <!-- * App Capsule -->
+
+@include('user.layouts.general-scripts')
+@include('user.layouts.footer')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CardDetails;
 use App\Models\Faq;
 use App\Models\Transactions;
 use App\Models\ChildInvestmentPlan;
@@ -51,7 +52,8 @@ class HomeController extends Controller {
         $user_account = UserAccountData::where('user_id', Auth::id())->first();
         $total_locked_fund = LockedFunds::where('user_id', $user->id)->sum('amount');
         $total_savings = Savings::where('user_id', $user->id)->sum('saved');
-        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings', 'total_locked_fund', 'total_savings'));
+        $cards = CardDetails::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings', 'total_locked_fund', 'total_savings', 'cards'));
     }
     public function deposit(Request $request){
         $page_title = env('SITE_NAME') . " Investment Website | Deposit";
@@ -93,8 +95,12 @@ class HomeController extends Controller {
 
     public function cards(Request $request){
         $page_title = env('SITE_NAME') . " Cards";
+
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
         
-        return view('user.cards-view', compact('page_title'));
+        $cards = CardDetails::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
+        return view('user.cards-view', compact('page_title', 'cards', 'user', 'user_account'));
     }
 
     public function withdrawals(Request $request){
@@ -115,19 +121,35 @@ class HomeController extends Controller {
         if($user->browsing_as){
             $user = User::find($user->browsing_as);
         }
-        $transactions = Transactions::where('user_id', $user['id'])->orderBy('id', 'DESC')->get();
-        return view('user.transactions', compact('page_title', 'mode', 'user', 'transactions'));
+        $transactions = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->orderBy('created_at', 'desc')->get();
+        $new_transaction_arr = array();
+        $dates = array();
+        foreach($transactions as $key => $item) {
+            $new_transaction_arr[$item->created_at->format('d/m/Y')][$key] = $item;
+            $dates[$item->created_at->format('d/m/Y')] = $item->created_at;
+        }
+        // ksort($new_transaction_arr, SORT_NUMERIC);
+        $transaction_count = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->count();
+        return view('user.transactions-view', compact('page_title', 'mode', 'user', 'transactions', 'transaction_count', 'new_transaction_arr', 'dates'));
     }
 
-    public function referrals(Request $request){
-        $page_title = env('SITE_NAME') . " Investment Website | Referrals";
+    public function transactionsItem($id) {
+        $page_title = env('SITE_NAME') . " Transaction Details";
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+        $transaction = Transactions::where('transaction_id', $id)->first();
+        return view('user.transaction-item', compact('transaction', 'page_title', 'user_account', 'user'));
+    }
+
+    public function savings(Request $request){
+        $page_title = env('SITE_NAME') . " Savings";
         $mode = 'dark';
         $user = Auth::user();
         if($user->browsing_as){
             $user = User::find($user->browsing_as);
         }
-        $referrals = User::where('referrer', $user['name'])->get();
-        return view('user.referrals', compact('page_title', 'mode', 'user', 'referrals'));
+        $savings = Savings::where('user_id', $user->id)->get();
+        return view('user.savings_view', compact('page_title', 'mode', 'user', 'savings'));
     }
 
     public function security(Request $request){

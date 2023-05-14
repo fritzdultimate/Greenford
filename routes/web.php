@@ -122,6 +122,8 @@ Route::get('/user/reinvestments', [App\Http\Controllers\HomeController::class, '
 Route::get('/user/withdrawal', [App\Http\Controllers\HomeController::class, 'withdrawal']);
 Route::get('/user/withdrawals', [App\Http\Controllers\HomeController::class, 'withdrawals']);
 Route::get('/user/transactions', [App\Http\Controllers\HomeController::class, 'transactions']);
+Route::get('/user/transaction/data/{id}', [App\Http\Controllers\HomeController::class, 'transactionsItem']);
+Route::get('/user/savings', [App\Http\Controllers\HomeController::class, 'savings']);
 Route::get('/user/security', [App\Http\Controllers\HomeController::class, 'security']);
 
 Route::get('/user/logout', [App\Http\Controllers\HomeController::class, 'logout']);

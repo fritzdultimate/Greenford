@@ -65,13 +65,15 @@
 
         @include('user.transactions')
 
-        @include('user.cards')
-
-        @include('user.send-money')
+        @if($cards->count() > 0) 
+            @include('user.cards')
+        @endif
 
         @include('user.monthly-bills')
 
-        @include('user.savings')
+        @if($savings->count() > 0)
+            @include('user.savings')
+        @endif;
 
 
 

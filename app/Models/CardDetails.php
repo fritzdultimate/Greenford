@@ -6,31 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transactions extends Model
+class CardDetails extends Model
 {
     use HasFactory;
-
     use SoftDeletes;
 
     protected $fillable = [
-        'transaction_id',
         'user_id',
-        'beneficiary_id',
-        'amount',
-        'description',
+        'balance',
+        'exp_date',
+        'card_id',
+        'card_number',
+        'card_cvv',
+        'card_pin',
+        'active',
+        'card_color',
         'created_at',
         'updated_at',
-        'deleted_at',
-        'type',
-        'sender_balance',
-        'beneficiary_balance'
+        'deleted_at'
     ];
 
-    public function sender() {
+    public function user() {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function beneficiary() {
-        return $this->belongsTo(User::class, 'beneficiary_id');
     }
 }

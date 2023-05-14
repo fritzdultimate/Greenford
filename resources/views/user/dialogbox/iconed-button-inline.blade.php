@@ -1,6 +1,6 @@
 <!-- Dialog Iconed Inline -->
 <div class="modal fade dialogbox" id="DialogIconedButtonInline" data-bs-backdrop="static"
-            role="dialog" style="z-index: 999;">
+            role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,9 +15,9 @@
                         <ion-icon name="close-outline"></ion-icon>
                         CANCEL
                     </a>
-                    <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal">
+                    <a href="#" class="btn btn-text-primary" id="confirmDialogIconedButtonAction">
                         <ion-icon name="checkmark-outline" id="iconedButtonAction"></ion-icon>
-                        SEND
+                        CONFIRM
                     </a>
                 </div>
             </div>
@@ -25,3 +25,16 @@
     </div>
 </div>
 <!-- * Dialog Iconed Inline -->
+
+<script>
+    confirmDialogIconedButtonAction.addEventListener('click', (e) => {
+        CONFIRM = true;
+        let path = location.pathname;
+        if(path == '/user/cards' || '/user') {
+            deleteCard();
+        }
+
+        let el = document.getElementById("DialogIconedButtonInline");
+        bootstrap.Modal.getInstance(el).hide();
+    })
+</script>

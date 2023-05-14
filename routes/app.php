@@ -114,6 +114,7 @@ use Illuminate\Support\Facades\Route;
      Route::post('/money/save', [App\Http\Controllers\DepositController::class, 'createSavings']);
      Route::post('/money/lock', [App\Http\Controllers\DepositController::class, 'lockFund']);
      Route::post('/card/add', [App\Http\Controllers\CardController::class, 'addCard']);
+     Route::delete('/card/delete/{cardId}', [App\Http\Controllers\CardController::class, 'deleteCard']);
      Route::post('/money/create-savings-goal', [App\Http\Controllers\DepositController::class, 'createSavingsGoal']);
      Route::get('/money/savings-goals', [App\Http\Controllers\DepositController::class, 'getSavings']);
      Route::post('/admin/deposit/approve', [App\Http\Controllers\DepositController::class, 'approve']);

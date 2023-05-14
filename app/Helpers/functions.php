@@ -41,3 +41,18 @@ function generateAccountNumber($table, $column, $length = 10, $initial = 22) {
     return $number;
 
 }
+
+function get_day_name($timestamp) {
+    $date = date_create($timestamp);
+    // return $date;
+
+    if(date_format($date, 'd/m/Y') == date('d/m/Y')) {
+      $date = 'Today';
+    } 
+    else if(date_format($date, 'd/m/Y') == date('d/m/Y', now()->timestamp - (24 * 60 * 60))) {
+      $date = 'Yesterday';
+    } else {
+        $date = date_format($date, 'M d, Y');
+    }
+    return $date;
+}

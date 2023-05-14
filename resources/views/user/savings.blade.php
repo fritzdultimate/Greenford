@@ -2,7 +2,7 @@
 <div class="section mt-4">
             <div class="section-heading">
                 <h2 class="title">Saving Goals</h2>
-                <a href="app-savings.html" class="link">View All</a>
+                <a href="/user/savings" class="link">View All</a>
             </div>
             <div class="goals">
                 @foreach($savings as $save)

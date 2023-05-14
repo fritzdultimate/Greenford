@@ -29,47 +29,53 @@
         <div class="section mt-2">
 
             <!-- card block -->
-            <div class="card-block mb-2">
-                <div class="card-main">
-                    <div class="card-button dropdown">
-                        <button type="button" class="btn btn-link btn-icon" data-bs-toggle="dropdown">
-                            <ion-icon name="ellipsis-horizontal"></ion-icon>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#">
-                                <ion-icon name="pencil-outline"></ion-icon>Edit
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <ion-icon name="close-outline"></ion-icon>Remove
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <ion-icon name="arrow-up-circle-outline"></ion-icon>Upgrade
-                            </a>
-                        </div>
-                    </div>
-                    <div class="balance">
-                        <span class="label">BALANCE</span>
-                        <h1 class="title">$ 1,256,90</h1>
-                    </div>
-                    <div class="in">
-                        <div class="card-number">
-                            <span class="label">Card Number</span>
-                            •••• 9905
-                        </div>
-                        <div class="bottom">
-                            <div class="card-expiry">
-                                <span class="label">Expiry</span>
-                                12 / 25
+            @foreach($cards as $card)
+                <div class="card-block mb-2 {{ $card->card_color }}">
+                    <div class="card-main">
+                        <div class="card-button dropdown">
+                            <button type="button" class="btn btn-link btn-icon" data-bs-toggle="dropdown">
+                                <ion-icon name="ellipsis-horizontal"></ion-icon>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#" data-id="{{ $card->card_id }}" onclick="toggleVisibility(this)" id="CardActionBtn-{{ $card->card_id }}">
+                                    Show
+                                </a>
+                                <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" onclick="deleteCardPan(this)" data-id="{{ $card->card_id }}">
+                                    <ion-icon name="close-outline"></ion-icon>Delete
+                                </a>
                             </div>
-                            <div class="card-ccv">
-                                <span class="label">CCV</span>
-                                553
+                        </div>
+                        <div class="balance">
+                            <span class="label">BALANCE</span>
+                            <h1 class="title">$ {{ number_format($card->balance, 2, '.', ',')}}</h1>
+                        </div>
+                        <div class="in">
+                            <div class="card-number">
+                                <span class="label">Card Number</span>
+                                <span id="hidden-card-number-{{ $card->card_id }}">•••• {{ substr($card->card_number, -4, 4) }}</span>
+                                <span id="visible-card-number-{{ $card->card_id }}" style="display: none">{{ $card->card_number }}</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="card-expiry">
+                                    <span class="label">Expiry</span>
+                                    {{ date('m / y', strtotime($card->exp_date))}}
+                                </div>
+                                <div class="card-ccv">
+                                    <span class="label">CCV</span>
+                                    <span id="hidden-card-cvv-{{ $card->card_id }}">***</span>
+                                    <span id="visible-card-cvv-{{ $card->card_id }}" style="display: none">{{ $card->card_cvv }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
             <!-- * card block -->
+            @if($cards->count() == 0)
+            <div class="flex justify-center content-center" style="display: flex; justify-content: center; height: 100%; align-items: center; flex-direction: column; font-size: 18px;">
+                You have not created any card yet!
+            </div>
+            @endif
 
         </div>
 
@@ -78,7 +84,35 @@
     <!-- * App Capsule -->
 @include('user.layouts.general-scripts')
 <script src="{{ asset('dash/js/cards.js') }}"></script>
+<script src="{{ asset('dash/js/delete-card.js') }}"></script>
 @include('user.layouts.footer')
 <script>
-    console.log(bootstrap.Modal)
+    IconedButtonInlineHeader.innerHTML = "Are you sure you want to delete this card?"
+    IconedButtonInlineMessage.innerHTML = "This card will be deleted permanently.";
+    function toggleVisibility(event) {
+        let action = event.text.trim();
+        let id = event.dataset.id;
+
+        if(document.getElementById('CardActionBtn-' + id).text.trim() == 'Show') {
+            document.getElementById('CardActionBtn-' + id).innerHTML = 'Hide';
+            document.getElementById('hidden-card-number-' + id).style.display = 'none';
+            document.getElementById('visible-card-number-' + id).style.display = 'block';
+
+            // toggle cvv
+            document.getElementById('hidden-card-cvv-' + id).style.display = 'none';
+            document.getElementById('visible-card-cvv-' + id).style.display = 'block';
+        } else if(document.getElementById('CardActionBtn-' + id).text.trim() == 'Hide') {
+            document.getElementById('hidden-card-number-' + id).style.display = 'block';
+            document.getElementById('visible-card-number-' + id).style.display = 'none';
+            document.getElementById('CardActionBtn-' + id).innerHTML = 'Show';
+
+            // toggle cvv
+            document.getElementById('hidden-card-cvv-' + id).style.display = 'block';
+            document.getElementById('visible-card-cvv-' + id).style.display = 'none';
+        }
+    }
+
+    function deleteCardPan(event) {
+        cardId = event.dataset.id;
+    }
 </script>
