@@ -15,7 +15,7 @@
                                     <label class="label">Account Number</label>
                                     <div class="input-group mb-2">
                                         <input type="text" class="form-control" placeholder=""
-                                            value="{{ $user_account->account_number }}">
+                                            value="{{ $user_account->account_number }}" id="accountNumberInput">
                                     </div>
                                 </div>
 
@@ -29,7 +29,7 @@
 
                                 <div class="form-group basic">
                                     <button type="button" class="btn btn-primary btn-block btn-lg"
-                                        data-bs-dismiss="modal">Copy Number</button>
+                                        data-bs-dismiss="modalv" id="copyAccountNumberBtn">Copy Number</button>
                                 </div>
                             </form>
                         </div>
@@ -203,3 +203,15 @@
         <!-- * Lock Action Sheet -->
 
         <!-- <script src="{{ asset('dash/js/deposit.js') }}"></script> -->
+
+        <script>
+            copyAccountNumberBtn.addEventListener('click', (e) => {
+                let copyText = document.getElementById("accountNumberInput");
+
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+
+                navigator.clipboard.writeText(copyText.value);
+                alert('Account number copied!')
+            })
+        </script>

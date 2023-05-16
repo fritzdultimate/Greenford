@@ -121,6 +121,7 @@ class HomeController extends Controller {
         if($user->browsing_as){
             $user = User::find($user->browsing_as);
         }
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
         $transactions = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->orderBy('created_at', 'desc')->get();
         $new_transaction_arr = array();
         $dates = array();
@@ -130,7 +131,7 @@ class HomeController extends Controller {
         }
         // ksort($new_transaction_arr, SORT_NUMERIC);
         $transaction_count = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->count();
-        return view('user.transactions-view', compact('page_title', 'mode', 'user', 'transactions', 'transaction_count', 'new_transaction_arr', 'dates'));
+        return view('user.transactions-view', compact('page_title', 'mode', 'user', 'transactions', 'transaction_count', 'new_transaction_arr', 'dates', 'user_account'));
     }
 
     public function transactionsItem($id) {
@@ -148,8 +149,9 @@ class HomeController extends Controller {
         if($user->browsing_as){
             $user = User::find($user->browsing_as);
         }
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
         $savings = Savings::where('user_id', $user->id)->get();
-        return view('user.savings_view', compact('page_title', 'mode', 'user', 'savings'));
+        return view('user.savings_view', compact('page_title', 'mode', 'user', 'savings', 'user_account'));
     }
 
     public function security(Request $request){
