@@ -185,6 +185,20 @@ class HomeController extends Controller {
         return view('user.settings', compact('page_title', 'mode', 'user', 'user_account', 'user_settings', 'faqs'));
     }
 
+    public function upgradeAccount(Request $request, UserSettings $userSettings){
+        $page_title = env('SITE_NAME') . " Acount Upgrade";
+        $mode = 'dark';
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+        if($user->browsing_as){
+            $user = User::find($user->browsing_as);
+        }
+
+        
+        $user_settings = $userSettings->where('user_id', $user->id)->first();
+        return view('user.upgrade-kyc', compact('page_title', 'mode', 'user', 'user_account', 'user_settings'));
+    }
+
     public function profile(Request $request){
         $page_title = env('SITE_NAME') . " Investment Website | Dashboard";
         $mode = 'dark';

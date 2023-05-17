@@ -126,6 +126,7 @@ Route::get('/user/transaction/data/{id}', [App\Http\Controllers\HomeController::
 Route::get('/user/savings', [App\Http\Controllers\HomeController::class, 'savings']);
 Route::get('/user/security', [App\Http\Controllers\HomeController::class, 'security']);
 Route::get('/user/settings', [App\Http\Controllers\HomeController::class, 'settings']);
+Route::get('/user/account/upgrade', [App\Http\Controllers\HomeController::class, 'upgradeAccount']);
 
 Route::get('/user/logout', [App\Http\Controllers\HomeController::class, 'logout']);
 Route::get('/user/referrals', [App\Http\Controllers\HomeController::class, 'referrals']);

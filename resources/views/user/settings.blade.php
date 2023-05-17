@@ -84,7 +84,7 @@
         <div class="listview-title mt-1">Upgrade</div>
         <ul class="listview image-listview text mb-2 inset">
             <li>
-                <a href="#" class="item">
+                <a href="/user/account/upgrade" class="item">
                     <div class="in">
                         <div>Upgrade Account</div>
                     </div>

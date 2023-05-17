@@ -20,6 +20,9 @@ class UserSettingsTable extends Migration
             $table->boolean('transaction_emails')->default(true);
             $table->boolean('twofac')->default(false);
             $table->boolean('use_pin_for_transaction')->default(false);
+            $table->string('front_kyc')->nullable();
+            $table->string('back_kyc')->nullable();
+            $table->string('address_proof')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
 

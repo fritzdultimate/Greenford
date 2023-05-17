@@ -118,4 +118,35 @@ class UserSettingsController extends Controller {
             ], 200
         );
     }
+
+    public function uploadKycFile(Request $request) {
+        $file_name = time() . '.' . request()->kyc_file->getClientOriginalExtension();
+        $key = $request->html_named;
+        $value = $request->kyc_file;
+
+        $former_url = UserSettings::where('user_id', Auth::user()->id)->first()[$key];
+
+        request()->kyc_file->move(public_path('images/kyc'), $file_name);
+
+        $image_path = 'images/kyc/' . $file_name;
+
+        $store = UserSettings::where('user_id', Auth::user()->id)->update([$key => $image_path ]);
+        $message = '';
+        if($key == 'back_kyc') {
+            $message = 'You successfully uploaded the back of your ID card, please make sure the front is uploaded as well';
+        } elseif($key == 'front_kyc') {
+            $message = 'You successfully uploaded the front of your ID card, please make sure the back is uploaded as well';
+        } else {
+            $message = 'You successfully uploaded your address proof, sit back while we review it.';
+        }
+        if($former_url) {
+            unlink($former_url);
+        }
+
+        return response()->json(
+            [
+                'success'=> ['message' => [$message]]
+            ], 200
+        );
+    }
 }
