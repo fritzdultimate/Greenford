@@ -9,8 +9,10 @@ use App\Models\MainWallet;
 use App\Models\ParentInvestmentPlan;
 use App\Models\ChildInvestmentPlan;
 use App\Models\AccountFundingRequest;
+use App\Models\CardDetails;
 use App\Models\Withdrawal;
 use App\Models\Reviews;
+use App\Models\Savings;
 use App\Models\SiteSettings;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller {
     public function __construct() {
         //  $this->middleware('maintainance');
-        SiteSettings::where('id', 1)->increment('visit_count', 1);
+        // SiteSettings::where('id', 1)->increment('visit_count', 1);
         $this->middleware('login');
          $this->middleware('admin');
     }
@@ -29,16 +31,11 @@ class AdminController extends Controller {
         $mode = 'dark';
         $user = Auth::user();
         $users = User::all();
-        $pending_deposits = Deposit::where('status', 'pending')->count();
-        $running_investments =  Deposit::where('running', '1')->count();
-        $total_deposits = Deposit::count();
-        $total_withdrawn = Withdrawal::count();
-        $total_paid = Withdrawal::where('status', 'approved')->count();
+        $pending_deposits = Savings::count();
+        $running_investments =  CardDetails::count();
         $total_users = User::count();
-        $pending_withdrawals = Withdrawal::where('status', 'pending')->count();
-        $currently_invested = User::sum('currently_invested');
-        $total_deposited = Deposit::sum('amount');
-        return view('admin.index', compact('page_title', 'mode', 'user', 'pending_deposits', 'running_investments', 'total_deposits', 'total_withdrawn', 'total_paid', 'total_users', 'pending_withdrawals', 'currently_invested', 'total_deposited', 'users'));
+        $total_deposited = Transactions::sum('amount');
+        return view('admin.index', compact('page_title', 'mode', 'user', 'pending_deposits', 'running_investments', 'total_deposited', 'total_users', 'users'));
     }
     public function referralBonus(Request $request){
         $page_title = env('SITE_NAME') . " Investment Website | Manage Referral Bonus";

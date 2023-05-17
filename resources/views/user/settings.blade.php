@@ -15,7 +15,7 @@
         <div class="right">
             <a href="/user/notifications" class="headerButton">
                 <ion-icon class="icon" name="notifications-outline"></ion-icon>
-                <span class="badge badge-danger">4</span>
+                <span class="badge badge-danger">{{ $notification_count }}</span>
             </a>
         </div>
     </div>

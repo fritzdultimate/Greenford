@@ -55,6 +55,8 @@ class CardController extends Controller {
         $create_card = CardDetails::create($data);
         if($create_card) {
             $user_account->decrement('account_balance', $validated['amount'] + 2);
+            // notify locker
+            notify("You created a $addCardRequest->type card with $ $addCardRequest->amount valid till " . get_day_name($exp_date), 'Card Created', $user->id);
             // send email
 
             return response()->json(

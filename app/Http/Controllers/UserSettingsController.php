@@ -15,6 +15,17 @@ class UserSettingsController extends Controller {
     public function updateMode(Request $request) {
         UserSettings::where('user_id', Auth::user()->id)->update(['dark_mode' => $request->dark_mode]);
 
+        $mode = UserSettings::where('user_id', Auth::user()->id)->first()['dark_mode'];
+
+        // notify 
+        if($mode) {
+            $message = "Dark mode activated";
+        } else {
+            $message = "Light mode activated";
+        }
+
+        notify($message, 'Account Theme', Auth::user()->id);
+
         return response()->json(
             [
                 'success' => ['message' => ['updated mode']]
@@ -35,6 +46,15 @@ class UserSettingsController extends Controller {
     public function toggleTwoFactor(Request $request) {
         UserSettings::where('user_id', Auth::user()->id)->update(['twofac' => $request->twofac]);
 
+        $two_f = UserSettings::where('user_id', Auth::user()->id)->first()['twofac'];
+
+        // notify 
+        if($two_f) {
+            $message = "Two factor authentication enabled";
+        } else {
+            $message = "Two factor authentication disabled";
+        }
+        notify($message, 'Account Upgrade', Auth::user()->id);
         return response()->json(
             [
                 'success' => ['message' => ['updated email 2fac']]
@@ -66,6 +86,9 @@ class UserSettingsController extends Controller {
         if($update_password) {
             // Auth::logoutOtherDevices($request->password);
             // Auth::login($user, true);
+
+            // notify locker
+        notify("Account password has been changed successfully", 'Password Change', Auth::user()->id);
             return response()->json(
                 [
                     'success'=> ['message' => ["password has been changed successfully"]]
@@ -112,6 +135,9 @@ class UserSettingsController extends Controller {
             );
         }
 
+        // notify locker
+        notify("Profile image updated", 'New Profile picture', Auth::user()->id);
+
         return response()->json(
             [
                 'success'=> ['message' => ["Profile picture uploade successfully!"]]
@@ -142,6 +168,9 @@ class UserSettingsController extends Controller {
         if($former_url) {
             unlink($former_url);
         }
+
+        // notify locker
+        notify($message, 'Account Upgrade', Auth::user()->id);
 
         return response()->json(
             [

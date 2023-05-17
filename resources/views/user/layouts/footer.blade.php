@@ -41,7 +41,7 @@
                     <!-- profile box -->
                     <div class="profileBox pt-2 pb-2">
                         <div class="image-wrapper">
-                            <img src="{{ asset('app/img/sample/avatar/avatar1.jpg') }}" alt="image" class="imaged  w36">
+                            <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app/img/sample/avatar/avatar1.png') }}" alt="image" class="imaged  w36">
                         </div>
                         <div class="in">
                             <strong>{{ $user->fullname }}</strong>
