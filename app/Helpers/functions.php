@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
+
 function generateTransactionHash($table, $column, $length) {
     $hash = bin2hex(random_bytes($length));
     $check_hash_exist = $table->where($column, $hash)->first();
@@ -55,4 +58,17 @@ function get_day_name($timestamp) {
         $date = date_format($date, 'M d, Y');
     }
     return $date;
+}
+
+function notify($message, $title, $user_id, $is_transaction = false, $type = null) {
+    $notify = Notification::insert([
+        'user_id' => $user_id,
+        'message' => $message,
+        'title' => $title,
+        'transaction' => $is_transaction,
+        'type' => $type,
+        'created_at' => date('Y-m-d H:i:s')
+    ]);
+
+    return $notify;
 }

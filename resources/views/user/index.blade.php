@@ -69,8 +69,6 @@
             @include('user.cards')
         @endif
 
-        @include('user.monthly-bills')
-
         @if($savings->count() > 0)
             @include('user.savings')
         @endif;

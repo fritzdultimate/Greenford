@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Notification;
 use App\Models\UserSettings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -30,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
             $user = Auth::user();
             if($user) {
                 $user_settings = UserSettings::where('user_id', Auth::user()->id)->first();
-                $view->with('user_settings', $user_settings); 
+                $notification_count = Notification::where(['user_id' => $user->id, 'delivered' => 0])->count();
+                
+                $view->with(compact('user_settings', 'notification_count'));
             }
         });
     }

@@ -122,7 +122,12 @@ class DepositController extends Controller {
             $sender->increment('total_outgoing', $request->amount);
             $sender->increment('total_sent_out', $request->amount);
 
+            // notify sender
+            $receiver = $beneficiary->user->fullname;
+            notify("You sent $ $request->amount to $receiver", 'money sent', $sender->user_id, true, 'debit');
+
             // send alert to sender
+
 
             $credit_beneficiary = $beneficiary->increment('account_balance', $request->amount);
 
@@ -130,6 +135,10 @@ class DepositController extends Controller {
                 $beneficiary->increment('total_balance', $request->amount);
                 $beneficiary->increment('total_incoming', $request->amount);
                 $beneficiary->increment('total_received', $request->amount);
+
+                // notify sender
+                $sender_notif = $sender->user->fullname;
+                notify("You received $ $request->amount from $sender_notif", 'payment received', $beneficiary->user_id, true, 'credit');
 
                 // send alert to beneficiary
             } else {

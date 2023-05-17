@@ -15,6 +15,7 @@ use App\Models\Reviews;
 use App\Models\User;
 use App\Models\FakeWithdrawal;
 use App\Models\LockedFunds;
+use App\Models\Notification;
 use App\Models\Properties;
 use App\Models\Savings;
 use App\Models\UserDoc;
@@ -59,6 +60,7 @@ class HomeController extends Controller {
         $total_locked_fund = LockedFunds::where('user_id', $user->id)->sum('amount');
         $total_savings = Savings::where('user_id', $user->id)->sum('saved');
         $cards = CardDetails::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+
         return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings', 'total_locked_fund', 'total_savings', 'cards'));
     }
     public function deposit(Request $request){
@@ -183,6 +185,22 @@ class HomeController extends Controller {
         $faqs = Faq::get();
         $user_settings = $userSettings->where('user_id', $user->id)->first();
         return view('user.settings', compact('page_title', 'mode', 'user', 'user_account', 'user_settings', 'faqs'));
+    }
+
+    public function notifications(Request $request, UserSettings $userSettings){
+        $page_title = env('SITE_NAME') . " Notification";
+        $mode = 'dark';
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+        if($user->browsing_as){
+            $user = User::find($user->browsing_as);
+        }
+
+        $notifications = Notification::where('user_id', Auth::user()->id)->get();
+        Notification::where('user_id', Auth::user()->id)->update(['seen' => true, 'delivered' => true]);
+
+        $user_settings = $userSettings->where('user_id', $user->id)->first();
+        echo view('user.notifications', compact('page_title', 'mode', 'user', 'user_account', 'user_settings', 'notifications'));
     }
 
     public function upgradeAccount(Request $request, UserSettings $userSettings){

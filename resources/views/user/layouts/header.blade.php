@@ -37,13 +37,12 @@
             <img src="{{ asset('app/img/logo.png') }}" alt="logo" class="logo">
         </div>
         <div class="right">
-            <a href="app-notifications.html" class="headerButton">
+            <a href="/user/notifications" class="headerButton">
                 <ion-icon class="icon" name="notifications-outline"></ion-icon>
-                <span class="badge badge-danger">4</span>
+                <span class="badge badge-danger">{{ $notification_count }}</span>
             </a>
-            <a href="app-settings.html" class="headerButton">
+            <a href="/user/settings" class="headerButton">
                 <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app/img/sample/avatar/avatar1.png') }}" alt="image" class="imaged w32">
-                <span class="badge badge-danger">6</span>
             </a>
         </div>
     </div>
