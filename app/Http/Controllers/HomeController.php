@@ -196,7 +196,7 @@ class HomeController extends Controller {
             $user = User::find($user->browsing_as);
         }
 
-        $notifications = Notification::where('user_id', Auth::user()->id)->get();
+        $notifications = Notification::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
         Notification::where('user_id', Auth::user()->id)->update(['seen' => true, 'delivered' => true]);
 
         $user_settings = $userSettings->where('user_id', $user->id)->first();

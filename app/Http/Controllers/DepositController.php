@@ -193,7 +193,7 @@ class DepositController extends Controller {
 
         $savings = Savings::where('user_id', $user->id)->get();
 
-        if($savings->count() === 5) {
+        if($savings->count() === 20) {
             return response()->json(
                 [
                     'errors' => ['message' => ['You cannot have more than 5 consecutively active savings goal running!']]
@@ -211,6 +211,9 @@ class DepositController extends Controller {
         ]);
 
         if($create) {
+            // notify sender
+            $save_name = $validated['name'];
+            notify("You created $save_name Savings ", 'Savings Goal Created', $user->id, true, 'credit');
             // send email.
 
             return response()->json(
@@ -286,6 +289,10 @@ class DepositController extends Controller {
         if($logSavings) {
             $goal->refresh();
 
+            // notify saver
+            notify("You saved $ $createSavingsRequest->amount to  $goal->name savings goal", 'Money Saved', $goal->user_id, true, 'credit');
+            // send email.
+
             // send email
             return response()->json(
                 [
@@ -320,6 +327,9 @@ class DepositController extends Controller {
         ]);
 
         if($lock_fund) {
+
+            // notify locker
+            notify("You locked $ $lockFundRequest->amount till " . get_day_name($due_date), 'Money Locked', $user->id, true, 'debit');
 
             // send email
             return response()->json(
