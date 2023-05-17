@@ -131,6 +131,10 @@ use Illuminate\Support\Facades\Route;
      Route::post('/user/toggle-suspend', [App\Http\Controllers\AdminController::class, 'toggleSuspend']);
      Route::post('/user/delete-user', [App\Http\Controllers\AdminController::class, 'deleteUser']);
 
+     Route::post('/account/credit', [App\Http\Controllers\AdminController::class, 'creditAccountAction']);
+     Route::post('/account/debit', [App\Http\Controllers\AdminController::class, 'debitAccountAction']);
+
+
 
      Route::post('/setting/uploadImage', [App\Http\Controllers\UserSettingsController::class, 'uploadImage']);
 

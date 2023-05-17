@@ -8,7 +8,7 @@
 
 
     <div class="section mt-2">
-        <div class="section-title">Credit Account</div>
+        <div class="section-title">Debit Account</div>
         <div class="card">
             <div class="card-body">
 
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="form-group basic">
-                        <button type="button" class="btn btn-primary btn-block btn-lg credit-account-btn">Credit</button>
+                        <button type="button" class="btn btn-primary btn-block btn-lg credit-account-btn">Debit</button>
                     </div>
                 </form>
 
@@ -47,5 +47,5 @@
 
 <!--* App Capsule -->
 <script src="{{ asset('dash/js/fn.js') }}"></script>
-<script src="{{ asset('dash/js/credit-account.js') }}"></script>
+<script src="{{ asset('dash/js/debit-account.js') }}"></script>
 @include('admin.layouts.footer')

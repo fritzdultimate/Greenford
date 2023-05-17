@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/fund" class="item">
+                            <a href="/admin/credit" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="arrow-up-outline"></ion-icon>
                                 </div>
@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/debit" class="item">
+                            <a href="/admin/upgrade/kyc" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="settings-outline"></ion-icon>
                                 </div>

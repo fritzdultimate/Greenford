@@ -54,6 +54,54 @@ class AdminController extends Controller {
         return view('admin.members', compact('page_title', 'users', 'user'));
     }
 
+    public function creditAccount(Request $request){
+        $page_title = env('SITE_NAME') . " Investment Website | Dashboard";
+        $mode = 'dark';
+        $user = Auth::user();
+        $users = User::all();
+        
+        return view('admin.credit-account', compact('page_title', 'users', 'user'));
+    }
+
+    public function debitAccount(Request $request){
+        $page_title = env('SITE_NAME') . " Finance | Dashboard";
+        $mode = 'dark';
+        $user = Auth::user();
+        $users = User::all();
+        
+        return view('admin.debit-account', compact('page_title', 'users', 'user'));
+    }
+
+    public function kycUpgrade(Request $request){
+        $page_title = env('SITE_NAME') . " Finance | Dashboard";
+        $mode = 'dark';
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+        $users = User::all();
+        
+        return view('admin.kyc-upgrade', compact('page_title', 'users', 'user', 'user_account'));
+    }
+
+    public function creditAccountAction(Request $request){
+        $credit = UserAccountData::where('user_id', $request->user_id)->increment('account_balance', $request->amount);
+
+        return response()->json(
+            [
+                'success' => ['message' => ["User has been funded $$request->amount!"]]
+            ], 201
+        );
+    }
+
+    public function debitAccountAction(Request $request){
+        $credit = UserAccountData::where('user_id', $request->user_id)->decrement('account_balance', $request->amount);
+
+        return response()->json(
+            [
+                'success' => ['message' => ["User has been debited $$request->amount!"]]
+            ], 201
+        );
+    }
+
     public function toggleSuspend(Request $request) {
         $user = User::where('id', $request->id)->first();
 

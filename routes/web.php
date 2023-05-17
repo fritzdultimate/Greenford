@@ -143,6 +143,11 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
 Route::get('/admin/members', [App\Http\Controllers\AdminController::class, 'members']);
 Route::get('/admin/members/suspended', [App\Http\Controllers\AdminController::class, 'suspendedMembers']);
 
+Route::get('/admin/credit', [App\Http\Controllers\AdminController::class, 'creditAccount']);
+Route::get('/admin/debit', [App\Http\Controllers\AdminController::class, 'debitAccount']);
+
+Route::get('/admin/upgrade/kyc', [App\Http\Controllers\AdminController::class, 'kycUpgrade']);
+
 
 Route::get('/admin/plans/parent', [App\Http\Controllers\AdminController::class, 'parentPlan']);
 Route::get('/admin/plans/child', [App\Http\Controllers\AdminController::class, 'childPlan']);

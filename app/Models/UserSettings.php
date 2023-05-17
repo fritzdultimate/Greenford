@@ -18,4 +18,8 @@ class UserSettings extends Model
         '2fac',
         'use_pin_for_transaction'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
