@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
 
-<body>
+<body class="{{ $user_settings->dark_mode ? 'dark-mode' : '' }}">
 
     <!-- loader -->
     <!-- <div id="loader">
@@ -42,7 +42,7 @@
                 <span class="badge badge-danger">4</span>
             </a>
             <a href="app-settings.html" class="headerButton">
-                <img src="{{ asset('app/img/sample/avatar/avatar1.jpg') }}" alt="image" class="imaged w32">
+                <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app/img/sample/avatar/avatar1.png') }}" alt="image" class="imaged w32">
                 <span class="badge badge-danger">6</span>
             </a>
         </div>

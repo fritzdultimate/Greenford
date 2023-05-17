@@ -125,6 +125,7 @@ Route::get('/user/transactions', [App\Http\Controllers\HomeController::class, 't
 Route::get('/user/transaction/data/{id}', [App\Http\Controllers\HomeController::class, 'transactionsItem']);
 Route::get('/user/savings', [App\Http\Controllers\HomeController::class, 'savings']);
 Route::get('/user/security', [App\Http\Controllers\HomeController::class, 'security']);
+Route::get('/user/settings', [App\Http\Controllers\HomeController::class, 'settings']);
 
 Route::get('/user/logout', [App\Http\Controllers\HomeController::class, 'logout']);
 Route::get('/user/referrals', [App\Http\Controllers\HomeController::class, 'referrals']);
@@ -181,6 +182,4 @@ Route::get('/user/account/verification', [App\Http\Controllers\RegistrationContr
 
 
 Route::get('/forgot-password', [App\Http\Controllers\HomeController::class, 'forgotPass']);
-Route::get('/property-view', [App\Http\Controllers\HomeController::class, 'propertyView']);
-Route::post('/submit-property', [App\Http\Controllers\FilesController::class, 'properties'])->name('property.submit');
 

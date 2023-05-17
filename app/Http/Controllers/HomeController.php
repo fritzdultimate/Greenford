@@ -21,6 +21,7 @@ use App\Models\UserDoc;
 use Illuminate\Http\Request;
 use App\Models\SiteSettings;
 use App\Models\UserAccountData;
+use App\Models\UserSettings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -40,12 +41,17 @@ class HomeController extends Controller {
         return view('visitor.index', compact('page_title'));
     }
 
-    public function dashboard(Request $request){
+    public function dashboard(Request $request, UserSettings $userSettings){
+        
         $page_title = env('SITE_NAME') . " Investment Website | Dashboard";
         $mode = 'dark';
         $user = Auth::user();
         if($user->browsing_as){
             $user = User::find($user->browsing_as);
+        }
+        $user_settings = $userSettings->where('user_id', $user->id)->first();
+        if(!$user_settings) {
+            $userSettings::insert(['user_id' => $user->id]);
         }
         $transactions = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->orderBy('id', 'desc')->take(5)->get();
         $savings = Savings::where('user_id', $user->id)->get();
@@ -158,10 +164,25 @@ class HomeController extends Controller {
         $page_title = env('SITE_NAME') . " Investment Website | Dashboard";
         $mode = 'dark';
         $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
         if($user->browsing_as){
             $user = User::find($user->browsing_as);
         }
         return view('user.security', compact('page_title', 'mode', 'user'));
+    }
+
+    public function settings(Request $request, UserSettings $userSettings){
+        $page_title = env('SITE_NAME') . " Settings";
+        $mode = 'dark';
+        $user = Auth::user();
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+        if($user->browsing_as){
+            $user = User::find($user->browsing_as);
+        }
+
+        $faqs = Faq::get();
+        $user_settings = $userSettings->where('user_id', $user->id)->first();
+        return view('user.settings', compact('page_title', 'mode', 'user', 'user_account', 'user_settings', 'faqs'));
     }
 
     public function profile(Request $request){

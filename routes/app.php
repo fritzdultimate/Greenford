@@ -117,6 +117,21 @@ use Illuminate\Support\Facades\Route;
      Route::delete('/card/delete/{cardId}', [App\Http\Controllers\CardController::class, 'deleteCard']);
      Route::post('/money/create-savings-goal', [App\Http\Controllers\DepositController::class, 'createSavingsGoal']);
      Route::get('/money/savings-goals', [App\Http\Controllers\DepositController::class, 'getSavings']);
+
+     Route::post('/setting/toggleMode', [App\Http\Controllers\UserSettingsController::class, 'updateMode']);
+
+     Route::post('/setting/toggleTransactionEmails', [App\Http\Controllers\UserSettingsController::class, 'updateEmailsTrasaction']);
+     
+     Route::post('/setting/toggleTwoFactor', [App\Http\Controllers\UserSettingsController::class, 'toggleTwoFactor']);
+
+     Route::post('/setting/changeAddress', [App\Http\Controllers\UserSettingsController::class, 'updateAddress']);
+     Route::post('/setting/changePassword', [App\Http\Controllers\UserSettingsController::class, 'changePassword']);
+     Route::post('/setting/logOutOtherDevices', [App\Http\Controllers\UserSettingsController::class, 'logOutOtherDevices']);
+
+     Route::post('/setting/uploadImage', [App\Http\Controllers\UserSettingsController::class, 'uploadImage']);
+     
+
+
      Route::post('/admin/deposit/approve', [App\Http\Controllers\DepositController::class, 'approve']);
      Route::post('/admin/deposit/deny', [App\Http\Controllers\DepositController::class, 'deny']);
      Route::post('/deposit/reinvest', [App\Http\Controllers\DepositController::class, 'reinvest']);

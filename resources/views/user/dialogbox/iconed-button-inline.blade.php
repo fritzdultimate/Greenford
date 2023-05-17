@@ -30,8 +30,10 @@
     confirmDialogIconedButtonAction.addEventListener('click', (e) => {
         CONFIRM = true;
         let path = location.pathname;
-        if(path == '/user/cards' || '/user') {
+        if(path == '/user/cards' || path == '/user') {
             deleteCard();
+        } else if(LOGOUTALLDEVICES) {
+            processLogoutAllDevice();
         }
 
         let el = document.getElementById("DialogIconedButtonInline");
