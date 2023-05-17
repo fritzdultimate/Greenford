@@ -34,6 +34,10 @@
             deleteCard();
         } else if(LOGOUTALLDEVICES) {
             processLogoutAllDevice();
+        } else if(SUSPENDINGUSERID) {
+            processSuspendUser()
+        } else if(DELETINGUSERID) {
+            processDeleteUser();
         }
 
         let el = document.getElementById("DialogIconedButtonInline");

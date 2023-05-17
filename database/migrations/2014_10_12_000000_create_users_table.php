@@ -40,6 +40,7 @@ class CreateUsersTable extends Migration
             $table->string('source_of_income');
             $table->string('state');
             $table->string('country');
+            $table->boolean('suspended')->default(false);
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

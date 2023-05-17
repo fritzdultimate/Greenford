@@ -128,6 +128,10 @@ use Illuminate\Support\Facades\Route;
      Route::post('/setting/changePassword', [App\Http\Controllers\UserSettingsController::class, 'changePassword']);
      Route::post('/setting/logOutOtherDevices', [App\Http\Controllers\UserSettingsController::class, 'logOutOtherDevices']);
 
+     Route::post('/user/toggle-suspend', [App\Http\Controllers\AdminController::class, 'toggleSuspend']);
+     Route::post('/user/delete-user', [App\Http\Controllers\AdminController::class, 'deleteUser']);
+
+
      Route::post('/setting/uploadImage', [App\Http\Controllers\UserSettingsController::class, 'uploadImage']);
 
      Route::post('/setting/uploadKycFile', [App\Http\Controllers\UserSettingsController::class, 'uploadKycFile']);
