@@ -56,6 +56,7 @@
 			<div class="container">
 				<nav class="navbar navbar-expand-md navbar-light">
 					<a class="navbar-brand" href="/">
+						<img src="{{ asset('assets/img/favicon.png') }}">
 						<span>
 							{{ env('SITE_NAME') }}
 						</span>
