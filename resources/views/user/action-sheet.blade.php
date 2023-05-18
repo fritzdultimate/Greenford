@@ -116,7 +116,7 @@
                                 <div class="form-group basic">
                                     <div class="input-wrapper">
                                         <label class="label" for="text11">To</label>
-                                        <input type="email" class="form-control" id="text11"
+                                        <input type="number" class="form-control" id="text11"
                                             placeholder="Account number" name="account_number">
                                         <i class="clear-input">
                                             <ion-icon name="close-circle"></ion-icon>
