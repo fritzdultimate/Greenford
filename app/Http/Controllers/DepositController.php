@@ -125,7 +125,7 @@ class DepositController extends Controller {
         $transaction_id = generateTransactionHash($transaction, 'transaction_id', 11);
 
         if($debit_sender) {
-            $sender->decrement('total_balance', $total_amount_to_debit);
+            // $sender->decrement('total_balance', $total_amount_to_debit);
             $sender->increment('total_outgoing', $request->amount);
             $sender->increment('total_sent_out', $request->amount);
 
@@ -154,7 +154,7 @@ class DepositController extends Controller {
             $credit_beneficiary = $beneficiary->increment('account_balance', $request->amount);
 
             if($credit_beneficiary) {
-                $beneficiary->increment('total_balance', $request->amount);
+                // $beneficiary->increment('total_balance', $request->amount);
                 $beneficiary->increment('total_incoming', $request->amount);
                 $beneficiary->increment('total_received', $request->amount);
 
