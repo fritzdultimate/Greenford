@@ -5,6 +5,7 @@ use App\Models\Notification;
 use App\Models\User;
 use App\Models\UserAccountData;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 function generateTransactionHash($table, $column, $length) {
     $hash = bin2hex(random_bytes($length));
@@ -107,6 +108,19 @@ function unlockFunds() {
             UserAccountData::where('user_id', $fund->user_id)->increment('account_balance');
             LockedFunds::where('user_id', $fund->user_id)->forceDelete();
             // send email
+            $details = [
+                'subject' => 'Your Money Was  Unocked',
+                'amount' => $fund->amount,
+                'transaction_id' => $fund->transaction_id,
+                'due_date' => get_day_format($fund->due_date),
+                'date_locked' => get_day_format($fund->created_at),
+                'sign' => '+',
+                'color' => 'green',
+                'view' => 'emails.user.moneyunlocked',
+            ];
+
+            $mailer = new \App\Mail\MailSender($details);
+            Mail::to($fund->user->email)->send($mailer);
 
         }
     }

@@ -138,7 +138,8 @@ class DepositController extends Controller {
                 'subject' => 'Transaction Notification [Debit Alert]',
                 'beneficiary' => $beneficiary->user->fullname,
                 'beneficiary_account_number' => $beneficiary->account_number,
-                'amount' => $request->amount, 
+                'amount' => number_format($request->amount, 2), 
+                'balance' => number_format($sender->account_balance, 2),
                 'transaction_id' => $transaction_id,
                 'date' => get_day_format(date("Y-m-d H:i:s")),
                 'sign' => '-',
@@ -166,7 +167,8 @@ class DepositController extends Controller {
                     'subject' => 'Transaction Notification [Credit Alert]',
                     'sender' => $sender->user->fullname,
                     'sender_account_number' => $sender->account_number,
-                    'amount' => $request->amount, 
+                    'amount' => number_format($request->amount, 2),
+                    'balance' => number_format($beneficiary->account_balance,2),
                     'transaction_id' => $transaction_id,
                     'date' => get_day_format(date("Y-m-d H:i:s")),
                     'sign' => '+',
@@ -251,6 +253,21 @@ class DepositController extends Controller {
             notify("You created $save_name Savings ", 'Savings Goal Created', $user->id, true, 'credit');
             // send email.
 
+            $details = [
+                'subject' => 'Savings goal created',
+                'goal_name' => $validated['name'],
+                'description' => $createSavingsGoalRequest->description,
+                'target' => $validated['target'], 
+                'savings_id' => $savings_id,
+                'date' => get_day_format(date("Y-m-d H:i:s")),
+                'sign' => '-',
+                'color' => 'red',
+                'view' => 'emails.user.savingscreated',
+            ];
+
+            $mailer = new \App\Mail\MailSender($details);
+            Mail::to($user->email)->send($mailer);
+
             
 
             return response()->json(
@@ -330,7 +347,21 @@ class DepositController extends Controller {
             notify("You saved $ $createSavingsRequest->amount to  $goal->name savings goal", 'Money Saved', $goal->user_id, true, 'credit');
             // send email.
 
-            // send email
+            $details = [
+                'subject' => 'You Save Some Money',
+                'goal_name' => $goal->name,
+                'amount' => $validated['amount'],
+                'description' => $goal->description,
+                'target' => $goal->target, 
+                'savings_id' => $goal->savings_id,
+                'date' => get_day_format(date("Y-m-d H:i:s")),
+                'sign' => '-',
+                'color' => 'red',
+                'view' => 'emails.user.moneysaved',
+            ];
+
+            $mailer = new \App\Mail\MailSender($details);
+            Mail::to($user->email)->send($mailer);
             return response()->json(
                 [
                     'success' => ['message' => [$goal->saved == $goal->target ? "Congrats! You have successfully reach your target of $$goal->target savings" : 'Money saved, great.']]
@@ -369,6 +400,19 @@ class DepositController extends Controller {
             notify("You locked $ $lockFundRequest->amount till " . get_day_name($due_date), 'Money Locked', $user->id, true, 'debit');
 
             // send email
+            $details = [
+                'subject' => 'You Locked Some Money',
+                'amount' => $validated['amount'],
+                'transaction_id' => $transaction_id,
+                'due_date' => get_day_format($due_date),
+                'date' => get_day_format(date("Y-m-d H:i:s")),
+                'sign' => '-',
+                'color' => 'red',
+                'view' => 'emails.user.lockmoney',
+            ];
+
+            $mailer = new \App\Mail\MailSender($details);
+            Mail::to($user->email)->send($mailer);
             return response()->json(
                 [
                     'success' => ['message' => ['Fund locked successfully']]

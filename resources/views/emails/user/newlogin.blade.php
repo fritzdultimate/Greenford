@@ -87,11 +87,11 @@
                   <!--[if mso]><table width="584" cellspacing="0" cellpadding="0" border="0" role="presentation"><tbody><tr><td align="center"><![endif]-->
                   <div class="o_col-6s o_center o_sans o_text-md o_text-white" data-color="White" data-size="Text MD" data-min="15" data-max="23" style="font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 19px;line-height: 28px;max-width: 584px;color: #ffffff;text-align: center;">
                     <h3 class="o_heading o_mb-xxs" data-size="Heading 2" data-min="20" data-max="40" style="font-family: Helvetica, Arial, sans-serif;font-weight: bold;margin-top: 0px;margin-bottom: 4px;font-size: 20px;line-height: 39px;">
-                        Hi! {{ $details['username'] }},
+                        Hi! {{ $details['name'] }},
                     </h3>
-                    <p class="o_mb-md" style="margin-top: 0px;margin-bottom: 14px;">
-                        Your deposit request of ${{ $details['amount'] }} was received!
-                    </p>
+                    <p class="o_mb-md" style="margin-top: 0px;margin-bottom: 14px;">A login attempt was initiated with you account just now.</p>
+
+                    <p class="o_mb-md" style="margin-top: 0px;margin-bottom: 14px;"><small>Ignore this email if this was you, if you were not the one, please login into your account, head to SETTING and change your password!.</small></p>
                     
                   </div>
                   <!--[if mso]></td></tr></table><![endif]-->
@@ -133,7 +133,7 @@
                 <td class="o_re o_bg-white o_px-md o_py" align="center" data-bgcolor="Bg White" style="font-size: 0;vertical-align: top;background-color: #f7f7ff;padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
                   <!--[if mso]><table width="584" cellspacing="0" cellpadding="0" border="0" role="presentation"><tbody><tr><td align="right"><![endif]-->
                   <div class="o_col-6s o_right" style="max-width: 700px;text-align: right;">
-                    <table class="o_right" width="100%"  role="presentation" cellspacing="0" cellpadding="0" border="0" style="text-align: right;margin-left: auto;margin-right: 0;">
+                    <table class="o_right" role="presentation" cellspacing="0" cellpadding="0" border="0" style="text-align: right;margin-left: auto;margin-right: 0;">
                       <tbody>
                         <tr>
                           <td width="100%" class="o_px o_pb o_pt-xs o_bg-ultra_light o_br" align="left" data-bgcolor="Bg Ultra Light" style="background-color: #ebf5fa;border-radius: 4px;padding-left: 16px;padding-right: 16px;padding-top: 8px;padding-bottom: 16px;">
@@ -142,84 +142,24 @@
                                 <tr>
                                   <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
                                     <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        Your Username
+                                    Nearest Location:
                                     </p>
                                   </td>
                                   <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
                                     <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        {{ $details['username'] }}
+                                    {{ $details['nearest_location'] }}
                                     </p>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
                                     <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        Wallet 
+                                        Device
                                     </p>
                                   </td>
                                   <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
                                     <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        {{ $details['wallet'] }}
-                                    </p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                         Investment Plan
-                                    </p>
-                                  </td>
-                                  <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                       {{ $details['plan'] }}
-                                    </p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        Duration
-                                    </p>
-                                  </td>
-                                  <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                       {{ $details['duration'] }}
-                                    </p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        Amount Deposited
-                                    </p>
-                                  </td>
-                                  <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        ${{ $details['amount'] }}
-                                    </p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        Wallet Address
-                                    </p>
-                                  </td>
-                                  <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        ${{ $details['wallet_address'] }}
-                                    </p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        Transaction Hash
-                                    </p>
-                                  </td>
-                                  <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        {{ $details['transaction_hash'] }}
+                                        {{ $details['device'] }}
                                     </p>
                                   </td>
                                 </tr>
@@ -235,6 +175,8 @@
                                     </p>
                                   </td>
                                 </tr>
+                                
+                                
                               </tbody>
                             </table>
                           </td>
@@ -260,16 +202,11 @@
           <table class="o_block-lg" width="100%" cellspacing="0" cellpadding="0" border="0" role="presentation" style="max-width: 100%;margin: 0 auto;">
             <tbody>
               <tr>
-                <td class="o_bg-white o_px-md o_py" align="" data-bgcolor="Bg White" style="background-color: #f7f7ff;padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
+                <td class="o_bg-white o_px-md o_py" align="center" data-bgcolor="Bg White" style="background-color: #f7f7ff;padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
                   <!--[if mso]><table width="584" cellspacing="0" cellpadding="0" border="0" role="presentation"><tbody><tr><td align="center"><![endif]-->
-                  <div class="o_col-6s o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;line-height: 24px;max-width: 584px;color: #424651;text-align: center;">
-                    <span style="margin-top: 0px;margin-bottom: 0px; text-align: left!important; font-weight: bold">
-                          Best Regards, <br>
-                          {{ env("SITE_NAME") }}.
-                      </span>
-                      <br><br>
-                    <small class="o_center" style="margin-top: 0px;margin-bottom: 0px; text-align: center;">
-                        If you have any questions about this email, simply reply to this email or reach out to our <a href="https://focaltradingltd.com/support">support team</a> for help.
+                  <div class="o_col-6s o_sans o_text o_text-secondary o_center" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;line-height: 24px;max-width: 584px;color: #424651;text-align: center;">
+                    <small style="margin-top: 0px;margin-bottom: 0px;">
+                        If you have any questions about this email, simply reply to this email or reach out to our <a href="https://greenfordcreditunion.com/contact">support team</a> for help.
                     </small>
                   </div>
                   <!--[if mso]></td></tr></table><![endif]-->

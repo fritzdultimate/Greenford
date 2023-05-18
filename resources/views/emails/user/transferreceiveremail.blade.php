@@ -138,7 +138,7 @@
                                                                                                         <div style="color:#555555;line-height:120%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif">
                                                                                                             <div style="font-size:14px;line-height:17px;text-align:left;color:#555555;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;border-bottom:solid 1px #ededed;padding-top:15px;padding-right:10px;padding-bottom:15px;padding-left:10px">
                                                                                                                 <p style="margin:0;font-size:14px;line-height:17px;text-align:left">Account Number&nbsp;
-                                                                                                                    <strong style="float:right">{{ "*** " . substr($details['sender_account_number'], -4, 4) }}</strong>
+                                                                                                                    <strong style="float:right">{{ "***** " . substr($details['sender_account_number'], -4, 4) }}</strong>
                                                                                                                     <br>
                                                                                                                 </p>
                                                                                                             </div>
@@ -151,6 +151,30 @@
                                                                                                             <div style="font-size:14px;line-height:17px;text-align:left;color:#555555;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;padding-top:15px;padding-right:10px;padding-bottom:15px;padding-left:10px">
                                                                                                                 <p style="margin:0;font-size:14px;line-height:17px;text-align:left">Transaction ID&nbsp;&nbsp;
                                                                                                                     <strong style="float:right">{{ $details['transaction_id'] }}</strong>
+                                                                                                                    <br>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr style="vertical-align:top">
+                                                                                                    <td style="word-break:break-word;border-collapse:collapse!important;vertical-align:top;padding-top:0;padding-right:20px;padding-bottom:0;padding-left:20px">
+                                                                                                        <div style="color:#555555;line-height:120%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif">
+                                                                                                            <div style="font-size:14px;line-height:17px;text-align:left;color:#555555;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;padding-top:15px;padding-right:10px;padding-bottom:15px;padding-left:10px">
+                                                                                                                <p style="margin:0;font-size:14px;line-height:17px;text-align:left"> Amount &nbsp;&nbsp;
+                                                                                                                    <strong style="float:right">{{ env('CURRENCY') }} {{ $details['amount'] }}</strong>
+                                                                                                                    <br>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr style="vertical-align:top">
+                                                                                                    <td style="word-break:break-word;border-collapse:collapse!important;vertical-align:top;padding-top:0;padding-right:20px;padding-bottom:0;padding-left:20px">
+                                                                                                        <div style="color:#555555;line-height:120%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif">
+                                                                                                            <div style="font-size:14px;line-height:17px;text-align:left;color:#555555;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;padding-top:15px;padding-right:10px;padding-bottom:15px;padding-left:10px">
+                                                                                                                <p style="margin:0;font-size:14px;line-height:17px;text-align:left"> Cleared Balance&nbsp;&nbsp;
+                                                                                                                    <strong style="float:right">{{ env('CURRENCY') }} {{ $details['balance'] }}</strong>
                                                                                                                     <br>
                                                                                                                 </p>
                                                                                                             </div>

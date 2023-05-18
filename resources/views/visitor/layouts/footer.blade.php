@@ -11,32 +11,8 @@
 							</span>
 						</a>
 						<p class="comp-desc">
-							On the other hand, we denounce whteous indig nation and dislike men wh beguiled moraized er hand consec teturus adipis iscing elit eiusmod tempordunt labore dolore magna aliqua consector tetur adip iscing.
+						Welcome to Greenford Credit Union, your trusted online banking partner. We are committed to providing secure and reliable financial services to our members, with a focus on community-driven values.
 						</p>
-						<div class="social-link">
-							<ul class="social-profile list-style style1">
-								<li>
-									<a target="_blank" href="https://facebook.com/">
-										<i class="ri-facebook-fill"></i>
-									</a>
-								</li>
-								<li>
-									<a target="_blank" href="https://twitter.com/">
-										<i class="ri-twitter-fill"></i>
-									</a>
-								</li>
-								<li>
-									<a target="_blank" href="https://linkedin.com/">
-										<i class="ri-linkedin-fill"></i>
-									</a>
-								</li>
-								<li>
-									<a target="_blank" href="https://instagram.com/">
-										<i class="ri-pinterest-fill"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
 					</div>
 				</div>
 
@@ -45,7 +21,7 @@
 						<h3 class="footer-widget-title">Our Company</h3>
 						<ul class="footer-menu list-style">
 							<li>
-								<a href="/about">
+								<a href="/about-us">
 									<i class="flaticon-next"></i>
 									Company &amp; Team
 								</a>

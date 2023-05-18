@@ -58,6 +58,21 @@ class CardController extends Controller {
             // notify locker
             notify("You created a $addCardRequest->type card with $ $addCardRequest->amount valid till " . get_day_name($exp_date), 'Card Created', $user->id);
             // send email
+            $details = [
+                'subject' => "$addCardRequest->type card was created",
+                'card_type' => $addCardRequest->type,
+                'card_number' => "**** **** **** " .substr($card_number, -4, 4),
+                'exp_date' => get_day_format($exp_date), 
+                'funded_amount' => number_format($validated['amount'], 2),
+                'date_created' => get_day_format(date("Y-m-d H:i:s")),
+                'card_id' => $card_id,
+                'sign' => '-',
+                'color' => 'red',
+                'view' => 'emails.user.cardcreated',
+            ];
+
+            $mailer = new \App\Mail\MailSender($details);
+            Mail::to($user->email)->send($mailer);
 
             return response()->json(
                 [

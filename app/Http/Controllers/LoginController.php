@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserAccountData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller {
 
@@ -31,7 +32,24 @@ class LoginController extends Controller {
             } else {
 
                Auth::login($data, true);
+               $user_ip = getenv('REMOTE_ADDR');
+                $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
+                $country = $geo["geoplugin_countryName"];
+                $city = $geo["geoplugin_city"];
+
+                $details = [
+                    'name' => Auth::user()->fullname,
+                    'subject' => "A Login Was Attempted On Your Account",
+                    'date' => get_day_format(date("Y-m-d H:i:s")),
+                    'device' => request()->userAgent(),
+                    'nearest_location' =>  $city . ' ' . $country,
+                    'view' => 'emails.user.newlogin',
+                ];
+
+                $mailer = new \App\Mail\MailSender($details);
+                Mail::to(Auth::user()->email)->send($mailer);
                return redirect('/user')->with('success', 'Access granted');
+
             }
             return redirect('/login')->with('error', 'Something went wrong, we are working on it');
         }

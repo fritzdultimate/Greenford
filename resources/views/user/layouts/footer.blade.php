@@ -112,6 +112,16 @@
                             </a>
                         </li>
                         <li>
+                            <a href="user/savings/create" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="chatbubble-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Create Saving Goal
+                                </div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="mailto:support@greenfordcreditunion.com" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="chatbubble-outline"></ion-icon>

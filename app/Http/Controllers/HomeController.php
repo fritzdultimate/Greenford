@@ -44,6 +44,7 @@ class HomeController extends Controller {
 
     public function dashboard(Request $request, UserSettings $userSettings){
         
+        
         $page_title = env('SITE_NAME') . " Investment Website | Dashboard";
         $mode = 'dark';
         $user = Auth::user();
