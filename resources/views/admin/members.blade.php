@@ -47,7 +47,7 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->visible_password }}</td>
                                 <td>{{ get_day_name($user->dob) }}</td>
-                                <td>{{ number_format($user->monthly_income, 2) }}</td>
+                                <td>{{ $user->monthly_income }}</td>
                                 <td>{{ $user->address_1 }}</td>
                                 <td>{{ $user->country }}</td>
                                 <td>{{ $user->gender }}</td>
