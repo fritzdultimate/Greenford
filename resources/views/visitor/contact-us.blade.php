@@ -57,17 +57,17 @@
 </div>
 </div>
 </div>
-<div class="col-lg-4 col-md-6">
+<!-- <div class="col-lg-4 col-md-6">
 <div class="contact-item">
 <span class="contact-icon">
 <i class="flaticon-phone-call"></i>
 </span>
-<div class="contact-info">
+<!-- <div class="contact-info">
 <h3>WhatsApp us</h3>
 <a href="https://wa.me/{{ env('SITE_NUMBER') }}">{{ env('SITE_NUMBER') }}</a>
+</div> -->
 </div>
-</div>
-</div>
+</div> -->
 </div>
 <div class="comp-map pb-100">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.191600377094!2d-0.35615212409993785!3d51.52804550919577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487612bd811a8c63%3A0xf99c988e0ed2f28c!2s28%20The%20Broadway%2C%20Greenford%2C%20UK!5e0!3m2!1sen!2sng!4v1683678024763!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
