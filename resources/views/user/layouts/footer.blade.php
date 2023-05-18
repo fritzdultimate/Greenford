@@ -126,7 +126,7 @@
                         <li>
                             <a href="user/savings/create" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="chatbubble-outline"></ion-icon>
+                                    <ion-icon name="cash-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Create Saving Goal
