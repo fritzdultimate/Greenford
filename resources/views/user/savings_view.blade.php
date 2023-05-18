@@ -32,7 +32,7 @@
                     <h4>{{ ucfirst($save->name) }}</h4>
                     <p>{{ ucfirst($save->description) }}</p>
                 </div>
-                <div class="price">$ {{ number_format($save->target, 2, '.', ',') }}</div>
+                <div class="price">{{ env('CURRENCY') }} {{ number_format($save->target, 2, '.', ',') }}</div>
             </div>
             <div class="progress text-center">
                 <div class="progress-bar text-center" role="progressbar" style="width: {{ number_format($save->saved/($save->target/100))  }}%;" aria-valuenow="80"

@@ -1,0 +1,80 @@
+/* Tab Content - menucool.com */
+
+ul.tabs
+{
+    padding: 7px 0;
+    font-size: 10;
+    margin:0;
+    list-style-type: none;
+    text-align: left; /*set to left, center, or right to align the tabs as desired*/
+}
+        
+ul.tabs li
+{
+    display: inline;
+    margin: 0;
+    margin-right:3px; /*distance between tabs*/
+	
+}
+        
+ul.tabs li a
+{
+        border-left: 2px solid #eee;
+    border-right: 2px solid #eee;
+    border-top: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+    text-decoration: none;
+    //: ;
+    position: relative;
+    color: #ba0808;
+    text-shadow: 1px 1px 0px #fff;
+    background: #F0F0F0 url(images/tabbg.html) repeat-x 0 0;
+    border-radius: 3px 3px 0 0;
+    outline: none;
+    font-weight: normal;
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 7px;
+    padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: 900;
+}
+        
+ul.tabs li a:visited
+{
+    color: #ba0808;
+	text-shadow:1px 1px 0px #fff;
+}
+        
+ul.tabs li a:hover
+{
+    border: 2px solid #eee;
+    background:#F0F0F0 url('images/tabbg.html') repeat-x 0 -36px;
+}
+        
+ul.tabs li.selected a, ul.tabs li.selected a:hover
+{
+    //position: relative;
+    top: 0px;
+    font-weight:bold;
+    background: white;
+    border: 2px solid #eee;
+    border-bottom-color: white;
+}
+        
+        
+ul.tabs li.selected a:hover
+{
+    text-decoration: none;
+}
+     
+
+div.tabcontents
+{
+    border: 2px solid #eee; padding: 30px;
+    background-color:#FFF;
+    border-radius: 0 3px 3px 3px;
+	font-size:10pt;
+}

@@ -56,7 +56,7 @@
                     <div class="sidebar-balance">
                         <div class="listview-title">Balance</div>
                         <div class="in">
-                            <h1 class="amount">$ {{ number_format($user_account->account_balance, 2) }}</h1>
+                            <h1 class="amount">{{ env('CURRENCY') }} {{ number_format($user_account->account_balance, 2) }}</h1>
                         </div>
                     </div>
                     <!-- * balance -->

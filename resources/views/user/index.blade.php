@@ -9,7 +9,7 @@
                 <div class="balance">
                     <div class="left">
                         <span class="title">Total Balance</span>
-                        <h1 class="total">$ {{ number_format($total_locked_fund + $total_savings + $user_account->account_balance, 2, '.', ',') }}</h1>
+                        <h1 class="total">{{ env('CURRENCY') }} {{ number_format($total_locked_fund + $total_savings + $user_account->account_balance, 2, '.', ',') }}</h1>
                     </div>
                     <div class="right">
                         <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">

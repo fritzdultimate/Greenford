@@ -11,7 +11,7 @@
     <meta name="description" content="{{ env('SITE_NAME') }} Online Banking System">
     <meta name="keywords"
         content="bank, wallet, banking, fintech mobile app, money, send, receive, withdraw" />
-    <link rel="icon" type="image/png" href="{{ asset('app/img/favicon.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app/img/icon/192x192.png') }}">
     <link rel="stylesheet" href="{{ asset('app/css/style.css') }}">
     <!-- <link rel="manifest" href="__manifest.json"> -->
@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="pageTitle">
-            <img src="{{ asset('app/img/logo.png') }}" alt="logo" class="logo">
+            <img src="{{ asset('assets/img/favicon.png') }}" alt="{{ env('SITE_NAME') }}" class="logo"> GFCU
         </div>
         <div class="right">
             <a href="/user/notifications" class="headerButton">

@@ -1,0 +1,24 @@
+/*
+Template:    	 hello-elementor
+License URI: 	 http://www.gnu.org/licenses/gpl-2.0.html
+Theme Name:		 regiotec digita GmbH
+Description:	 Child für regiotec-digital.de
+Author:			 www.regiotec-digital.de
+Author URI:		 https://regiotec-digital.de
+Template: 		 sydney
+Version:		 1.1
+
+*/
+
+/* Schreibe hier dein eigenes persönliches Stylesheet */
+
+
+:root {
+  	--cl-primary: #fff;
+}
+
+/* Theam header deaktivieren */
+#site-header{
+	display:none
+}
+/* Theam header deaktivieren */

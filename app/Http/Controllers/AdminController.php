@@ -90,7 +90,7 @@ class AdminController extends Controller {
 
         return response()->json(
             [
-                'success' => ['message' => ["User has been funded $$request->amount!"]]
+                'success' => ['message' => ["User has been funded £$request->amount!"]]
             ], 201
         );
     }
@@ -114,7 +114,7 @@ class AdminController extends Controller {
 
         return response()->json(
             [
-                'success' => ['message' => ["User has been debited $$request->amount!"]]
+                'success' => ['message' => ["User has been debited £$request->amount!"]]
             ], 201
         );
     }

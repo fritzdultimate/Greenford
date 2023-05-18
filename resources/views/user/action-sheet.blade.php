@@ -71,7 +71,7 @@
                                 <div class="form-group basic">
                                     <label class="label">Enter Amount</label>
                                     <div class="input-group mb-2">
-                                        <span class="input-group-text" id="basic-addonb1">$</span>
+                                        <span class="input-group-text" id="basic-addonb1">{{ env('CURRENCY') }}</span>
                                         <input type="text" class="form-control" placeholder="Enter an amount" name="amount">
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                                 <div class="form-group basic">
                                     <label class="label">Enter Amount</label>
                                     <div class="input-group mb-2">
-                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                        <span class="input-group-text" id="basic-addon1">{{ env('CURRENCY') }}</span>
                                         <input type="number" class="form-control" placeholder="0.00"
                                          name="amount">
                                     </div>
@@ -175,7 +175,7 @@
                                 <div class="form-group basic">
                                     <label class="label">Enter Amount</label>
                                     <div class="input-group mb-2">
-                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                        <span class="input-group-text" id="basic-addon1">{{ env('CURRENCY') }}</span>
                                         <input type="number" class="form-control" placeholder="0.00"
                                          name="amount">
                                     </div>

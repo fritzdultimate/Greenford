@@ -60,25 +60,25 @@ class DepositController extends Controller {
        } elseif($request->amount > 1000 && $sender->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['You can only transfer money not greater $1,000 at once, upgrade your account to transfer more!']]
+                    'errors' => ['message' => ["You can only transfer money not greater £1,000 at once, upgrade your account to transfer more!"]]
                 ], 401
             );
        } elseif($request->amount > 5000 && $sender->kyc_level == 'tier 2') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['You can only transfer money not greater $5,000 at once, upgrade your account to transfer more!']]
+                    'errors' => ['message' => ['You can only transfer money not greater £5,000 at once, upgrade your account to transfer more!']]
                 ], 401
             );
         } elseif ($request->amount > 1000 && $beneficiary->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than $1,000 at a go, split and send!']]
+                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than £1,000 at a go, split and send!']]
                 ], 401
             );
         } elseif ($request->amount > 10000 && $beneficiary->kyc_level == 'tier 2') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than $5,000 at a go, split and send!']]
+                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than £5,000 at a go, split and send!']]
                 ], 401
             );
         } 
@@ -233,7 +233,7 @@ class DepositController extends Controller {
         if($savings->count() === 20) {
             return response()->json(
                 [
-                    'errors' => ['message' => ['You cannot have more than 5 consecutively active savings goal running!']]
+                    'errors' => ['message' => ['You cannot have more than 25 consecutively active savings goal running!']]
                 ], 401
             );
         }
