@@ -126,7 +126,7 @@
                                 <div class="form-group basic">
                                     <label class="label">Bank Name</label>
                                     <div class="input-group mb-2">
-                                        <input type="text" class="form-control" placeholder="Bank NAME"
+                                        <input type="text" class="form-control" placeholder="Bank Name"
                                          name="bank">
                                     </div>
                                 </div>
