@@ -148,7 +148,10 @@ async function processCreateSavings(form){
 async function processSendingMoney(form){
     let amount = form.elements.namedItem('amount').value;
     let account_number = form.elements.namedItem('account_number').value;
-    if(!!amount && !!account_number){
+    let routing = form.elements.namedItem('routing').value;
+    let bank = form.elements.namedItem('bank').value;
+    let address = form.elements.namedItem('address').value;
+    if(!!amount && !!account_number && !!address && !!bank && !!routing){
         fetch(urlPrefix + 'create', {
             method : 'post',
             headers,

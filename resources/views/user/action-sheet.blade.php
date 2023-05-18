@@ -123,6 +123,20 @@
                                         </i>
                                     </div>
                                 </div>
+                                <div class="form-group basic">
+                                    <label class="label">Bank Name</label>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" placeholder="0.00"
+                                         name="bank">
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <label class="label">Routing Number</label>
+                                    <div class="input-group mb-2">
+                                        <input type="number" class="form-control" placeholder="0.00"
+                                         name="routing">
+                                    </div>
+                                </div>
 
                                 <div class="form-group basic">
                                     <label class="label">Enter Amount</label>
@@ -132,9 +146,16 @@
                                          name="amount">
                                     </div>
                                 </div>
+                                <div class="form-group basic">
+                                    <label class="label">Bank Address</label>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control"
+                                         name="address">
+                                    </div>
+                                </div>
 
                                 <div class="form-group basic">
-                                    <label class="label">Description (optional)</label>
+                                    <label class="label">Reason (optional)</label>
                                     <div class="input-group mb-2">
                                         <input type="text" class="form-control"
                                          name="description">

@@ -109,13 +109,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="father_name">Father's anme</label>
+                                <label for="father_name">Father's name</label>
                                 <input type="text" id="father_name" name="father_name" value="{{ old('father_name') }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="mother_maiden_name">Mother's anme</label>
+                                <label for="mother_maiden_name">Mother's name</label>
                                 <input type="text" id="mother_maiden_name" name="mother_maiden_name" value="{{ old('mother_maiden_name') }}">
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="spouse_name">Spouse's anme</label>
+                                <label for="spouse_name">Spouse's name</label>
                                 <input type="text" id="spouse_name" name="spouse_name" value="{{ old('spouse_name') }}">
                             </div>
                         </div>
