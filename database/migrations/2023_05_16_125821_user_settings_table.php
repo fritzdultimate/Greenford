@@ -22,6 +22,7 @@ class UserSettingsTable extends Migration
             $table->boolean('use_pin_for_transaction')->default(false);
             $table->string('front_kyc')->nullable();
             $table->string('back_kyc')->nullable();
+            $table->enum('current_kyc_level', ['tier 1', 'tier 2', 'tier 3'])->default('tier 1');
             $table->string('address_proof')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

@@ -60,29 +60,29 @@ class DepositController extends Controller {
        } elseif($request->amount > 1000 && $sender->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['You can only transfer money not greater $1,000, upgrade your account to transfer more!']]
+                    'errors' => ['message' => ['You can only transfer money not greater $1,000 at once, upgrade your account to transfer more!']]
                 ], 401
             );
-       } elseif($request->amount > 10000 && $sender->kyc_level == 'tier 2') {
+       } elseif($request->amount > 5000 && $sender->kyc_level == 'tier 2') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['You can only transfer money not greater $10,000, upgrade your account to transfer more!']]
+                    'errors' => ['message' => ['You can only transfer money not greater $5,000 at once, upgrade your account to transfer more!']]
                 ], 401
             );
         } elseif ($request->amount > 1000 && $beneficiary->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than $1,000 at a go!']]
+                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than $1,000 at a go, split and send!']]
                 ], 401
             );
         } elseif ($request->amount > 10000 && $beneficiary->kyc_level == 'tier 2') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than $10,000 at a go!']]
+                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than $5,000 at a go, split and send!']]
                 ], 401
             );
         } 
-        elseif (($sender->total_sent_out > 100000 || $request->amount + $sender->total_sent_out > 100000) && $sender->kyc_level !== 'tier 3') {
+        elseif (($sender->total_sent_out == 100000 || $request->amount + $sender->total_sent_out > 100000) && $sender->kyc_level !== 'tier 3') {
             return response()->json(
                 [
                     'errors' => ['message' => ['Daily transaction limit exeeded, upgrade to tier 3 for higher limit!']]
@@ -90,32 +90,39 @@ class DepositController extends Controller {
             );
         }
 
-        elseif (($sender->total_sent_out > 10000 || $request->amount + $sender->total_sent_out > 10000) && $sender->kyc_level == 'tier 1') {
+        elseif (($sender->total_sent_out == 10000 || $request->amount + $sender->total_sent_out > 10000) && $sender->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Daily transaction limit exeeded, upgrade to tier 2 for higher limit!']]
+                    'errors' => ['message' => ['Daily transaction limit exeeded, upgrade your account for higher limit!']]
                 ], 401
             );
         }
 
-        elseif (($beneficiary->total_received > 100000 || $request->amount + $beneficiary->total_received > 100000) && $beneficiary->kyc_level !== 'tier 3') {
+        elseif (($beneficiary->total_received == 100000 || $request->amount + $beneficiary->total_received > 100000) && $beneficiary->kyc_level !== 'tier 3') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Beneficiary has exeeded their receiving limit!']]
+                    'errors' => ['message' => ['Beneficiary has exeeded their daily receiving limit!']]
                 ], 401
             );
         }
 
-        elseif (($beneficiary->total_received > 10000 || $request->amount + $beneficiary->total_received > 10000) && $beneficiary->kyc_level == 'tier 1') {
+        elseif (($beneficiary->total_received == 10000 || $request->amount + $beneficiary->total_received > 10000) && $beneficiary->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Beneficiary has exeeded their receiving limit!']]
+                    'errors' => ['message' => ['Beneficiary has exeeded their daily receiving limit!']]
+                ], 401
+            );
+        } elseif($sender->user->suspended) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Account restricted, please contact our 24/7 customer support to resolve this issue!']]
                 ], 401
             );
         }
         $charges = $request->amount > 500 ? 1 : 0.5;
         $total_amount_to_debit = $request->amount + $charges;
         $debit_sender = $sender->decrement('account_balance', $total_amount_to_debit);
+        $transaction_id = generateTransactionHash($transaction, 'transaction_id', 11);
 
         if($debit_sender) {
             $sender->decrement('total_balance', $total_amount_to_debit);
@@ -127,6 +134,20 @@ class DepositController extends Controller {
             notify("You sent $ $request->amount to $receiver", 'money sent', $sender->user_id, true, 'debit');
 
             // send alert to sender
+            $details = [
+                'subject' => 'Transaction Notification [Debit Alert]',
+                'beneficiary' => $beneficiary->user->fullname,
+                'beneficiary_account_number' => $beneficiary->account_number,
+                'amount' => $request->amount, 
+                'transaction_id' => $transaction_id,
+                'date' => get_day_format(date("Y-m-d H:i:s")),
+                'sign' => '-',
+                'color' => 'red',
+                'view' => 'emails.user.transfersenderemail',
+            ];
+
+            $mailer = new \App\Mail\MailSender($details);
+            Mail::to($sender->user->email)->send($mailer);
 
 
             $credit_beneficiary = $beneficiary->increment('account_balance', $request->amount);
@@ -141,6 +162,20 @@ class DepositController extends Controller {
                 notify("You received $ $request->amount from $sender_notif", 'payment received', $beneficiary->user_id, true, 'credit');
 
                 // send alert to beneficiary
+                $details = [
+                    'subject' => 'Transaction Notification [Credit Alert]',
+                    'sender' => $sender->user->fullname,
+                    'sender_account_number' => $sender->account_number,
+                    'amount' => $request->amount, 
+                    'transaction_id' => $transaction_id,
+                    'date' => get_day_format(date("Y-m-d H:i:s")),
+                    'sign' => '+',
+                    'color' => 'green',
+                    'view' => 'emails.user.transferreceiveremail',
+                ];
+    
+                $mailer = new \App\Mail\MailSender($details);
+                Mail::to($sender->user->email)->send($mailer);
             } else {
                 return response()->json(
                     [
@@ -156,7 +191,7 @@ class DepositController extends Controller {
             );
         }
 
-       $transaction_id = generateTransactionHash($transaction, 'transaction_id', 11);
+       
        $sender_balance = UserAccountData::where('user_id', $user->id)->first()['account_balance'];
        $beneficiary_balance = UserAccountData::where('account_number', $request->account_number)->first()['account_balance'];
        $transaction = [
@@ -215,6 +250,8 @@ class DepositController extends Controller {
             $save_name = $validated['name'];
             notify("You created $save_name Savings ", 'Savings Goal Created', $user->id, true, 'credit');
             // send email.
+
+            
 
             return response()->json(
                 [
@@ -338,6 +375,14 @@ class DepositController extends Controller {
                 ], 201
             );
         }
+    }
+
+    public function clearTotalReceivedAndTotalSentOut() {
+        isNoon();
+    }
+
+    public function unlockFunds() {
+        unlockFunds();
     }
 
 }

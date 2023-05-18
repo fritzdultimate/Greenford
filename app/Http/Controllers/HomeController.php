@@ -52,16 +52,17 @@ class HomeController extends Controller {
         }
         $user_settings = $userSettings->where('user_id', $user->id)->first();
         if(!$user_settings) {
-            $userSettings::insert(['user_id' => $user->id]);
+            $userSettings::insert(['user_id' => $user->id, 'created_at' => date('Y-m-d H:i:s')]);
         }
         $transactions = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->orderBy('id', 'desc')->take(5)->get();
         $savings = Savings::where('user_id', $user->id)->get();
         $user_account = UserAccountData::where('user_id', Auth::id())->first();
         $total_locked_fund = LockedFunds::where('user_id', $user->id)->sum('amount');
         $total_savings = Savings::where('user_id', $user->id)->sum('saved');
+        $total_card_balance = CardDetails::where('user_id', $user->id)->sum('balance');
         $cards = CardDetails::where('user_id', $user->id)->orderBy('id', 'desc')->get();
 
-        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings', 'total_locked_fund', 'total_savings', 'cards'));
+        return view('user.index', compact('page_title', 'mode', 'user', 'transactions', 'user_account', 'savings', 'total_locked_fund', 'total_savings', 'cards', 'total_card_balance'));
     }
     public function deposit(Request $request){
         $page_title = env('SITE_NAME') . " Investment Website | Deposit";

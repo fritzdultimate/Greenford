@@ -26,13 +26,13 @@ class CreateUsersTable extends Migration
             $table->string('father_name');
             $table->enum('marital_status', ['single', 'married', 'divorced', 'widow', 'widower'])->default('single');
             $table->string('nationality');
-            $table->decimal('monthly_income');
+            $table->string('monthly_income');
             $table->string('address_1');
             $table->string('address_2')->nullable();
             $table->string('city');
             $table->string('zip_code');
             $table->string('mobile_number');
-            $table->enum('account_type', ["savings account", "current account", "bussiness account"])->default("savings account");
+            $table->enum('account_type', ["savings account", "current account", "bussiness account", "joint account"])->default("savings account");
             $table->enum('gender', ['male', 'female', 'other']);
             $table->string('mother_maiden_name');
             $table->string('spouse_name');
@@ -43,6 +43,7 @@ class CreateUsersTable extends Migration
             $table->boolean('suspended')->default(false);
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('is_twenty_four_hours')->nullable();
         });
     }
 

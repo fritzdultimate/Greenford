@@ -44,6 +44,16 @@
         
     </div>
 
+    @if($savings->count() == 0)
+        <div class="flex justify-center content-center" style="display: flex; justify-content: center; height: 100%; align-items: center; flex-direction: column; font-size: 15px;">
+            You have not created any savings goal yet!
+
+            <div class="form-group basic">
+                <a href="/user/savings/create" class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modalk">Create Savings goal</a>
+            </div>
+        </div>
+    @endif
+
 </div>
 
 </div>

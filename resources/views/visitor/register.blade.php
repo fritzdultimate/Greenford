@@ -69,13 +69,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="mobile_number">Mobile Number</label>
-                                <input type="number" id="mobile_number" name="mobile_number" value="{{ old('mobile_number') }}">
+                                <input type="text" id="mobile_number" name="mobile_number" value="{{ old('mobile_number') }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" value="{{ old('email') }}">
+                                <input type="email" id="email" name="email" value="{{ old('email') }}" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -86,6 +86,7 @@
                                     <option value="savings account" {{ old('account_type') == 'savings account' ? "selected" : ''}}>Savings Account</option>
                                     <option value="current account" {{ old('account_type') == 'current account' ? "selected" : ''}}>Current Account</option>
                                     <option value="bussiness account" {{ old('account_type') == 'bussiness account' ? "selected" : ''}}>Bussiness Account</option>
+                                    <option value="joint account" {{ old('account_type') == 'bussiness account' ? "selected" : ''}}>Joint Account</option>
                                 </select>
                             </div>
                         </div>

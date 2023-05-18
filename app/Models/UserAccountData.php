@@ -16,6 +16,7 @@ class UserAccountData extends Authenticatable
     protected $fillable = [
         'user_id',
         'account_number',
+        'account_type',
         'total_balance',
         'savings',
         'expenses',

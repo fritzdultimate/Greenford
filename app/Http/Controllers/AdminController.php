@@ -17,6 +17,7 @@ use App\Models\Savings;
 use App\Models\SiteSettings;
 use App\Models\User;
 use App\Models\UserAccountData;
+use App\Models\UserSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,8 +79,10 @@ class AdminController extends Controller {
         $user = Auth::user();
         $user_account = UserAccountData::where('user_id', $user->id)->first();
         $users = User::all();
+        $user_accounts = UserAccountData::all();
+        $user_settings_ = UserSettings::all();
         
-        return view('admin.kyc-upgrade', compact('page_title', 'users', 'user', 'user_account'));
+        return view('admin.kyc-upgrade', compact('page_title', 'users', 'user', 'user_account', 'user_accounts', 'user_settings_'));
     }
 
     public function creditAccountAction(Request $request){
@@ -88,6 +91,20 @@ class AdminController extends Controller {
         return response()->json(
             [
                 'success' => ['message' => ["User has been funded $$request->amount!"]]
+            ], 201
+        );
+    }
+
+    public function upgradeKycAction(Request $request){
+        $upgrade = UserAccountData::where('user_id', $request->id)->update(['kyc_level' => $request->kyc_level]);
+        UserSettings::where('user_id', $request->id)->update(['current_kyc_level' => $request->kyc_level]);
+
+        if($upgrade) {
+            // send email
+        }
+        return response()->json(
+            [
+                'success' => ['message' => ["User has been upgraded to  $request->kyc_level"]]
             ], 201
         );
     }

@@ -112,7 +112,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/user/support" class="item">
+                            <a href="mailto:support@greenfordcreditunion.com" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="chatbubble-outline"></ion-icon>
                                 </div>

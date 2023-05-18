@@ -33,20 +33,7 @@
                 </a>
                 <!-- * item -->
                 @endforeach
-                <!-- item -->
-                <a href="/user/transaction/data/{{ $transaction->transaction_id }}" class="item">
-                    <div class="detail">
-                        <img src="{{ asset('app/img/sample/brand/2.jpg') }}" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Apple</strong>
-                            <p>Appstore Purchase</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger">- $ 29</div>
-                    </div>
-                </a>
-                <!-- * item -->
+                
             </div>
         </div>
         <!-- * Transactions -->

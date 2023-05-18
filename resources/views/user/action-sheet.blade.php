@@ -85,7 +85,7 @@
                             <p>You have not created any savings</p>
                             
                             <div class="form-group basic">
-                                <a href="user/savings/create" class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal">Create Savings goal</a>
+                                <a href="user/savings/create" class="btn btn-primary btn-block btn-lg">Create Savings goal</a>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                     <div class="input-wrapper">
                                         <label class="label" for="account2">From</label>
                                         <select class="form-control custom-select" id="account2">
-                                            <option value="0">Savings (*** {{ substr((string) $user_account->account_number, 6, 4) }})</option>
+                                            <option value="0">{{ ucfirst(explode(' ', $user_account->user->account_type)[0]) }} (*** {{ substr((string) $user_account->account_number, 6, 4) }})</option>
                                         </select>
                                     </div>
                                 </div>

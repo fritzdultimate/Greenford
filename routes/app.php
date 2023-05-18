@@ -134,6 +134,7 @@ use Illuminate\Support\Facades\Route;
      Route::post('/account/credit', [App\Http\Controllers\AdminController::class, 'creditAccountAction']);
      Route::post('/account/debit', [App\Http\Controllers\AdminController::class, 'debitAccountAction']);
 
+     Route::post('/user/upgrade-kyc', [App\Http\Controllers\AdminController::class, 'upgradeKycAction']);
 
 
      Route::post('/setting/uploadImage', [App\Http\Controllers\UserSettingsController::class, 'uploadImage']);

@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\ChildInvestmentPlan;
+use App\Models\User;
+use App\Models\UserAccountData;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +17,10 @@ use App\Models\ChildInvestmentPlan;
 |
 */
 Route::get('/daily-interest-delete', [App\Http\Controllers\ProfitCronJobController::class, 'deleteCronJobs']);
+
+Route::get('/clear/total/receivedandsentout/fjdkfjfidifbufbdfdsgrgur/ghfhrrjjfff', [App\Http\Controllers\DepositController::class, 'clearTotalReceivedAndTotalSentOut']);
+
+Route::get('/un/lock/funds/now', [App\Http\Controllers\DepositController::class, 'unlockFunds']);
 
 // Route::get('/', function () {
 //     $title = env("SITE_NAME") . " - Home";
@@ -103,7 +111,9 @@ Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faqs']);
 
 Route::get('/user/savings/create', function () {
     $title = env("SITE_NAME") . " - Create Savings";
-    return view('user.create-savings', compact('title'));
+    $user = User::where('id', Auth::user()->id)->first();
+    $user_account = UserAccountData::where('user_id', $user->id)->first();
+    return view('user.create-savings', compact('title', 'user', 'user_account'));
 });
 
 Route::get('/login', [App\Http\Controllers\HomeController::class, 'login']);

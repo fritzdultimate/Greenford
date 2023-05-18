@@ -81,16 +81,18 @@
             </li>
         </ul>
 
-        <div class="listview-title mt-1">Upgrade</div>
-        <ul class="listview image-listview text mb-2 inset">
-            <li>
-                <a href="/user/account/upgrade" class="item">
-                    <div class="in">
-                        <div>Upgrade Account</div>
-                    </div>
-                </a>
-            </li>
-        </ul>
+        @if($user_settings->current_kyc_level != 'tier 3')
+            <div class="listview-title mt-1">Upgrade</div>
+            <ul class="listview image-listview text mb-2 inset">
+                <li>
+                    <a href="/user/account/upgrade" class="item">
+                        <div class="in">
+                            <div>Upgrade Account</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        @endif
 
         <div class="listview-title mt-1">Security</div>
         <ul class="listview image-listview text mb-2 inset">
@@ -126,7 +128,7 @@
         <div class="listview-title mt-1">Others</div>
         <ul class="listview image-listview text mb-2 inset">
             <li>
-                <a href="#" class="item">
+                <a href="mailto:abuse@greenfordcreditunion.com" class="item">
                     <div class="in">
                         <div>Report Scam</div>
                     </div>

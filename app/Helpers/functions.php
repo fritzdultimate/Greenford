@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\LockedFunds;
 use App\Models\Notification;
+use App\Models\User;
+use App\Models\UserAccountData;
 use Illuminate\Support\Facades\Auth;
 
 function generateTransactionHash($table, $column, $length) {
@@ -60,6 +63,14 @@ function get_day_name($timestamp) {
     return $date;
 }
 
+function get_day_format($timestamp) {
+    $date = date_create($timestamp);
+
+    $date = date_format($date, 'M d, Y H:i A');
+
+    return $date;
+}
+
 function notify($message, $title, $user_id, $is_transaction = false, $type = null) {
     $notify = Notification::insert([
         'user_id' => $user_id,
@@ -71,4 +82,32 @@ function notify($message, $title, $user_id, $is_transaction = false, $type = nul
     ]);
 
     return $notify;
+}
+
+function isNoon() {
+    $users = User::all();
+    foreach($users as $user) {
+        $date = date_create($user->is_twenty_four_hours);
+        if(date_format($date, 'd/m/Y') != date('d/m/Y')) {
+            // return date_format($date, 'd/m/Y');
+            User::where('id', $user->id)->update(['is_twenty_four_hours' => date('Y-m-d H:i:s')]);
+            UserAccountData::where('user_id', $user->id)->update([
+                'total_received' => 0.00,
+                'total_sent_out' => 0.00
+            ]);
+        }
+    }
+}
+
+function unlockFunds() {
+    $lockedFunds = LockedFunds::all();
+    foreach($lockedFunds as $fund) {
+        $date = date_create($fund->due_date);
+        if(date_format($date, 'd/m/Y') == date('d/m/Y')) {
+            UserAccountData::where('user_id', $fund->user_id)->increment('account_balance');
+            LockedFunds::where('user_id', $fund->user_id)->forceDelete();
+            // send email
+
+        }
+    }
 }

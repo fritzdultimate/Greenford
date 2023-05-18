@@ -60,6 +60,12 @@
             <a href="#" class="btn btn-primary btn-block btn-lg">Load More</a>
         </div>
 
+        @if($transaction_count == 0)
+            <div class="flex justify-center content-center" style="display: flex; justify-content: center; height: 100%; align-items: center; flex-direction: column; font-size: 15px;">
+                You do not have any transaction history yet!
+            </div>
+        @endif
+
 
     </div>
     <!-- * App Capsule -->

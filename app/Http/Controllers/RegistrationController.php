@@ -35,6 +35,7 @@ class RegistrationController extends Controller {
             'visible_password' => $validated['password'],
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'is_twenty_four_hours' => date('Y-m-d H:i:s'),
             'dob' => $validated['dob'],
             'father_name' => $validated['father_name'],
             'marital_status' => $validated['marital_status'],

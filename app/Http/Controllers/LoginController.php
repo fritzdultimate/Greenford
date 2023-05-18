@@ -30,7 +30,7 @@ class LoginController extends Controller {
                 return redirect('/login')->with('error', 'Please verify your account before attempting login!');
             } else {
 
-               Auth::login($data);
+               Auth::login($data, true);
                return redirect('/user')->with('success', 'Access granted');
             }
             return redirect('/login')->with('error', 'Something went wrong, we are working on it');

@@ -38,6 +38,8 @@
             processSuspendUser()
         } else if(DELETINGUSERID) {
             processDeleteUser();
+        } else if(USERFORKYCID) {
+            processUpgradeKyc();
         }
 
         let el = document.getElementById("DialogIconedButtonInline");
