@@ -28,7 +28,7 @@
         <div class="section mt-3 text-center">
             <div class="avatar-section">
                 <div href="#">
-                    <img src="{{ asset('app/img/sample/photo/document.jpg') }}" alt="avatar" class="imaged w100 rounded" id="front-kyc">
+                    <img src="{{ asset('app_assets/img/sample/photo/document.jpg') }}" alt="avatar" class="imaged w100 rounded" id="front-kyc">
                     <label for="front_kyc">
                         <span class="button">
                             <ion-icon name="camera-outline"></ion-icon>
@@ -53,7 +53,7 @@
         <div class="section mt-3 text-center">
             <div class="avatar-section">
                 <div href="#">
-                    <img src="{{ asset('app/img/sample/photo/document.jpg') }}" alt="avatar" class="imaged w100 rounded" id="back-kyc">
+                    <img src="{{ asset('app_assets/img/sample/photo/document.jpg') }}" alt="avatar" class="imaged w100 rounded" id="back-kyc">
                     <label for="back_kyc">
                         <span class="button">
                             <ion-icon name="camera-outline"></ion-icon>
@@ -78,7 +78,7 @@
         <div class="section mt-3 text-center">
             <div class="avatar-section">
                 <div href="#">
-                    <img src="{{ asset('app/img/sample/photo/document.jpg') }}" alt="avatar" class="imaged w100 rounded" id="proof-kyc">
+                    <img src="{{ asset('app_assets/img/sample/photo/document.jpg') }}" alt="avatar" class="imaged w100 rounded" id="proof-kyc">
                     <label for="address_proof">
                         <span class="button">
                             <ion-icon name="camera-outline"></ion-icon>

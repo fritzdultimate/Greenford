@@ -27,7 +27,7 @@
         <div class="section mt-3 text-center">
             <div class="avatar-section">
                 <div href="#">
-                    <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app/img/sample/avatar/avatar1.png') }}" alt="avatar" class="imaged w100 rounded" id="avatar">
+                    <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app_assets/img/sample/avatar/avatar1.png') }}" alt="avatar" class="imaged w100 rounded" id="avatar">
                     <label for="profile_image">
                         <span class="button">
                             <ion-icon name="camera-outline"></ion-icon>
