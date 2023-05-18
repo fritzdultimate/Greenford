@@ -154,18 +154,6 @@
                                 <tr>
                                   <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
                                     <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        Device
-                                    </p>
-                                  </td>
-                                  <td width="100%" class="o_pt-xs" align="right" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
-                                        {{ $details['device'] }}
-                                    </p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td width="100%" class="o_pt-xs" align="left" style="padding-top: 8px;">
-                                    <p class="o_sans o_text o_text-secondary" data-color="Secondary" data-size="Text Default" data-min="12" data-max="20" style="white-space: nowrap; font-family: Helvetica, Arial, sans-serif;margin-top: 0px;margin-bottom: 0px;font-size: 16px;line-height: 24px;color: #424651;">
                                         Date
                                     </p>
                                   </td>
