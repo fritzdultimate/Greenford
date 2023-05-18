@@ -91,7 +91,8 @@
                     </h3>
                     <p class="o_mb-md" style="margin-top: 0px;margin-bottom: 14px;">A login attempt was initiated with you account just now.</p>
 
-                    <p class="o_mb-md" style="margin-top: 0px;margin-bottom: 14px;"><small>Ignore this email if this was you, if you were not the one, please login into your account, head to SETTING and change your password!.</small></p>
+                    <p class="o_mb-md" style="margin-top: 0px;margin-bottom: 14px;"><small>Ignore this email if this was you</small></p>
+                    <p> <small>you were not the one, please login into your account, head to SETTING and change your password!.</small></p>
                     
                   </div>
                   <!--[if mso]></td></tr></table><![endif]-->
