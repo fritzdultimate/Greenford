@@ -41,7 +41,7 @@ class RegistrationRequet extends FormRequest {
             'address_2' => 'required',
             'city' => 'required',
             'zip_code' => 'required',
-            'mobile_number' => 'required',
+            'mobile_number' => 'required|numeric',
             'account_type' => 'required',
             'gender' => 'required',
             'mother_maiden_name' => 'required',
