@@ -126,14 +126,14 @@
                                 <div class="form-group basic">
                                     <label class="label">Bank Name</label>
                                     <div class="input-group mb-2">
-                                        <input type="text" class="form-control" placeholder="0.00"
+                                        <input type="text" class="form-control" placeholder="Bank NAME"
                                          name="bank">
                                     </div>
                                 </div>
                                 <div class="form-group basic">
                                     <label class="label">Routing Number</label>
                                     <div class="input-group mb-2">
-                                        <input type="number" class="form-control" placeholder="0.00"
+                                        <input type="number" class="form-control" placeholder="e.g 123456789"
                                          name="routing">
                                     </div>
                                 </div>
