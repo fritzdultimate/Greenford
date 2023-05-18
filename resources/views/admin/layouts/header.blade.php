@@ -11,9 +11,9 @@
     <meta name="description" content="{{ env('SITE_NAME') }} Online Banking System">
     <meta name="keywords"
         content="bank, wallet, banking, fintech mobile app, money, send, receive, withdraw" />
-    <link rel="icon" type="image/png" href="{{ asset('app/img/favicon.png') }}" sizes="32x32">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app/img/icon/192x192.png') }}">
-    <link rel="stylesheet" href="{{ asset('app/css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('app_assets/img/favicon.png') }}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app_assets/img/icon/192x192.png') }}">
+    <link rel="stylesheet" href="{{ asset('app_assets/css/style.css') }}">
     <!-- <link rel="manifest" href="__manifest.json"> -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="pageTitle">
-            <img src="{{ asset('app/img/logo.png') }}" alt="logo" class="logo">
+            <img src="{{ asset('assets/img/favicon.png') }}" alt="logo" class="logo">
         </div>
         <div class="right">
             <a href="/user/notifications" class="headerButton">
@@ -42,7 +42,7 @@
                 <span class="badge badge-danger">{{ $notification_count }}</span>
             </a>
             <a href="/user/settings" class="headerButton">
-                <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app/img/sample/avatar/avatar1.png') }}" alt="image" class="imaged w32">
+                <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app_assets/img/sample/avatar/avatar1.png') }}" alt="image" class="imaged w32">
             </a>
         </div>
     </div>

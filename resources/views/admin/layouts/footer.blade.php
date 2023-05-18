@@ -8,7 +8,7 @@
                     <!-- profile box -->
                     <div class="profileBox pt-2 pb-2">
                         <div class="image-wrapper">
-                            <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app/img/sample/avatar/avatar1.png') }}" alt="image" class="imaged  w36">
+                            <img src="{{$user_settings->profile_image_url ? asset($user_settings->profile_image_url) : asset('app_assets/img/sample/avatar/avatar1.png') }}" alt="image" class="imaged  w36">
                         </div>
                         <div class="in">
                             <strong>{{ $user->fullname }}</strong>
@@ -83,14 +83,14 @@
 
     <!-- ========= JS Files =========  -->
     <!-- Bootstrap -->
-    <script src="{{ asset('app/js/lib/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('app_assets/js/lib/bootstrap.bundle.min.js') }}"></script>
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- Splide -->
-    <script src="{{ asset('app/js/plugins/splide/splide.min.js') }}"></script>
+    <script src="{{ asset('app_assets/js/plugins/splide/splide.min.js') }}"></script>
     <!-- Base Js File -->
-    <script src="{{ asset('app/js/base.js') }}" defer></script>
+    <script src="{{ asset('app_assets/js/base.js') }}" defer></script>
 
     <script>
         // Add to Home with 2 seconds delay.
