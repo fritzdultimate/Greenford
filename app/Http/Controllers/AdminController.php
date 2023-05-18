@@ -104,7 +104,7 @@ class AdminController extends Controller {
         }
         return response()->json(
             [
-                'success' => ['message' => ["User has been upgraded to  $request->kyc_level"]]
+                'success' => ['message' => ["User has been upgraded to  $request->kyc_level!"]]
             ], 201
         );
     }
