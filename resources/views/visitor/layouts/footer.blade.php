@@ -6,6 +6,7 @@
 				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 					<div class="footer-widget">
 						<a href="/" class="footer-logo">
+							<img src="{{ asset('assets/img/favicon.png') }}">
 							<span class="text-white">
 								{{ env('SITE_NAME') }}
 							</span>
