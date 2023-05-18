@@ -163,7 +163,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="action-sheet-content text-center">
-                        <div class="mb-1"><img src="{{ asset('app/img/icon/192x192.png') }}" alt="image" class="imaged w64 mb-2">
+                        <div class="mb-1"><img src="{{ asset('app_assets/img/icon/192x192.png') }}" alt="image" class="imaged w64 mb-2">
                         </div>
                         <div>
                             Install <strong>Finapp</strong> on your iPhone's home screen.
@@ -235,14 +235,14 @@
 
     <!-- ========= JS Files =========  -->
     <!-- Bootstrap -->
-    <script src="{{ asset('app/js/lib/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('app_assets/js/lib/bootstrap.bundle.min.js') }}"></script>
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- Splide -->
-    <script src="{{ asset('app/js/plugins/splide/splide.min.js') }}"></script>
+    <script src="{{ asset('app_assets/js/plugins/splide/splide.min.js') }}"></script>
     <!-- Base Js File -->
-    <script src="{{ asset('app/js/base.js') }}" defer></script>
+    <script src="{{ asset('app_assets/js/base.js') }}" defer></script>
 
     <script>
         // Add to Home with 2 seconds delay.
