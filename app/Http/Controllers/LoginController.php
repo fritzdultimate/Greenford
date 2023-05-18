@@ -42,7 +42,7 @@ class LoginController extends Controller {
                     'subject' => "A Login Was Attempted On Your Account",
                     'date' => get_day_format(date("Y-m-d H:i:s")),
                     'device' => request()->userAgent(),
-                    'nearest_location' =>  $city . ' ' . $country,
+                    'nearest_location' =>  $city . ', ' . $country,
                     'view' => 'emails.user.newlogin',
                 ];
 
