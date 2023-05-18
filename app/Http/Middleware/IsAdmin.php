@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class IsAdmin extends Middleware {
     /**
@@ -13,8 +14,8 @@ class IsAdmin extends Middleware {
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    public function handle($request, Closure $next) {
-        if(Auth::user() && Auth::user()->is_admin == 1) {
+    public function handle($request, Closure $next, ...$guards) {
+        if(FacadesAuth::user() && FacadesAuth::user()->is_admin == 1) {
             return $next($request);
         }
         

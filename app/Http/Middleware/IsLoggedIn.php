@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class IsLoggedIn extends Middleware {
     /**
@@ -13,8 +14,8 @@ class IsLoggedIn extends Middleware {
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    public function handle($request, Closure $next) {
-        if(Auth::user()) {
+    public function handle($request, Closure $next, ...$guards) {
+        if(FacadesAuth::user()) {
             return $next($request);
         }
         
