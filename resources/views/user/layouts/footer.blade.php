@@ -129,7 +129,7 @@
                                     <ion-icon name="cash-outline"></ion-icon>
                                 </div>
                                 <div class="in">
-                                    Create Saving Goal
+                                    Create Savings Goal
                                 </div>
                             </a>
                         </li>
