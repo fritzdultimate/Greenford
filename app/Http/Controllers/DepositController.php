@@ -469,7 +469,7 @@ class DepositController extends Controller {
         if($lock_fund) {
 
             // notify locker
-            notify("You locked $ $lockFundRequest->amount till " . get_day_name($due_date), 'Money Locked', $user->id, true, 'debit');
+            notify("You locked £ $lockFundRequest->amount till " . get_day_name($due_date), 'Money Locked', $user->id, true, 'debit');
 
             // send email
             $details = [
