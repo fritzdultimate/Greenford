@@ -231,7 +231,7 @@
                             </div>
 
                             <div class="form-group basic">
-                                <button type="button" class="btn btn-primary btn-block btn-lg set-pin-btn" onclick="() => alert('yes')">Create Pin</button>
+                                <button type="button" class="btn btn-primary btn-block btn-lg set-pin-btn">Create Pin</button>
                             </div>
                         </form>
                     </div>
@@ -298,7 +298,7 @@
     <!-- * About {{ env('SITE_NAME') }} -->
 
 @include('user.layouts.general-scripts')
-<script src="{{ asset('dash/js/settings.js') }}"></script>
+<script src="{{ asset('dash/js/settings.js?u=0') }}"></script>
 @include('user.layouts.footer')
 
 <script>
