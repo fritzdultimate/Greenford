@@ -231,7 +231,7 @@
                             </div>
 
                             <div class="form-group basic">
-                                <button type="button" class="btn btn-primary btn-block btn-lg set-pin-btn">Create Pin</button>
+                                <button type="button" class="btn btn-primary btn-block btn-lg set-pin-btn">Create Pin.</button>
                             </div>
                         </form>
                     </div>
