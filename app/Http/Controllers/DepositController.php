@@ -329,6 +329,29 @@ class DepositController extends Controller {
         $user = Auth::user();
         $user_account = UserAccountData::where('user_id', $user->id)->first();
 
+        if(!Schema::hasColumn('user_settings', 'pin')) {
+            Schema::table('user_settings', function(Blueprint $table) {
+                $table->string('pin');
+            });
+        }
+
+        $pin = UserSettings::where('user_id', $user->id)->first()['pin'];
+        if(!$pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Please setup your transaction pin!']]
+                ], 401
+            );
+        }
+
+        if($pin !== $createSavingsRequest->pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Wrong pin!']]
+                ], 401
+            );
+        }
+
         if($validated['amount'] > $user_account->account_balance) {
             return response()->json(
                 [
@@ -401,6 +424,29 @@ class DepositController extends Controller {
 
         $user = Auth::user();
         $user_account = UserAccountData::where('user_id', $user->id)->first();
+
+        if(!Schema::hasColumn('user_settings', 'pin')) {
+            Schema::table('user_settings', function(Blueprint $table) {
+                $table->string('pin');
+            });
+        }
+
+        $pin = UserSettings::where('user_id', $user->id)->first()['pin'];
+        if(!$pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Please setup your transaction pin!']]
+                ], 401
+            );
+        }
+
+        if($pin !== $lockFundRequest->pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Wrong pin!']]
+                ], 401
+            );
+        }
 
         if($validated['amount'] > $user_account->account_balance) {
             return response()->json(
