@@ -97,6 +97,13 @@
         <div class="listview-title mt-1">Security</div>
         <ul class="listview image-listview text mb-2 inset">
             <li>
+                <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#pinFormActionSheet">
+                    <div class="in">
+                        <div>Set Transaction Pin</div>
+                    </div>
+                </a>
+            </li>
+            <li>
                 <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#passwordFormActionSheet">
                     <div class="in">
                         <div>Update Password</div>
@@ -198,6 +205,41 @@
         </div>
     </div>
     <!-- * Update Password Action Sheet -->
+
+    <!-- Set Pin Action Sheet -->
+    <div class="modal fade action-sheet" id="pinFormActionSheet" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Set Transaction Pin</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="action-sheet-content" id="modalContentSavings">
+                        <form class="set-pin-form">
+                            <div class="form-group basic">
+                                <label class="label"> Current Password</label>
+                                <div class="input-group mb-2">
+                                    <input type="password" class="form-control" placeholder="" name="password">
+                                </div>
+                            </div>
+
+                            <div class="form-group basic">
+                                <label class="label">Transaction Pin <small>(4-digits)</small></label>
+                                <div class="input-group mb-2">
+                                    <input type="number" class="form-control" placeholder="" name="pin">
+                                </div>
+                            </div>
+
+                            <div class="form-group basic">
+                                <button type="button" class="btn btn-primary btn-block btn-lg set-pin-btn">Create Pin</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Set Pin Action Sheet -->
 
     <!-- FAQs -->
     <div class="modal fade modalbox" id="ModalBasic" tabindex="-1" role="dialog">

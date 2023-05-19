@@ -1,6 +1,7 @@
     @include('user.dialogbox.error-modal')
     @include('user.dialogbox.success-modal')
     @include('user.dialogbox.iconed-button-inline')
+    @include('user.dialogbox.enter-pin-dialogbox')
         <!-- Deposit Action Sheet -->
         <div class="modal fade action-sheet" id="depositActionSheet" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">

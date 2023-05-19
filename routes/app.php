@@ -126,6 +126,9 @@ use Illuminate\Support\Facades\Route;
 
      Route::post('/setting/changeAddress', [App\Http\Controllers\UserSettingsController::class, 'updateAddress']);
      Route::post('/setting/changePassword', [App\Http\Controllers\UserSettingsController::class, 'changePassword']);
+
+     Route::post('/setting/setpin', [App\Http\Controllers\UserSettingsController::class, 'setPin']);
+
      Route::post('/setting/logOutOtherDevices', [App\Http\Controllers\UserSettingsController::class, 'logOutOtherDevices']);
 
      Route::post('/user/toggle-suspend', [App\Http\Controllers\AdminController::class, 'toggleSuspend']);

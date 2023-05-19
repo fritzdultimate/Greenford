@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\SetPinRequest;
 use App\Models\User;
 use App\Models\UserSettings;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class UserSettingsController extends Controller {
@@ -96,6 +99,31 @@ class UserSettingsController extends Controller {
             );
         }
 
+    }
+
+    public function setPin(SetPinRequest $setPinRequest) {
+        $user = Auth::user();
+        if(!password_verify($setPinRequest->password, $user->password)) {
+            return response()->json(
+                [
+                    'errors'=> ['message' => ["Incorrect password"]]
+                ], 401
+            );
+        } else {
+            if(!Schema::hasColumn('user_settings', 'pin')) {
+                Schema::table('user_settings', function(Blueprint $table) {
+                    $table->string('pin');
+                });
+            }
+
+            UserSettings::where('user_id', $user->id)->update(['pin' => $setPinRequest->pin]);
+
+            return response()->json(
+                [
+                    'success'=> ['message' => ["Pin created"]]
+                ], 200
+            );
+        }
     }
 
     public function logOutOtherDevices() {
