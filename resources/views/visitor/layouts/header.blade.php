@@ -18,12 +18,6 @@
 						<div class="header-top-left">
 							<ul class="contact-info list-style">
 								<li>
-									<i class="flaticon-call"></i> 
-									<a href="https://wa.me/{{env('SITE_NUMBER')}}">
-										{{env('SITE_NUMBER')}}
-									</a>
-								</li>
-								<li>
 									<i class="flaticon-email-1"></i> 
 									<a href="mailto:{{env('SUPPORT_EMAIL')}}">
 										<span class="__cf_email__">
