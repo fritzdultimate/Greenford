@@ -44,6 +44,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label">Transaction Pin</label>
+                                <input type="number" id="transactionpin" class="form-control" placeholder="" name="pin">
+                            </div>
+                        </div>
 
 
                         <div class="form-group basic mt-2">
