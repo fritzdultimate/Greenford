@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddCardRequest;
 use App\Models\CardDetails;
 use App\Models\UserAccountData;
+use App\Models\UserSettings;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Schema;
 
 class CardController extends Controller {
     /**
@@ -27,6 +30,30 @@ class CardController extends Controller {
         }
         $user = Auth::user();
         $user_account = UserAccountData::where('user_id', $user->id)->first();
+
+        if(!Schema::hasColumn('user_settings', 'pin')) {
+            Schema::table('user_settings', function(Blueprint $table) {
+                $table->string('pin');
+            });
+        }
+
+        $pin = UserSettings::where('user_id', $user->id)->first()['pin'];
+        if(!$pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Please setup your transaction pin!']]
+                ], 401
+            );
+        }
+
+        if($pin !== $addCardRequest->pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Wrong pin!']]
+                ], 401
+            );
+        }
+
         if($validated['amount'] + 2 > $user_account->account_balance) {
             return response()->json(
                 [
