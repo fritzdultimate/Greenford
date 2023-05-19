@@ -46,7 +46,7 @@ class CreateSavingsRequest extends FormRequest {
         return [
             'amount.required' => 'Set a valid amount?',
             'amount.numeric' => 'Set a valid amount?',
-            'amount.min' => 'Minimum amount to save is $5'
+            'amount.min' => 'Minimum amount to save is £5'
         ];
     }
 

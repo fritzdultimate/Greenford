@@ -47,7 +47,7 @@ class LockFundRequest extends FormRequest {
         return [
             'amount.required' => 'Set a valid amount?',
             'amount.numeric' => 'Set a valid amount?',
-            'amount.min' => 'Amount to lock must not be less than $50',
+            'amount.min' => 'Amount to lock must not be less than £50',
             'duration.required' => 'Set a valid duration?',
             'duration.numeric' => 'Set a valid duration?',
             'duration.min' => 'days to lock must not be less than 7 days',

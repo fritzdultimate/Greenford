@@ -48,7 +48,7 @@ class AddCardRequest extends FormRequest {
         return [
             'amount.required' => 'Set a valid amount?',
             'amount.numeric' => 'Set a valid amount?',
-            'amount.min' => 'Minimum amount is $5',
+            'amount.min' => 'Minimum amount is £5',
             'pin.required' => 'Choose a 4 digit pin for this card',
             'pin.numeric' => 'Choose a valid 4 digit pin for this card',
             'type.required' => 'Please choose a card type' 
