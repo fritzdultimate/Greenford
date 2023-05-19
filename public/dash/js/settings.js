@@ -8,14 +8,26 @@ let headers = {
 let changePasswordBtn = document.querySelector('.change-password-btn');
 let changePasswordForm = document.querySelector('.change-password-form');
 
+let setPinBtn = document.querySelector('.set-pin-btn');
+let setPinForm = document.querySelector('.set-pin-form');
+
 window.addEventListener('load', () => {
     initChangePasswordBtnAction();
+    initSetPinBtnAction()
 });
 
 function initChangePasswordBtnAction() {
     changePasswordBtn.addEventListener('click', (e) => {
         e.preventDefault();
         processChangePassword(changePasswordForm)
+    })
+}
+
+function initSetPinBtnAction() {
+    console.log('pin')
+    setPinBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        processSetPin(setPinForm)
     })
 }
 
@@ -57,6 +69,47 @@ async function processChangePassword(form){
     } else {
         // hideLoading();
         showErrorModal('Please fill up the box', ['passwordFormActionSheet']);
+    }
+}
+
+async function processSetPin(form){
+    let password = form.elements.namedItem('password').value;
+    let pin = form.elements.namedItem('pin').value;
+    if(!!password && !!pin){
+        fetch(urlPrefix + 'setpin', {
+            method : 'post',
+            headers,
+            body : JSON.stringify({
+                ...jsonFormData(form)
+            })
+        }).then((res) => {
+            console.log(res)
+            return res.json();
+            // return res.text();
+        })
+        .then((data) => {
+            console.dir(data)
+            if('errors' in data){
+                let errorMsg = getResponse(data);
+                showErrorModal(errorMsg, ['pinFormActionSheet']);
+                console.log(errorMsg)
+            }
+            else if('success' in data){
+                let successMsg = getResponse(data, 'success');
+                showSuccessModal(successMsg, ['pinFormActionSheet']);
+            } else {
+                 hideLoading();
+                 console.log(data)  
+                 showErrorModal('something is not right!', ['pinFormActionSheet']); 
+            }
+        }).catch((err) => {
+            console.log(err);
+             hideLoading();
+             showErrorModal('something is not right!', ['pinFormActionSheet']);
+        });
+    } else {
+        // hideLoading();
+        showErrorModal('Please fill up the box', ['pinFormActionSheet']);
     }
 }
 
