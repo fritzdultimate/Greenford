@@ -47,7 +47,7 @@
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label">Transaction Pin</label>
-                                <input type="number" id="transactionpin" class="form-control" placeholder="" name="pin">
+                                <input type="number" id="transactionpin" class="form-control" placeholder="" name="transaction_pin">
                             </div>
                         </div>
 

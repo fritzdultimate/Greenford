@@ -46,7 +46,7 @@ class CardController extends Controller {
             );
         }
 
-        if($pin !== $addCardRequest->pin) {
+        if($pin !== $addCardRequest->transaction_pin) {
             return response()->json(
                 [
                     'errors' => ['message' => ['Wrong pin!']]
