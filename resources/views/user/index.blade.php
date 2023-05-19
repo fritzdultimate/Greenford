@@ -71,7 +71,7 @@
 
         @if($savings->count() > 0)
             @include('user.savings')
-        @endif;
+        @endif
 
 
 
