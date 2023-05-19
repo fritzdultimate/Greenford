@@ -103,7 +103,7 @@ async function lockFund(form) {
         showErrorModal('Please fill up the box', ['exchangeActionSheet']);
     }
 }
-alert('yoo');
+
 async function processCreateSavings(form){
     let amount = form.elements.namedItem('amount').value;
     let savings = form.elements.namedItem('savings').value;

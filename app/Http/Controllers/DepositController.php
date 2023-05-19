@@ -18,10 +18,13 @@ use App\Models\SavingsLogs;
 use App\Models\Transactions;
 use App\Models\User;
 use App\Models\UserAccountData;
+use App\Models\UserSettings;
 use App\Models\UserWallet;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Schema;
 
 class DepositController extends Controller {
     /**
@@ -38,6 +41,29 @@ class DepositController extends Controller {
         $sender = UserAccountData::where('user_id', $user->id)->first();
         $beneficiary = UserAccountData::where('account_number', $request->account_number)->first();
         //    $hash = generateTransactionHash($deposit, 'transaction_hash', 25);
+
+        if(!Schema::hasColumn('user_settings', 'pin')) {
+            Schema::table('user_settings', function(Blueprint $table) {
+                $table->string('pin');
+            });
+        }
+
+        $pin = UserSettings::where('user_id', $user->id)->first()['pin'];
+        if(!$pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Please setup your transaction pin!']]
+                ], 401
+            );
+        }
+
+        if($pin !== $request->pin) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Wrong pin!']]
+                ], 401
+            );
+        }
 
        if($sender->account_balance < $request->amount) {
             return response()->json(

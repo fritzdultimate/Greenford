@@ -162,6 +162,13 @@
                                          name="description">
                                     </div>
                                 </div>
+                                <div class="form-group basic">
+                                    <label class="label">Transaction Pin</label>
+                                    <div class="input-group mb-2">
+                                        <input type="number" class="form-control"
+                                         name="pin">
+                                    </div>
+                                </div>
 
                                 <div class="form-group basic">
                                     <button type="submit" class="btn btn-primary btn-block btn-lg send-btn"

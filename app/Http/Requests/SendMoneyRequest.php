@@ -34,7 +34,8 @@ class SendMoneyRequest extends FormRequest {
         return [
         'amount' => 'required|numeric', 
         'account_number' => 'required|numeric|digits:10',
-        'routing' => 'required|numeric|digits:9'
+        'routing' => 'required|numeric|digits:9',
+        'pin' => 'required|numeric|digits:4'
         ];
     }
 
