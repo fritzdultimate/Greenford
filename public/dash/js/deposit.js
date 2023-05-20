@@ -31,6 +31,7 @@ window.addEventListener('load', () => {
 function initSendMoneyBtnAction(){
     [...sendBtns].forEach((sendBtn) => {
         sendBtn.addEventListener('click', (e) => {
+            showLoading();
             e.preventDefault();
             processSendingMoney(sendMoneyForm);
         })
@@ -39,6 +40,7 @@ function initSendMoneyBtnAction(){
 
 function initLockFundBtnAction() {
     lockFundBtn.addEventListener('click', (e) => {
+        showLoading();
         e.preventDefault();
         processLockFund(lockFundForm)
     })
@@ -47,6 +49,7 @@ function initLockFundBtnAction() {
 function initCreateSavingsBtnAction() {
     [...createSavingsBtn].forEach((save) =>{
         save.addEventListener('click', (e) => {
+            showLoading();
             e.preventDefault();
             processCreateSavings(createSavingsForm)
         })
@@ -61,6 +64,7 @@ async function lockFund(form) {
             ...jsonFormData(form)
         })
     }).then((res) => {
+        hideLoading();
         console.log(res)
         return res.json();
         // return res.text();
@@ -99,7 +103,7 @@ async function lockFund(form) {
         // })
         lockFund(form);
     } else {
-        // hideLoading();
+        hideLoading();
         showErrorModal('Please fill up the box', ['exchangeActionSheet']);
     }
 }
@@ -115,6 +119,7 @@ async function processCreateSavings(form){
                 ...jsonFormData(form)
             })
         }).then((res) => {
+            hideLoading();
             console.log(res)
             return res.json();
             // return res.text();
@@ -140,7 +145,7 @@ async function processCreateSavings(form){
              showErrorModal('something is not right!', ['withdrawActionSheet']);
         });
     } else {
-        // hideLoading();
+        hideLoading();
         showErrorModal('Please fill up the box', ['withdrawActionSheet']);
     }
 }
@@ -159,7 +164,7 @@ async function processSendingMoney(form){
                 ...jsonFormData(form)
             })
         }).then((res) => {
-            // console.log(res)
+            hideLoading();
             return res.json();
             // return res.text();
         })
@@ -183,7 +188,7 @@ async function processSendingMoney(form){
              showErrorModal('something is not right!', ['sendActionSheet']);
         });
     } else {
-        // hideLoading();
+        hideLoading();
         showErrorModal('Please fill up the box', ['sendActionSheet']);
     }
 }

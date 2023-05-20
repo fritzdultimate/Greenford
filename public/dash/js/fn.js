@@ -1,6 +1,6 @@
 let form = document.querySelector('.page-form');
-let loading = document.querySelector('.form-loading');
-let submitText = document.querySelector('.submit-text');
+let loading = document.querySelectorAll('.form-loading');
+let formButton = document.querySelectorAll('.form-button');
 let submitBtn = form ? form.querySelector("button[type='submit']") : null;
 let soundPath = '/plugins/lobibox/sounds/';
 let lobiboxAlert = null;
@@ -16,28 +16,37 @@ window.addEventListener('load', () => {
     addPasswordToggle();
 })
 function showLoading(form){
-    loading = form ? form.querySelector('.form-loading') : loading;
-    submitText = form ? form.querySelector('.submit-text') : submitText;
-    submitBtn = form ? form.querySelector("button[type='submit']") : submitBtn;
+    loading = form ? form.querySelectorAll('.form-loading') : loading;
+    formButton = form ? form.querySelectorAll('.form-button') : formButton;
+    
 
     if(loading){
-        loading.classList.remove('d-none');
-        submitText.classList.add('d-none');
-        // submitBtn.classList.add('disabled');
-        submitBtn.setAttribute('disabled','');
+        [...loading].forEach(el => {
+            el.classList.remove('d-none');
+        });
+        [...formButton].forEach(el => {
+            el.classList.add('d-none');
+        });
+        // loading.classList.remove('d-none');
+        // formButton.classList.add('d-none');
 
     }
 }
 function hideLoading(form){
-    loading = form ? form.querySelector('.form-loading') : loading;
-    submitText = form ? form.querySelector('.submit-text') : submitText;
-    submitBtn = form ? form.querySelector("button[type='submit']") : submitBtn;
+    loading = form ? form.querySelectorAll('.form-loading') : loading;
+    formButton = form ? form.querySelectorAll('.form-button') : formButton;
+    // submitBtn = form ? form.querySelector("button[type='submit']") : submitBtn;
     
     if(loading){
-        loading.classList.add('d-none')
-        submitText.classList.remove('d-none');
-        // submitBtn.classList.remove('disabled');
-        submitBtn.removeAttribute('disabled');
+        // loading.classList.add('d-none')
+        // formButton.classList.remove('d-none');
+
+        [...loading].forEach(el => {
+            el.classList.add('d-none');
+        });
+        [...formButton].forEach(el => {
+            el.classList.remove('d-none');
+        });
     }
 }
 function showErrorMsg(Msg, target){

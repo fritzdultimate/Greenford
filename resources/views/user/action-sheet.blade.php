@@ -86,7 +86,12 @@
                                 </div>
 
                                 <div class="form-group basic">
-                                    <button type="button" class="btn btn-primary btn-block btn-lg create-savings-btn">Save</button>
+                                    <button type="button" class="btn btn-primary btn-block btn-lg create-savings-btn form-button">Save</button>
+
+                                    <button class="btn btn-primary btn-block btn-lg form-loading d-none" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm me-05" role="status" aria-hidden="true"></span>
+                                         Loading...
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -179,8 +184,14 @@
                                 </div>
 
                                 <div class="form-group basic">
-                                    <button type="submit" class="btn btn-primary btn-block btn-lg send-btn"
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg send-btn form-button"
                                     value="submit">Send</button>
+
+
+                                    <button class="btn btn-primary btn-block btn-lg form-loading d-none" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm me-05" role="status" aria-hidden="true"></span>
+                                         Loading...
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -236,8 +247,13 @@
                                 </div>
 
                                 <div class="form-group basic">
-                                    <button type="submit" class="btn btn-primary btn-block btn-lg lock-fund-btn"
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg lock-fund-btn form-button"
                                     value="submit">Lock</button>
+
+                                    <button class="btn btn-primary btn-block btn-lg form-loading d-none" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm me-05" role="status" aria-hidden="true"></span>
+                                         Loading...
+                                    </button>
                                 </div>
                             </form>
                         </div>
