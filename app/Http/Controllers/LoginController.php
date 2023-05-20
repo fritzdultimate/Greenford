@@ -19,19 +19,19 @@ class LoginController extends Controller {
 
         $password = $request->password;
 
-        $user = UserAccountData::where('account_number', $request->account_number)->first();
+        $account = UserAccountData::where('account_number', $request->account_number)->first();
 
-        if(!$user) {
+        if(!$account) {
             return redirect('/login')->with('error', 'Account not found.');
         } else {
-            $data = User::where('id', $user->user_id)->first();
-            if(!password_verify($password, $data->password)) {
+            $user = User::where('id', $account->user_id)->first();
+            if(!password_verify($password, $user->password)) {
                 return redirect('/login')->with('error', 'Password is incorrect');
-            } elseif(!$data->email_verified_at) {
+            } elseif(!$user->email_verified_at) {
                 return redirect('/login')->with('error', 'Please verify your account before attempting login!');
             } else {
 
-               Auth::login($data);
+               Auth::login($user);
                $user_ip = getenv('REMOTE_ADDR');
                 $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
                 $country = $geo["geoplugin_countryName"];
@@ -48,7 +48,7 @@ class LoginController extends Controller {
 
                 $mailer = new \App\Mail\MailSender($details);
                 Mail::to(Auth::user()->email)->send($mailer);
-                Auth::login($data);
+                Auth::login($user);
                 return redirect('/user');
 
             }
