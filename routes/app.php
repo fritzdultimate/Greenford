@@ -143,6 +143,8 @@ use Illuminate\Support\Facades\Route;
      Route::post('/setting/uploadImage', [App\Http\Controllers\UserSettingsController::class, 'uploadImage']);
 
      Route::post('/setting/uploadKycFile', [App\Http\Controllers\UserSettingsController::class, 'uploadKycFile']);
+
+     Route::post('/setting/transaction/edit', [App\Http\Controllers\UserSettingsController::class, 'editTransaction']);
      
 
 

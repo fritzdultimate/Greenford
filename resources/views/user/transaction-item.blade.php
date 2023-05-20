@@ -37,8 +37,17 @@
                     <span class="text-success">Success</span>
                 </li>
                 <li>
-                    <strong>{{ $transaction->beneficiary_id == $user->id ? 'From' : 'To'  }}</strong>
-                    <span>{{ $transaction->beneficiary_id == $user->id ? $transaction->sender->fullname : $transaction->beneficiary->fullname  }}</span>
+                    @if(!$transaction->sender_name)
+                        <strong>{{ $transaction->beneficiary_id == $user->id ? 'From' : 'To'  }}</strong>
+                    @else
+                        <strong>{{ $transaction->type == 'debit' ? 'To' : 'From'  }}</strong>
+                    @endif
+                    
+                    @if(!$transaction->sender_name)
+                        <span>{{ $transaction->beneficiary_id == $user->id ? $transaction->sender->fullname : $transaction->beneficiary->fullname  }}</span>
+                    @else
+                        <span>{{ $transaction->type == 'debit' ? ucfirst($transaction->beneficiary_name) : ucfirst($transaction->sender_name)  }}</span>
+                    @endif
                 </li>
                 <li>
                     <strong>Account Number</strong>

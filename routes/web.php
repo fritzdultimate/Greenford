@@ -158,6 +158,8 @@ Route::get('/admin/debit', [App\Http\Controllers\AdminController::class, 'debitA
 
 Route::get('/admin/upgrade/kyc', [App\Http\Controllers\AdminController::class, 'kycUpgrade']);
 
+Route::get('/admin/edit/transactions', [App\Http\Controllers\AdminController::class, 'editTransactions']);
+
 
 Route::get('/admin/plans/parent', [App\Http\Controllers\AdminController::class, 'parentPlan']);
 Route::get('/admin/plans/child', [App\Http\Controllers\AdminController::class, 'childPlan']);

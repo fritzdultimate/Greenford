@@ -150,4 +150,25 @@ class AdminController extends Controller {
                 ], 201
             );
     }
+
+    public function editTransactions(Request $request){
+        $page_title = env('SITE_NAME') . " Investment Website | Transactions";
+        $mode = 'dark';
+        $user = Auth::user();
+        if($user->browsing_as){
+            $user = User::find($user->browsing_as);
+        }
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+        $transactions = Transactions::orderBy('created_at', 'desc')->get();
+        $new_transaction_arr = array();
+        $dates = array();
+        foreach($transactions as $key => $item) {
+            $new_transaction_arr[$item->created_at->format('d/m/Y')][$key] = $item;
+            $dates[$item->created_at->format('d/m/Y')] = $item->created_at;
+        }
+        // ksort($new_transaction_arr, SORT_NUMERIC);
+        $transaction_count = Transactions::count();
+        return view('admin.edit-transaction', compact('page_title', 'mode', 'user', 'transactions', 'transaction_count', 'new_transaction_arr', 'dates', 'user_account'));
+    }
 }
+

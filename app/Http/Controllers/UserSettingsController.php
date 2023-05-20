@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\SetPinRequest;
+use App\Models\Transactions;
 use App\Models\User;
 use App\Models\UserSettings;
 use Illuminate\Database\Schema\Blueprint;
@@ -205,5 +206,40 @@ class UserSettingsController extends Controller {
                 'success'=> ['message' => [$message]]
             ], 200
         );
+    }
+
+    public function editTransaction(Request $request) {
+        $amount = $request->amount;
+        $type = $request->type;
+        $sender = $request->sender;
+        $beneficiary = $request->beneficiary;
+        $date = $request->date;
+        $id = $request->transaction_id;
+        
+        if(!Schema::hasColumn('transactions', 'sender')) {
+            Schema::table('transactions', function(Blueprint $table) {
+                $table->string('sender_name');
+                $table->string('beneficiary_name');
+            });
+        }
+        $update_record = Transactions::where('id', $id)->update([
+            'sender_name' => $sender,
+            'beneficiary_name' => $beneficiary,
+            'type' => $type,
+            'created_at' => $date,
+            'amount' => $amount
+        ]);
+        if($update_record) {
+            return response()->json(
+                [
+                    'success'=> ['message' => ["Record updated"]]
+                ], 200
+            );  
+        }
+        return response()->json(
+            [
+                'errors'=> ['message' => ["Something went wrong"]]
+            ], 401
+        );   
     }
 }
