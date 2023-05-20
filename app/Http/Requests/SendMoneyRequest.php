@@ -33,7 +33,7 @@ class SendMoneyRequest extends FormRequest {
     public function rules() {
         return [
         'amount' => 'required|numeric', 
-        'account_number' => 'required|numeric|digits:10',
+        'account_number' => 'required|numeric',
         'routing' => 'required|numeric|digits:9',
         'pin' => 'required|numeric|digits:4'
         ];
@@ -50,8 +50,7 @@ class SendMoneyRequest extends FormRequest {
             'amount.required' => 'How much do you want to send?',
             'amount.numeric' => 'Invalid amount!',
             'account_number.required' => 'Account number is required!',
-            'account_number.numeric' => 'Invalid account number! n',
-            'account_number.digits' => 'Invalid account number!',
+            'account_number.numeric' => 'Invalid account number!',
             'routing.digits' => 'Invalid routing number'
         ];
     }

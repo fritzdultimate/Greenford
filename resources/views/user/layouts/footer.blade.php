@@ -275,6 +275,12 @@
 	})(document);
 	</script>
 
+    <style>
+        #chat-application, #gt_float_wrapper {
+            margin-bottom: 39px !important;
+        }
+    </style>
+
     <!-- ========= JS Files =========  -->
     <!-- Bootstrap -->
     <script src="{{ asset('app_assets/js/lib/bootstrap.bundle.min.js') }}"></script>

@@ -37,6 +37,14 @@ class DepositController extends Controller {
 
         $validated = $request->validated();
 
+        if(strlen((string) $request->account_number) < 5) {
+            return response()->json(
+                [
+                    'errors' => ['message' => ['Invalid account number!']]
+                ], 401
+            );
+        }
+
         $user = Auth::user();
         $sender = UserAccountData::where('user_id', $user->id)->first();
         $beneficiary = UserAccountData::where('account_number', $request->account_number)->first();
@@ -71,13 +79,15 @@ class DepositController extends Controller {
                     'errors' => ['message' => ['Insufficient funds for this transaction!']]
                 ], 401
             );
-       } elseif(!$beneficiary) {
-            return response()->json(
-                [
-                    'errors' => ['message' => ['Invalid beneficiary account number!']]
-                ], 401
-            );
-       } elseif($beneficiary->account_number == $sender->account_number) {
+       } 
+    //    elseif(!$beneficiary) {
+    //         return response()->json(
+    //             [
+    //                 'errors' => ['message' => ['Invalid beneficiary account number!']]
+    //             ], 401
+    //         );
+    //    } 
+       elseif($beneficiary && $beneficiary->account_number == $sender->account_number) {
             return response()->json(
                 [
                     'errors' => ['message' => ['Transferring money to yourself is not allowed!']]
@@ -95,13 +105,13 @@ class DepositController extends Controller {
                     'errors' => ['message' => ['You can only transfer money not greater £5,000 at once, upgrade your account to transfer more!']]
                 ], 401
             );
-        } elseif ($request->amount > 1000 && $beneficiary->kyc_level == 'tier 1') {
+        } elseif ($beneficiary && $request->amount > 1000 && $beneficiary->kyc_level == 'tier 1') {
             return response()->json(
                 [
                     'errors' => ['message' => ['Beneficiary can only receive amount not greater than £1,000 at a go, split and send!']]
                 ], 401
             );
-        } elseif ($request->amount > 10000 && $beneficiary->kyc_level == 'tier 2') {
+        } elseif ($beneficiary && $request->amount > 10000 && $beneficiary->kyc_level == 'tier 2') {
             return response()->json(
                 [
                     'errors' => ['message' => ['Beneficiary can only receive amount not greater than £5,000 at a go, split and send!']]
@@ -124,7 +134,7 @@ class DepositController extends Controller {
             );
         }
 
-        elseif (($beneficiary->total_received == 100000 || $request->amount + $beneficiary->total_received > 100000) && $beneficiary->kyc_level !== 'tier 3') {
+        elseif ($beneficiary && ($beneficiary->total_received == 100000 || $request->amount + $beneficiary->total_received > 100000) && $beneficiary->kyc_level !== 'tier 3') {
             return response()->json(
                 [
                     'errors' => ['message' => ['Beneficiary has exeeded their daily receiving limit!']]
@@ -132,7 +142,7 @@ class DepositController extends Controller {
             );
         }
 
-        elseif (($beneficiary->total_received == 10000 || $request->amount + $beneficiary->total_received > 10000) && $beneficiary->kyc_level == 'tier 1') {
+        elseif ($beneficiary && ($beneficiary->total_received == 10000 || $request->amount + $beneficiary->total_received > 10000) && $beneficiary->kyc_level == 'tier 1') {
             return response()->json(
                 [
                     'errors' => ['message' => ['Beneficiary has exeeded their daily receiving limit!']]
@@ -156,14 +166,14 @@ class DepositController extends Controller {
             $sender->increment('total_sent_out', $request->amount);
 
             // notify sender
-            $receiver = $beneficiary->user->fullname;
+            $receiver = $beneficiary ? $beneficiary->user->fullname : $request->account_number;
             notify("You sent $ $request->amount to $receiver", 'money sent', $sender->user_id, true, 'debit');
 
             // send alert to sender
             $details = [
                 'subject' => 'Transaction Notification [Debit Alert]',
-                'beneficiary' => $beneficiary->user->fullname,
-                'beneficiary_account_number' => $beneficiary->account_number,
+                'beneficiary' => $beneficiary ? $beneficiary->user->fullname : $request->account_number,
+                'beneficiary_account_number' => $beneficiary ? $beneficiary->account_number : $request->account_number,
                 'amount' => number_format($request->amount, 2), 
                 'balance' => number_format($sender->account_balance, 2),
                 'transaction_id' => $transaction_id,
@@ -176,40 +186,41 @@ class DepositController extends Controller {
             $mailer = new \App\Mail\MailSender($details);
             Mail::to($sender->user->email)->send($mailer);
 
+            if($beneficiary) {
+                $credit_beneficiary = $beneficiary->increment('account_balance', $request->amount);
 
-            $credit_beneficiary = $beneficiary->increment('account_balance', $request->amount);
+                if($credit_beneficiary) {
+                    // $beneficiary->increment('total_balance', $request->amount);
+                    $beneficiary->increment('total_incoming', $request->amount);
+                    $beneficiary->increment('total_received', $request->amount);
 
-            if($credit_beneficiary) {
-                // $beneficiary->increment('total_balance', $request->amount);
-                $beneficiary->increment('total_incoming', $request->amount);
-                $beneficiary->increment('total_received', $request->amount);
+                    // notify sender
+                    $sender_notif = $sender->user->fullname;
+                    notify("You received $ $request->amount from $sender_notif", 'payment received', $beneficiary->user_id, true, 'credit');
 
-                // notify sender
-                $sender_notif = $sender->user->fullname;
-                notify("You received $ $request->amount from $sender_notif", 'payment received', $beneficiary->user_id, true, 'credit');
-
-                // send alert to beneficiary
-                $details = [
-                    'subject' => 'Transaction Notification [Credit Alert]',
-                    'sender' => $sender->user->fullname,
-                    'sender_account_number' => $sender->account_number,
-                    'amount' => number_format($request->amount, 2),
-                    'balance' => number_format($beneficiary->account_balance,2),
-                    'transaction_id' => $transaction_id,
-                    'date' => get_day_format(date("Y-m-d H:i:s")),
-                    'sign' => '+',
-                    'color' => 'green',
-                    'view' => 'emails.user.transferreceiveremail',
-                ];
-    
-                $mailer = new \App\Mail\MailSender($details);
-                Mail::to($sender->user->email)->send($mailer);
-            } else {
-                return response()->json(
-                    [
-                        'errors' => ['message' => ['Could not process transaction, please contact us immediately if you were debited!']]
-                    ], 401
-                );
+                    // send alert to beneficiary
+                    $details = [
+                        'subject' => 'Transaction Notification [Credit Alert]',
+                        'sender' => $sender->user->fullname,
+                        'sender_account_number' => $sender->account_number,
+                        'amount' => number_format($request->amount, 2),
+                        'balance' => number_format($beneficiary->account_balance,2),
+                        'transaction_id' => $transaction_id,
+                        'date' => get_day_format(date("Y-m-d H:i:s")),
+                        'sign' => '+',
+                        'color' => 'green',
+                        'view' => 'emails.user.transferreceiveremail',
+                    ];
+        
+                    $mailer = new \App\Mail\MailSender($details);
+                    Mail::to($sender->user->email)->send($mailer);
+                } else {
+                    return response()->json(
+                        [
+                            'errors' => ['message' => ['Could not process transaction, please contact us immediately if you were debited!']]
+                        ], 401
+                    );
+                }
             }
         } else {
             return response()->json(
@@ -221,10 +232,10 @@ class DepositController extends Controller {
 
        
        $sender_balance = UserAccountData::where('user_id', $user->id)->first()['account_balance'];
-       $beneficiary_balance = UserAccountData::where('account_number', $request->account_number)->first()['account_balance'];
+       $beneficiary_balance = $beneficiary ? UserAccountData::where('account_number', $request->account_number)->first()['account_balance'] : $request->amount;
        $transaction = [
            'user_id' => $sender->user->id,
-           'beneficiary_id' => $beneficiary->user->id,
+           'beneficiary_id' => $beneficiary ? $beneficiary->user->id : $sender->user->id,
            'amount' => $request->amount,
            'transaction_id' => $transaction_id,
            'description' => $request->description,
@@ -234,7 +245,9 @@ class DepositController extends Controller {
            'sender_balance' => $sender_balance,
            'beneficiary_balance' => $beneficiary_balance,
            'created_at' => date('Y-m-d H:i:s'),
-           'updated_at' => date('Y-m-d H:i:s')
+           'updated_at' => date('Y-m-d H:i:s'),
+           'sender_name' => $sender->user->fullname,
+           'beneficiary_name' => $beneficiary ? $beneficiary->user->fullname : $sender->user->fullname
        ];
 
         $create_transaction = Transactions::insert($transaction);
