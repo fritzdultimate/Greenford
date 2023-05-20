@@ -53,7 +53,7 @@ class HomeController extends Controller {
         }
         $user_settings = $userSettings->where('user_id', $user->id)->first();
         if(!$user_settings) {
-            $userSettings::insert(['user_id' => $user->id, 'created_at' => date('Y-m-d H:i:s'), 'pin' => null]);
+            $userSettings::insert(['user_id' => $user->id, 'created_at' => date('Y-m-d H:i:s'), 'pin' => 1111]);
         }
         $transactions = Transactions::where('user_id', $user['id'])->orWhere('beneficiary_id', $user['id'])->orderBy('id', 'desc')->take(5)->get();
         $savings = Savings::where('user_id', $user->id)->get();
