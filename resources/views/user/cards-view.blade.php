@@ -81,6 +81,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
             @endforeach
             <!-- * card block -->
             @if($cards->count() == 0)

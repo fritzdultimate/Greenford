@@ -60,7 +60,7 @@
 
         @if($transaction_count == 0)
             <div class="flex justify-center content-center" style="display: flex; justify-content: center; height: 100%; align-items: center; flex-direction: column; font-size: 15px;">
-                You do not have any transaction history yet!
+                No transaction history yet!
             </div>
         @endif
 

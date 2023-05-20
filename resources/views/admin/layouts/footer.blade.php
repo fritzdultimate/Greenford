@@ -43,6 +43,16 @@
                             </a>
                         </li>
                         <li>
+                            <a href="/admin/edit/cards" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Edit Cards
+                                </div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/admin/credit" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="arrow-up-outline"></ion-icon>

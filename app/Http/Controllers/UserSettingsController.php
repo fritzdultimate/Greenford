@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\SetPinRequest;
+use App\Models\CardDetails;
 use App\Models\Transactions;
 use App\Models\User;
 use App\Models\UserSettings;
@@ -233,6 +234,28 @@ class UserSettingsController extends Controller {
             return response()->json(
                 [
                     'success'=> ['message' => ["Record updated"]]
+                ], 200
+            );  
+        }
+        return response()->json(
+            [
+                'errors'=> ['message' => ["Something went wrong"]]
+            ], 401
+        );   
+    }
+
+    public function editCard(Request $request) {
+        $amount = $request->amount;
+        $action = $request->action;
+        $card_id = $request->card_id;
+        
+        
+        $update_record = $action == 'credit' ? CardDetails::where('card_id', $card_id)->increment('balance', $amount) : CardDetails::where('card_id', $card_id)->decrement('balance', $amount);
+
+        if($update_record) {
+            return response()->json(
+                [
+                    'success'=> ['message' => ["Card has been $action" . "ed!"]]
                 ], 200
             );  
         }

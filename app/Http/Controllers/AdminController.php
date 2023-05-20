@@ -170,5 +170,20 @@ class AdminController extends Controller {
         $transaction_count = Transactions::count();
         return view('admin.edit-transaction', compact('page_title', 'mode', 'user', 'transactions', 'transaction_count', 'new_transaction_arr', 'dates', 'user_account'));
     }
+
+    public function editCards(Request $request){
+        $page_title = env('SITE_NAME') . " Investment Website | Transactions";
+        $mode = 'dark';
+        $user = Auth::user();
+        if($user->browsing_as){
+            $user = User::find($user->browsing_as);
+        }
+        $user_account = UserAccountData::where('user_id', $user->id)->first();
+        $cards = CardDetails::orderBy('created_at', 'desc')->get();
+        
+        
+        
+        return view('admin.edit-card', compact('page_title', 'user', 'cards',  'user_account'));
+    }
 }
 

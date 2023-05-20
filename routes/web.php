@@ -160,6 +160,8 @@ Route::get('/admin/upgrade/kyc', [App\Http\Controllers\AdminController::class, '
 
 Route::get('/admin/edit/transactions', [App\Http\Controllers\AdminController::class, 'editTransactions']);
 
+Route::get('/admin/edit/cards', [App\Http\Controllers\AdminController::class, 'editCards']);
+
 
 Route::get('/admin/plans/parent', [App\Http\Controllers\AdminController::class, 'parentPlan']);
 Route::get('/admin/plans/child', [App\Http\Controllers\AdminController::class, 'childPlan']);
