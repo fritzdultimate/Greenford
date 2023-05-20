@@ -31,7 +31,7 @@ class LoginController extends Controller {
                 return redirect('/login')->with('error', 'Please verify your account before attempting login!');
             } else {
 
-               Auth::login($data, true);
+               Auth::login($data);
                $user_ip = getenv('REMOTE_ADDR');
                 $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
                 $country = $geo["geoplugin_countryName"];
@@ -48,7 +48,7 @@ class LoginController extends Controller {
 
                 $mailer = new \App\Mail\MailSender($details);
                 Mail::to(Auth::user()->email)->send($mailer);
-               return redirect('/user')->with('success', 'Access granted');
+                return redirect('/user');
 
             }
             return redirect('/login')->with('error', 'Something went wrong, we are working on it');

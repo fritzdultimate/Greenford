@@ -18,6 +18,6 @@ class IsLoggedIn extends Middleware {
             return $next($request);
         }
         
-        return redirect('/login')->with('login-required', 'You must login to continue');
+        return redirect('/login')->with('error', 'You must login to continue');
     }
 }
