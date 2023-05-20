@@ -30,9 +30,9 @@
                 <!-- item -->
                 <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#editTransactionActionSheet" onclick="updateId(this)" data-id="{{ $transaction->id }}">
                     <div class="detail">
-                        @if($transaction->user_id == $user->id && $transaction->transaction == 'transfer')
+                        @if($transaction->type == 'debit')
                         <ion-icon class="text-danger" name="arrow-up-outline" style="margin-right: 5px;"></ion-icon>
-                        @elseif($transaction->beneficiary_id == $user->id && $transaction->transaction == 'transfer')
+                        @elseif($transaction->type == 'credit')
                         <ion-icon class="text-success" name="arrow-down-outline" style="margin-right: 5px;"></ion-icon>
                         @endif
                         <div>
