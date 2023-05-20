@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="card-ccv" style="margin-left: 35px;">
                                             <span class="label">TYPE</span>
-                                            <span  style="font-style:itali; color: #bfbfaa">{{ $card->color == 'bg-info' ? 'Visa': 'Master' }}</span>
+                                            <span  style="font-style:itali; color: #bfbfaa">{{ $card->card_color == 'bg-info' ? 'Visa': 'Master' }}</span>
                                         </div>
                                     </div>
                                 </div>
