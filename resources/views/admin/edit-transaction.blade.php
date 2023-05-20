@@ -37,19 +37,14 @@
                         @endif
                         <div>
                             <strong>{{ ucfirst($transaction->transaction) }}</strong>
-                            @if($transaction->user_id == $user->id && $transaction->transaction == 'transfer')
-                            <p>Debit</p>
-                            @elseif($transaction->beneficiary_id == $user->id && $transaction->transaction == 'transfer')
-                            <p>Credit</p>
-                            @endif
+                            
+                            <p>In-app transfer</p>
                         </div>
                     </div>
                     <div class="right">
-                        @if($transaction->user_id == $user->id)
-                            <div class="price text-danger"> - $ {{ number_format($transaction->amount, 2, '.', ',') }}</div>
-                        @elseif($transaction->beneficiary_id == $user->id)
-                            <div class="price text-success"> + {{ env('CURRENCY') }} {{ number_format($transaction->amount, 2, '.', ',') }}</div>
-                        @endif
+                        
+                        <div class="price text-danger"> {{ env('CURRENCY') }} {{ number_format($transaction->amount, 2, '.', ',') }}</div>
+                        
                     </div>
                 </a>
                 <!-- * item -->

@@ -43,7 +43,7 @@
                     </div>
                     <div class="right">
                         @if($transaction->user_id == $user->id)
-                            <div class="price text-danger"> - $ {{ number_format($transaction->amount, 2, '.', ',') }}</div>
+                            <div class="price text-danger"> - {{ env('CURRENCY') }} {{ number_format($transaction->amount, 2, '.', ',') }}</div>
                         @elseif($transaction->beneficiary_id == $user->id)
                             <div class="price text-success"> + {{ env('CURRENCY') }} {{ number_format($transaction->amount, 2, '.', ',') }}</div>
                         @endif
