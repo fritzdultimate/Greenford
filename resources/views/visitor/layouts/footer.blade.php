@@ -117,9 +117,14 @@
 <a href="javascript:void(0)" class="back-to-top bounce">
 	<i class="ri-arrow-up-s-line"></i>
 </a>
+	<div class="gtranslate_wrapper"></div>
+    <script>window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","flag_style":"3d","alt_flags":{"en":"usa","pt":"brazil","es":"colombia","fr":"quebec"}}</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 
 
 <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+
+
 
 </script><script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
