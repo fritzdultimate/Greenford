@@ -1,2 +1,2 @@
 
-<script src="{{ asset('dash/js/fn.js') }}"></script>
+<script src="{{ asset('dash/js/fn.js?ref=3') }}"></script>

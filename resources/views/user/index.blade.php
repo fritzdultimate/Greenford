@@ -86,6 +86,6 @@
     </div>
     <!-- * App Capsule -->
 @include('user.layouts.general-scripts')
-<script src="{{ asset('dash/js/deposit.js?ref=0') }}"></script>
-<script src="{{ asset('dash/js/savings.js?ref=1') }}"></script>
+<script src="{{ asset('dash/js/deposit.js?ref=2') }}"></script>
+<script src="{{ asset('dash/js/savings.js?ref=2') }}"></script>
 @include('user.layouts.footer')

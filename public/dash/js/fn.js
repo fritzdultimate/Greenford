@@ -21,10 +21,10 @@ function showLoading(form){
     
 
     if(loading){
-        [...loading].forEach(el => {
+        [...loading].forEach((el) => {
             el.classList.remove('d-none');
         });
-        [...formButton].forEach(el => {
+        [...formButton].forEach((el) => {
             el.classList.add('d-none');
         });
         // loading.classList.remove('d-none');
@@ -41,10 +41,10 @@ function hideLoading(form){
         // loading.classList.add('d-none')
         // formButton.classList.remove('d-none');
 
-        [...loading].forEach(el => {
+        [...loading].forEach((el) => {
             el.classList.add('d-none');
         });
-        [...formButton].forEach(el => {
+        [...formButton].forEach((el) => {
             el.classList.remove('d-none');
         });
     }
