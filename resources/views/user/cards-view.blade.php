@@ -64,8 +64,8 @@
                                         </div>
                                         <div class="card-ccv">
                                             <span class="label">CCV</span>
-                                            <span id="hidden-card-cvv-{{ $card->card_id }}">***</span>
-                                            <span id="visible-card-cvv-{{ $card->card_id }}" style="display: none">{{ $card->card_cvv }}</span>
+                                            <span class="hidden-card-cvv-{{ $card->card_id }}">***</span>
+                                            <span class="visible-card-cvv-{{ $card->card_id }}" style="display: none">{{ $card->card_cvv }}</span>
                                         </div>
                                         <div class="card-ccv" style="margin-left: 35px;">
                                             <span class="label">TYPE</span>
