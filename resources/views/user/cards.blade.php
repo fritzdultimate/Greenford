@@ -112,10 +112,10 @@
             });
 
             // toggle cvv
-            [...document.querySelectorAll('.hidden-card-number-' + id)].forEach((e) => {
+            [...document.querySelectorAll('.hidden-card-cvv-' + id)].forEach((e) => {
                 e.style.display = 'block';
             });
-            [...document.querySelectorAll('.visible-card-number-' + id)].forEach((e) => {
+            [...document.querySelectorAll('.visible-card-cvv-' + id)].forEach((e) => {
                 e.style.display = 'none';
             });
         }
