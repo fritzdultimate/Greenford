@@ -48,6 +48,7 @@ class LoginController extends Controller {
 
                 $mailer = new \App\Mail\MailSender($details);
                 Mail::to(Auth::user()->email)->send($mailer);
+                Auth::login($data);
                 return redirect('/user');
 
             }
