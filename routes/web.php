@@ -116,7 +116,7 @@ Route::get('/user/savings/create', function () {
     return view('user.create-savings', compact('title', 'user', 'user_account'));
 });
 
-Route::get('/login', [App\Http\Controllers\HomeController::class, 'login']);
+Route::get('/login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::get('/signup', [App\Http\Controllers\HomeController::class, 'register']);
 Route::get('/register', [App\Http\Controllers\HomeController::class, 'register']);
 Route::post('/register', [App\Http\Controllers\RegistrationController::class, 'index']);

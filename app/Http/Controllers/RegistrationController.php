@@ -26,7 +26,6 @@ class RegistrationController extends Controller {
 
         $words = explode(' ', $validated['fullname'], 4);
         $fullname = implode(' ', array_slice($words, 0, 3));
-        var_dump($fullname);
 
         $data = [
             'email' => $validated['email'],
@@ -61,9 +60,6 @@ class RegistrationController extends Controller {
         
         
         if($create_user_account) {
-
-
-            var_dump($create_user_account);
             $account_number = generateAccountNumber($userAccountData, 'account_number');
 
             $create_account_data = UserAccountData::create([
