@@ -36,28 +36,29 @@
                         </thead>
                         <tbody>
                             @foreach($user_settings_  as $setting)
-                                @if($setting->current_kyc_level != 'tier 3')
-                                    <tr>
-                                        <th scope="row">{{ $setting->user->fullname }}</th>
-                                        <td><a href="{{asset($setting->front_kyc)}}">View Image</a></td>
-                                        <td><a href="{{asset($setting->back_kyc)}}">View Image</a></td>
-                                        <td><a href="{{asset($setting->address_proof)}}">View Image</a></td>
-                                        <td class="text-end text-primary">
-                                            <div class="card-button dropdown">
-                                                <button type="button" class="btn btn-link btn-icon" data-bs-toggle="dropdown">
-                                                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" id="CardActionBtn" data-id="{{ $setting->user_id }}" data-kyc="tier 2" onclick="upgrade(this)">
-                                                        Upgrade to Tier 2
-                                                    </a>
-                                                    <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" data-id="{{ $setting->user_id }}" data-kyc="tier 3" onclick="upgrade(this)">Upgrade to Tier 3
-                                                    </a>
-                                                </div>
+                                <tr>
+                                    <th scope="row">{{ $setting->user->fullname }}</th>
+                                    <td><a href="{{asset($setting->front_kyc)}}">View Image</a></td>
+                                    <td><a href="{{asset($setting->back_kyc)}}">View Image</a></td>
+                                    <td><a href="{{asset($setting->address_proof)}}">View Image</a></td>
+                                    <td class="text-end text-primary">
+                                        <div class="card-button dropdown">
+                                            <button type="button" class="btn btn-link btn-icon" data-bs-toggle="dropdown">
+                                                <ion-icon name="ellipsis-horizontal"></ion-icon>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" id="CardActionBtn" data-id="{{ $setting->user_id }}" data-kyc="tier 1" onclick="upgrade(this)">
+                                                    Downgrade to Tier 1
+                                                </a>
+                                                <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" id="CardActionBtn" data-id="{{ $setting->user_id }}" data-kyc="tier 2" onclick="upgrade(this)">
+                                                    Upgrade to Tier 2
+                                                </a>
+                                                <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" data-id="{{ $setting->user_id }}" data-kyc="tier 3" onclick="upgrade(this)">Upgrade to Tier 3
+                                                </a>
                                             </div>
-                                        </td>
-                                    </tr>
-                                @endif
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

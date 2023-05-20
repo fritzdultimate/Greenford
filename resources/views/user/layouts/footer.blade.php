@@ -1,30 +1,30 @@
 <!-- App Bottom Menu -->
 <div class="appBottomMenu">
-        <a href="/user" class="item active">
+        <a href="/user" class="item" id="HomeItemTab">
             <div class="col">
                 <ion-icon name="pie-chart-outline"></ion-icon>
                 <strong>Home</strong>
             </div>
         </a>
-        <a href="/user/transactions" class="item">
+        <a href="/user/transactions" class="item" id="TransactionItemTab">
             <div class="col">
                 <ion-icon name="document-text-outline"></ion-icon>
                 <strong>Transactions</strong>
             </div>
         </a>
-        <a href="/user/savings" class="item">
+        <a href="/user/savings" class="item" id="SavingsItemTab">
             <div class="col">
                 <ion-icon name="apps-outline"></ion-icon>
                 <strong>Savings</strong>
             </div>
         </a>
-        <a href="/user/cards" class="item">
+        <a href="/user/cards" class="item" id="CardItemTab">
             <div class="col">
                 <ion-icon name="card-outline"></ion-icon>
                 <strong>My Cards</strong>
             </div>
         </a>
-        <a href="/user/settings" class="item">
+        <a href="/user/settings" class="item" id="SettingItemTab">
             <div class="col">
                 <ion-icon name="settings-outline"></ion-icon>
                 <strong>Settings</strong>
@@ -32,6 +32,21 @@
         </a>
     </div>
     <!-- * App Bottom Menu -->
+    <script>
+        let pathname = location.pathname;
+        if(pathname == '/user') {
+            HomeItemTab.classList.add('active');
+        } else if(pathname == '/user/transactions') {
+            TransactionItemTab.classList.add('active');
+        } else if(pathname == '/user/savings') {
+            SavingsItemTab.classList.add('active');
+        } else if(pathname == '/user/cards') {
+            CardItemTab.classList.add('active');
+        } else if(pathname == '/user/settings') {
+            SettingItemTab.classList.add('active')
+        }
+        console.log(location)
+    </script>
 
     <!-- App Sidebar -->
     <div class="modal fade panelbox panelbox-left" id="sidebarPanel" tabindex="-1" role="dialog">
