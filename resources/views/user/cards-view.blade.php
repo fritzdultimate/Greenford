@@ -75,12 +75,12 @@
                                 </div>
                             </div>
                             <div class="inm">
-                            <div class="card-numberp">
-                                <span style="font-weight: bold; color: rgb(221 221 221 / 68%);"> {{ ucfirst($card->user->fullname) }}</span>
+                                <div class="card-numberp">
+                                    <span style="font-weight: bold; color: rgb(221 221 221 / 68%);"> {{ ucfirst($card->user->fullname) }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             @endforeach
             <!-- * card block -->
             @if($cards->count() == 0)

@@ -41,12 +41,21 @@
                                 <div class="bottom">
                                     <div class="card-expiry">
                                         <span class="label">Expiry</span>
-                                        {{ date('m / y', strtotime($card->exp_date))}}
+                                        <small style="font-size: 10px">{{ date('m / y', strtotime($card->exp_date))}}</small>
                                     </div>
                                     <div class="card-ccv">
                                         <span class="label">CCV</span>
                                         <span class="hidden-card-cvv-{{ $card->card_id }}">***</span>
                                         <span class="visible-card-cvv-{{ $card->card_id }}" style="display: none">{{ $card->card_cvv }}</span>
+                                    </div>
+                                    <div class="card-ccv" style="margin-left: 35px;">
+                                        <span class="label">TYPE</span>
+                                        <span  style="font-style:itali; color: #bfbfaa">{{ $card->card_color == 'bg-info' ? 'Visa': 'Master' }}</span>
+                                    </div>
+                                </div>
+                                <div class="inm">
+                                    <div class="card-numberp">
+                                        <span style="font-weight: bold; color: rgb(221 221 221 / 68%);"> {{ ucfirst($card->user->fullname) }}</span>
                                     </div>
                                 </div>
                             </div>
