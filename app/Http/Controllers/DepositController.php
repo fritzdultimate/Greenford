@@ -151,7 +151,7 @@ class DepositController extends Controller {
         } elseif($sender->user->suspended) {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Account restricted, please contact our 24/7 customer support to resolve this issue!']]
+                    'errors' => ['message' => ['Action denied!, you cannot perform this action in your location!']]
                 ], 401
             );
         }
