@@ -51,6 +51,10 @@
                         <div class="form-group basic mt-2">
                             <button type="button" class="btn btn-primary btn-block btn-lg edit-transaction-btn">Edit</button>
                         </div>
+
+                        <div class="form-group mt-">
+                            <a href="" id="transactionDeleteBtn" class="btn btn-danger btn-block btn-lg">Delete</a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -58,3 +62,7 @@
     </div>
 </div>
 <!-- * Add Card Action Sheet -->
+
+<script>
+    
+</script>

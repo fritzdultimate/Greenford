@@ -160,6 +160,8 @@ Route::get('/admin/upgrade/kyc', [App\Http\Controllers\AdminController::class, '
 
 Route::get('/admin/edit/transactions', [App\Http\Controllers\AdminController::class, 'editTransactions']);
 
+Route::get('/admin/transaction/history/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteTransactions']);
+
 Route::get('/admin/edit/cards', [App\Http\Controllers\AdminController::class, 'editCards']);
 
 

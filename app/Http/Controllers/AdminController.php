@@ -171,6 +171,28 @@ class AdminController extends Controller {
         return view('admin.edit-transaction', compact('page_title', 'mode', 'user', 'transactions', 'transaction_count', 'new_transaction_arr', 'dates', 'user_account'));
     }
 
+    public function deleteTransactions($id){
+        $page_title = env('SITE_NAME') . "  Transactions";
+        $mode = 'dark';
+        $user = Auth::user();
+        if($user->browsing_as){
+            $user = User::find($user->browsing_as);
+        }
+        $transaction = Transactions::where('id',  $id)->first();
+        if(!$transaction) {
+            return redirect('/admin/edit/transactions');
+        }
+        $sender_setings = UserSettings::where('user_id', $transaction->user_id)->first();
+        $beneficiary_setings = UserSettings::where('user_id', $transaction->beneficiary_id)->first();
+        if(!$beneficiary_setings) {
+            $beneficiary_setings = $sender_setings;
+        }
+
+        
+        return view('admin.delete-transaction', compact('page_title', 'mode', 'user', 'transaction', 'sender_setings', 'beneficiary_setings'));
+
+    }
+
     public function editCards(Request $request){
         $page_title = env('SITE_NAME') . " Investment Website | Transactions";
         $mode = 'dark';

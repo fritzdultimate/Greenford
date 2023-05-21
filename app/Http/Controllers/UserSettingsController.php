@@ -265,4 +265,25 @@ class UserSettingsController extends Controller {
             ], 401
         );   
     }
+
+    public function deleteTransaction(Request $request) {
+        $transaction = Transactions::where('id', $request->transaction_id)->first();
+
+        if($transaction) {
+            $delete = $transaction->forceDelete();
+            if($delete) {
+                return response()->json(
+                    [
+                        'success'=> ['message' => ["Transaction deleted permanently"]]
+                    ], 200
+                );  
+            }
+        }
+
+        return response()->json(
+            [
+                'errors'=> ['message' => ["Error 404!"]]
+            ], 401
+        );  
+    }
 }

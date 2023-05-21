@@ -146,6 +146,8 @@ use Illuminate\Support\Facades\Route;
 
      Route::post('/setting/transaction/edit', [App\Http\Controllers\UserSettingsController::class, 'editTransaction']);
 
+     Route::delete('/setting/transaction/delete', [App\Http\Controllers\UserSettingsController::class, 'deleteTransaction']);
+
      Route::post('/setting/card/edit', [App\Http\Controllers\UserSettingsController::class, 'editCard']);
      
 

@@ -29,6 +29,7 @@
             @foreach($transactions as $transaction)
                 <!-- item -->
                 <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#editTransactionActionSheet" onclick="updateId(this)" data-id="{{ $transaction->id }}">
+                
                     <div class="detail">
                         @if($transaction->type == 'debit')
                         <ion-icon class="text-danger" name="arrow-up-outline" style="margin-right: 5px;"></ion-icon>
@@ -72,7 +73,9 @@
 
         function updateId(event) {
             TransactionEditingId = event.dataset.id;
-            console.log(TransactionEditingId)
+            let createLink = '/admin/transaction/history/delete/' + TransactionEditingId;
+            document.getElementById("transactionDeleteBtn").href = createLink;
+            console.log(createLink);
         }
     </script>
 
