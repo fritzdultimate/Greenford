@@ -67,7 +67,7 @@
                 </li>
                 <li>
                     <strong>Amount</strong>
-                    <h3 class="m-0">{{ env('CURRENCY') }} {{ number_format($transaction->amount, 2) }}</h3>
+                    <h3 class="m-0">{{ get_currency_symbol($user_settings->currency)  }}  {{ currency_conversion($user_settings->currency, $transaction->amount) }}</h3>
                 </li>
             </ul>
 
