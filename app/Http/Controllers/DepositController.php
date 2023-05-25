@@ -107,13 +107,13 @@ class DepositController extends Controller {
        } elseif($request->amount > 5000 && $sender->kyc_level == 'tier 2') {
             return response()->json(
                 [
-                    'errors' => ['message' => ["You can only transfer money not greater $kyc_1_limit at once, upgrade your account to transfer more!"]]
+                    'errors' => ['message' => ["You can only transfer money not greater $kyc_2_limit at once, upgrade your account to transfer more!"]]
                 ], 401
             );
         } elseif ($beneficiary && $request->amount > 1000 && $beneficiary->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ['Beneficiary can only receive amount not greater than £1,000 at a go, split and send!']]
+                    'errors' => ['message' => ["Beneficiary can only receive amount not greater than £1,000 at a go, split and send!"]]
                 ], 401
             );
         } elseif ($beneficiary && $request->amount > 10000 && $beneficiary->kyc_level == 'tier 2') {
