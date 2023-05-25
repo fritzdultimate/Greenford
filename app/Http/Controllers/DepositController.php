@@ -101,7 +101,7 @@ class DepositController extends Controller {
        } elseif($request->amount > 1000 && $sender->kyc_level == 'tier 1') {
             return response()->json(
                 [
-                    'errors' => ['message' => ["You can only transfer money not greater £1,000 at once, upgrade your account to transfer more!"]]
+                    'errors' => ['message' => ["You can only transfer money not greater $kyc_1_limit at once, upgrade your account to transfer more!"]]
                 ], 401
             );
        } elseif($request->amount > 5000 && $sender->kyc_level == 'tier 2') {
