@@ -130,7 +130,7 @@ function unlockFunds() {
 
 function currency_conversion($currency, $amount) {
     // Fetching JSON
-    $req_url = 'https://api.exchangerate-api.com/v4/latest/USD';
+    $req_url = 'https://api.exchangerate-api.com/v4/latest/GBP';
     $response_json = file_get_contents($req_url);
 
     // Continuing if we got a result
