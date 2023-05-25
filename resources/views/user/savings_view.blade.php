@@ -32,11 +32,11 @@
                     <h4>{{ ucfirst($save->name) }}</h4>
                     <p>{{ ucfirst($save->description) }}</p>
                 </div>
-                <div class="price">{{ env('CURRENCY') }} {{ number_format($save->target, 2, '.', ',') }}</div>
+                <div class="price">{{ get_currency_symbol($user_settings->currency)  }} {{ currency_conversion($user_settings->currency, $save->target) }}</div>
             </div>
             <div class="progress text-center">
-                <div class="progress-bar text-center" role="progressbar" style="width: {{ number_format($save->saved/($save->target/100))  }}%;" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100">{{ number_format($save->saved/($save->target/100), 2)  }}%</div>
+                <div class="progress-bar text-center" role="progressbar" style="width: {{ currency_conversion($user_settings->currency, $save->saved/($save->target/100)) }}%;" aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100">{{ currency_conversion($user_settings->currency, $save->saved/($save->target/100)) }}%</div>
             </div>
         </div>
         <!-- * item -->

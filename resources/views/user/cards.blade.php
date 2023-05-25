@@ -30,7 +30,7 @@
                             </div>
                             <div class="balance">
                                 <span class="label">BALANCE</span>
-                                <h1 class="title">{{ env('CURRENCY') }} {{ number_format($card->balance, 2, '.', ',')}}</h1>
+                                <h1 class="title">{{ get_currency_symbol($user_settings->currency) }} {{ currency_conversion($user_settings->currency, $card->balance) }}</h1>
                             </div>
                             <div class="in">
                                 <div class="card-number">
