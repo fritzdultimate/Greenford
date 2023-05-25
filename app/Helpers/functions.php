@@ -146,7 +146,7 @@ function currency_conversion($currency, $amount) {
         //$base_price = 12; // Your price in USD
         $price = round(($amount * $response_object->rates->$currency), 2);
 
-        echo $price;
+        echo number_format($price, 2);
 
         }
         catch(Exception $e) {
