@@ -4,7 +4,7 @@
                 <div class="col-12">
                     <div class="stat-box">
                         <div class="title">Account balance </div>
-                        <div class="value text-success">{{ get_currency_symbol($user_settings->currency) }} {{ currency_conversion($user_settings->currency, number_format($user_account->account_balance, 2, '.', ',')) }}</div>
+                        <div class="value text-success">{{ get_currency_symbol($user_settings->currency) }} {{ currency_conversion($user_settings->currency, $user_account->account_balance) }}</div>
                     </div>
                 </div>
                 <div class="col-12 mt-2">
