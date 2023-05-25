@@ -45,7 +45,7 @@
         </div>
 
         <div class="listview-title mt-1">Theme</div>
-        <ul class="listview image-listview text inset no-line">
+        <ul class="listview image-listview text inset">
             <li>
                 <div class="item">
                     <div class="in">
@@ -59,6 +59,16 @@
                     </div>
                 </div>
             </li>
+
+            <li>
+                <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#currencyFormActionSheet">
+                    <div class="in">
+                        <div>Currency</div>
+                        <span class="text-primary">{{ $user_settings->currency_name }}</span>
+                    </div>
+                </a>
+            </li>
+            
         </ul>
 
         <div class="listview-title mt-1">Notifications</div>
@@ -240,6 +250,39 @@
         </div>
     </div>
     <!-- * Set Pin Action Sheet -->
+
+    <!-- Set Currency Action Sheet -->
+    <div class="modal fade action-sheet" id="currencyFormActionSheet" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Currency</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="action-sheet-content" id="modalContentSavings">
+                        <form class="set-currency-form">
+                            <div class="form-group basic">
+                                <div class="input-wrapper">
+                                    <label class="label" for="account2d">Currency</label>
+                                    <select class="form-control custom-select" id="account2d" name="currency">
+                                        <option value="GBP">Pounds</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group basic">
+                                <button type="button" class="btn btn-primary btn-block btn-lg set-currency-btn">
+                                    Change Currency
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Set Currency Action Sheet -->
 
     <!-- FAQs -->
     <div class="modal fade modalbox" id="ModalBasic" tabindex="-1" role="dialog">

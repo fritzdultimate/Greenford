@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserAccountData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Currency\Util\CurrencySymbolUtil;
 
 function generateTransactionHash($table, $column, $length) {
     $hash = bin2hex(random_bytes($length));
@@ -124,4 +125,38 @@ function unlockFunds() {
 
         }
     }
+
+}
+
+function currency_conversion($currency, $amount) {
+    // Fetching JSON
+    $req_url = 'https://api.exchangerate-api.com/v4/latest/USD';
+    $response_json = file_get_contents($req_url);
+
+    // Continuing if we got a result
+    if(false !== $response_json) {
+
+        // Try/catch for json_decode operation
+        try {
+
+        // Decoding
+        $response_object = json_decode($response_json);
+
+        // YOUR APPLICATION CODE HERE, e.g.
+        //$base_price = 12; // Your price in USD
+        $price = round(($amount * $response_object->rates->$currency), 2);
+
+        echo $price;
+
+        }
+        catch(Exception $e) {
+            // Handle JSON parse error...
+        }
+    }
+}
+
+function get_currency_symbol($currency) {
+    
+    $symbol = CurrencySymbolUtil::getSymbol($currency);
+    return $symbol;
 }

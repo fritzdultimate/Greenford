@@ -11,9 +11,13 @@ let changePasswordForm = document.querySelector('.change-password-form');
 let setPinBtn = document.querySelector('.set-pin-btn');
 let setPinForm = document.querySelector('.set-pin-form');
 
+let setCurrencyBtn = document.querySelector('.set-currency-btn');
+let setCurrencyForm = document.querySelector('.set-currency-form');
+
 window.addEventListener('load', () => {
     initChangePasswordBtnAction();
     initSetPinBtnAction()
+    initChangeCurrencyBtnAction()
 });
 
 function initChangePasswordBtnAction() {
@@ -23,12 +27,64 @@ function initChangePasswordBtnAction() {
     })
 }
 
+function initChangeCurrencyBtnAction() {
+    setCurrencyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        processChangeCurrency(setCurrencyForm)
+    })
+}
+
 function initSetPinBtnAction() {
     console.log('pin')
     setPinBtn.addEventListener('click', (e) => {
         e.preventDefault();
         processSetPin(setPinForm)
     })
+}
+
+async function processChangeCurrency(form){
+    let currency = form.elements.namedItem('currency').value;
+    let currency_name = form.elements.namedItem('currency').options[form.elements.namedItem('currency').selectedIndex].outerText;
+    console.log(currency_name)
+    // let confirm_password = form.elements.namedItem('confirm_password').value;
+    if(!!currency){
+        fetch(urlPrefix + 'changeCurrency', {
+            method : 'post',
+            headers,
+            body : JSON.stringify({
+                ...jsonFormData(form),
+                'currency_name': currency_name
+            })
+        }).then((res) => {
+            hideLoading();
+            console.log(res)
+            return res.json();
+            // return res.text();
+        })
+        .then((data) => {
+            console.dir(data)
+            if('errors' in data){
+                let errorMsg = getResponse(data);
+                showErrorModal(errorMsg, ['currencyFormActionSheet']);
+                console.log(errorMsg)
+            }
+            else if('success' in data){
+                let successMsg = getResponse(data, 'success');
+                showSuccessModal(successMsg, ['currencyFormActionSheet']);
+            } else {
+                 hideLoading();
+                 console.log(data)  
+                 showErrorModal('something is not right!', ['currencyFormActionSheet']); 
+            }
+        }).catch((err) => {
+            console.log(err);
+             hideLoading();
+             showErrorModal('something is not right!', ['currencyFormActionSheet']);
+        });
+    } else {
+        // hideLoading();
+        showErrorModal('Please fill up the box', ['currencyFormActionSheet']);
+    }
 }
 
 async function processChangePassword(form){

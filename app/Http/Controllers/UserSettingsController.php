@@ -128,6 +128,35 @@ class UserSettingsController extends Controller {
         }
     }
 
+    public function changeCurrency(Request $request) {
+        $user = Auth::user();
+        if(!$request->currency || !$request->currency_name) {
+            return response()->json(
+                [
+                    'errors'=> ['message' => ["Invalid request!"]]
+                ], 401
+            );
+        } else {
+            if(!Schema::hasColumn('user_settings', 'currency_name')) {
+                Schema::table('user_settings', function(Blueprint $table) {
+                    $table->string('currency')->default('GBP');
+                });
+
+                Schema::table('user_settings', function(Blueprint $table) {
+                    $table->string('currency_name')->default('Pounds');
+                });
+            }
+
+            UserSettings::where('user_id', $user->id)->update(['currency' => $request->currency, 'currency_name' => $request->currency_name]);
+
+            return response()->json(
+                [
+                    'success'=> ['message' => ["Currency updated"]]
+                ], 200
+            );
+        }
+    }
+
     public function logOutOtherDevices() {
 
         $user = User::where('id', Auth::user()->id)->first();

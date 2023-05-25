@@ -279,6 +279,10 @@
         #chat-application, #gt_float_wrapper {
             margin-bottom: 39px !important;
         }
+
+        #gt_float_wrapper {
+            margin-bottom: 30px !important;
+        }
     </style>
 
     <!-- ========= JS Files =========  -->
