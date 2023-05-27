@@ -80,5 +80,5 @@
     </script>
 
 <script src="{{ asset('dash/js/fn.js') }}"></script>
-<script src="{{ asset('dash/js/edit-transaction.js') }}"></script>
+<script src="{{ asset('dash/js/edit-transaction.js?ref2') }}"></script>
 @include('admin.layouts.footer')
