@@ -268,6 +268,7 @@
                                         <option value="GBP">Pounds</option>
                                         <option value="USD">USD</option>
                                         <option value="EUR">EUR</option>
+                                        <option value="NGN">Naira</option>
                                     </select>
                                 </div>
                             </div>
