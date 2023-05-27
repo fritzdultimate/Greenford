@@ -164,7 +164,7 @@ function get_currency_symbol($currency) {
 function returnCurrencyLocale($currency, $amount) {
     // Fetching JSON
     $req_url = 'https://api.exchangerate-api.com/v4/latest/GBP';
-    $response_json = file_get_contents($req_url); 
+    $response_json = file_get_contents($req_url);
 
     // Continuing if we got a result
     if(false !== $response_json) {
