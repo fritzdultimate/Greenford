@@ -16,8 +16,8 @@
                             <div class="price">{{ get_currency_symbol($user_settings->currency)  }} {{ currency_conversion($user_settings->currency, $save->target) }}</div>
                         </div>
                         <div class="progress text-center">
-                            <div class="progress-bar text-center" role="progressbar" style="width: {{ currency_conversion($user_settings->currency, $save->saved/($save->target/100)) }}%;" aria-valuenow="80"
-                                aria-valuemin="0" aria-valuemax="100"> {{ currency_conversion($user_settings->currency, $save->saved/($save->target/100)) }}%</div>
+                            <div class="progress-bar text-center" role="progressbar" style="width: {{ ($save->saved/($save->target/100)) }}%;" aria-valuenow="80"
+                                aria-valuemin="0" aria-valuemax="100"> {{  ($save->saved/($save->target/100)) }}%</div>
                         </div>
                     </div>
                     <!-- * item -->

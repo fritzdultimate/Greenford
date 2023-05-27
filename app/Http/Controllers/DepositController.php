@@ -38,8 +38,8 @@ class DepositController extends Controller {
         $validated = $request->validated();
         $user_settings = UserSettings::where('user_id', Auth::id())->first();
 
-        $kyc_1_limit = get_currency_symbol($user_settings->currency) . currency_conversion($user_settings->currency, 1000);
-        $kyc_2_limit = get_currency_symbol($user_settings->currency) . currency_conversion($user_settings->currency, 5000);
+        $kyc_1_limit = returnCurrencyLocale($user_settings->currency, 1000);
+        $kyc_2_limit = returnCurrencyLocale($user_settings->currency, 5000);
 
 
         if(strlen((string) $request->account_number) < 5) {
@@ -62,7 +62,7 @@ class DepositController extends Controller {
         }
 
         $pin = UserSettings::where('user_id', $user->id)->first()['pin'];
-        if(!$pin) {
+        if(!$pin || $pin == 1111) {
             return response()->json(
                 [
                     'errors' => ['message' => ['Please setup your transaction pin!']]

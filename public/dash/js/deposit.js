@@ -169,6 +169,7 @@ async function processSendingMoney(form){
             // return res.text();
         })
         .then((data) => {
+            console.log(data)
             if('errors' in data){
                 let errorMsg = getResponse(data);
                 showErrorModal(errorMsg, ['sendActionSheet']);

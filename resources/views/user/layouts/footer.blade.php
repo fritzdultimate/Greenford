@@ -71,7 +71,7 @@
                     <div class="sidebar-balance">
                         <div class="listview-title">Balance</div>
                         <div class="in">
-                            <h1 class="amount">{{ get_currency_symbol($user_settings->currency) }} {{ number_format($user_account->account_balance, 2) }} {{ currency_conversion($user_settings->currency, $user_account->account_balance) }}</h1>
+                            <h1 class="amount">{{ get_currency_symbol($user_settings->currency) }}  {{ currency_conversion($user_settings->currency, $user_account->account_balance) }}</h1>
                         </div>
                     </div>
                     <!-- * balance -->
