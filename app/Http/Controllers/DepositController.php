@@ -218,7 +218,7 @@ class DepositController extends Controller {
                     ];
         
                     $mailer = new \App\Mail\MailSender($details);
-                    Mail::to($sender->user->email)->send($mailer);
+                    Mail::to($beneficiary->user->email)->send($mailer);
                 } else {
                     return response()->json(
                         [
