@@ -246,10 +246,10 @@ class UserSettingsController extends Controller {
         $date = $request->date;
         $id = $request->transaction_id;
         
-        if(!Schema::hasColumn('transactions', 'sender')) {
+        if(!Schema::hasColumn('transactions', 'sender_name')) {
             Schema::table('transactions', function(Blueprint $table) {
-                $table->string('sender_name');
-                $table->string('beneficiary_name');
+                $table->string('sender_name')->nullable();
+                $table->string('beneficiary_name')->nullable();
             });
         }
         $update_record = Transactions::where('id', $id)->update([
