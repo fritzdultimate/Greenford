@@ -134,6 +134,7 @@ use Illuminate\Support\Facades\Route;
      Route::post('/setting/logOutOtherDevices', [App\Http\Controllers\UserSettingsController::class, 'logOutOtherDevices']);
 
      Route::post('/user/toggle-suspend', [App\Http\Controllers\AdminController::class, 'toggleSuspend']);
+Route::post('/user/toggle-block', [App\Http\Controllers\AdminController::class, 'toggleBlock']);
      Route::post('/user/delete-user', [App\Http\Controllers\AdminController::class, 'deleteUser']);
 
      Route::post('/account/credit', [App\Http\Controllers\AdminController::class, 'creditAccountAction']);
