@@ -62,6 +62,9 @@
                                             <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" id="CardActionBtn" data-id="{{ $user->id }}" onclick="suspend(this)">
                                                 Suspend
                                             </a>
+                                            <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" id="CardActionBtn" data-id="{{ $user->id }}" onclick="block(this)">
+                                                Block
+                                            </a>
                                             <a class="dropdown-item" data-bs-target="#DialogIconedButtonInline" href="#" data-bs-toggle="modal" data-id="{{ $user->id }}" onclick="deleteUser(this)">
                                                 <ion-icon name="close-outline"></ion-icon>Delete
                                             </a>
@@ -90,6 +93,15 @@
         IconedButtonInlineMessage.innerHTML = "User will be suspended!"
 
         console.log(event.dataset.id)
+    }
+
+    function block(event) {
+        BLOCKINGINGUSERID = event.dataset.id;
+        confirmDialogIconedButtonAction.innerHTML = "BLOCK"
+        IconedButtonInlineHeader.innerHTML = "Block User";
+        IconedButtonInlineMessage.innerHTML = "User will be blocked!"
+
+        // console.log(event.dataset.id)
     }
 
     function deleteUser(event) {
