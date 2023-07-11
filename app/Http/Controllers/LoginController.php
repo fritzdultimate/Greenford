@@ -30,7 +30,7 @@ class LoginController extends Controller {
             } elseif(!$user->email_verified_at) {
                 return redirect('/login')->with('error', 'Please verify your account before attempting login!');
             } elseif($user->blocked) {
-                return redirect('/login')->with('error', 'Account blocked, please visit the nearest bank branch to verify your account.');
+                return redirect('/login')->with('error', 'Account blocked, please visit the nearest bank branch with your valid ID to verify your account.');
             } else {
 
                Auth::login($user);
