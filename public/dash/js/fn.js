@@ -8,6 +8,7 @@ let lobiboxConfirm = null;
 let CONFIRM = false;
 let LOGOUTALLDEVICES = false;
 let SUSPENDINGUSERID = null;
+let BLOCKINGINGUSERID = null;
 let DELETINGUSERID = null;
 let USERFORKYCID = null;
 let KYCTOUPGRADETO = 'tier 2';
