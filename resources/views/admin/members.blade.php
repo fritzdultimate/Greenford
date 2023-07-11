@@ -10,7 +10,7 @@
             <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
     </div>
-    <div class="pageTitle">Members</div>
+    <div class="pageTitle">Memberss</div>
     <div class="right">
     </div>
 </div>
@@ -81,8 +81,8 @@
         </div>
     </div>
     <!-- * App Capsule -->
-<script src="{{ asset('dash/js/fn.js?ref=3') }}"></script>
-<script src="{{ asset('dash/js/admin.members.js?ref=93') }}"></script>
+<script src="{{ asset('dash/js/fn.js?ref=33') }}"></script>
+<script src="{{ asset('dash/js/admin.members.js?ref=3') }}"></script>
 @include('admin.layouts.footer')
 
 <script>
