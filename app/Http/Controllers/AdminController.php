@@ -141,6 +141,28 @@ class AdminController extends Controller {
         }
     }
 
+    public function toggleBlock(Request $request) {
+        $user = User::where('id', $request->id)->first();
+
+        if($user->blocked) {
+            User::where('id', $request->id)->update(['blocked' => 0]);
+
+            return response()->json(
+                [
+                    'success' => ['message' => ['User unblocked.']]
+                ], 201
+            );
+        } else {
+            User::where('id', $request->id)->update(['blocked' => 1]);
+
+            return response()->json(
+                [
+                    'success' => ['message' => ['User blocked.']]
+                ], 201
+            );
+        }
+    }
+
     public function deleteUser(Request $request) {
         User::where('id', $request->id)->forceDelete();
 
