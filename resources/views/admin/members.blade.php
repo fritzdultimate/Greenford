@@ -81,8 +81,8 @@
         </div>
     </div>
     <!-- * App Capsule -->
-<script src="{{ asset('dash/js/fn.js') }}"></script>
-<script src="{{ asset('dash/js/admin.members.js?ref=9') }}"></script>
+<script src="{{ asset('dash/js/fn.js?ref=3') }}"></script>
+<script src="{{ asset('dash/js/admin.members.js?ref=93') }}"></script>
 @include('admin.layouts.footer')
 
 <script>
