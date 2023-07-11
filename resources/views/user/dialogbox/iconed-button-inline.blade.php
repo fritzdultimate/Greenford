@@ -40,6 +40,8 @@
             processDeleteUser();
         } else if(USERFORKYCID) {
             processUpgradeKyc();
+        } else if(BLOCKINGINGUSERID) {
+            processBlockUser();      
         }
 
         let el = document.getElementById("DialogIconedButtonInline");
