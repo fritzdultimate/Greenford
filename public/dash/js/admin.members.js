@@ -50,7 +50,7 @@ async function processBlockUser(){
         })
         .then((data) => {
             if('errors' in data){
-                let errorMsg = getResponse(data);
+                let errorMsg = getResponse(data); 
                 showErrorModal(errorMsg, []);
                 console.log(errorMsg)
             }
